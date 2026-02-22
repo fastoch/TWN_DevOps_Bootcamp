@@ -95,7 +95,7 @@ The root user is the only user that doesn't have its own folder in `/home`, inst
 >[!note]
 >Modern Linux distributions maintain both /bin, /sbin, /lib and their /usr/ counterparts due to historical Unix conventions and ongoing compatibility needs.
 
-
+12min
 
 ---
 

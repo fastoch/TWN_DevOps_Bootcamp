@@ -80,7 +80,7 @@ Letters A and B were used for removable disks, and Windows used C: when internal
 
 ## Linux File System Overview
 
-
+Every user on Linux
 
 ---
 

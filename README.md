@@ -87,7 +87,15 @@ The root user is the only user that doesn't have its own folder in `/home`, inst
 
 - `/bin`: stands for binaries, contains executables for most essential commands (cat, cp, ls, echo...)
   - these binaries are available system-wide (for all users but also for the system itself)
-- 
+  - a binary is a computer-readable format (zeros and ones)
+- `/sbin`: contains system binaries, executables that require root permissions or the use of `sudo`
+- `/lib` folders: contain essential shared libraries that executables from /bin or /sbin use
+- `/usr`: the actual location of binaries and libraries, previous folders are symlinks most of the time
+
+>[!note]
+>Modern Linux distributions maintain both /bin, /sbin, /lib and their /usr/ counterparts due to historical Unix conventions and ongoing compatibility needs.
+
+
 
 ---
 

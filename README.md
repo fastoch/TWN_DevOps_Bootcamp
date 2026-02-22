@@ -7,6 +7,20 @@ These are my notes from learning the DevOps engineer profession thanks to Nana J
 ## Virtualization
 
 Virtualization removes the need for physical hardware to install and run an OS.  
+You can install any OS on top of any other OS thanks to something called a hypervisor.  
+
+A hypervisor is a technology that allows hosting multiple virtual computers on a physical computer.  
+It uses physical resources (CPU, RAM, storage, I/O devices) to create virtual machines (VMs).  
+
+VMs, even if running on the same host system, don't see each other, they're completely isolated.  
+
+### Type 2 Hypervisor
+
+This type of hypervisor is installed on top of an OS already running on a physical machine.   
+One of the most popular Type 2 hypervisors is VirtualBox.  
+
+### Type 1 Hypervisor
+
 
 
 ## Linux File System vs Windows'

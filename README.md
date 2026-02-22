@@ -80,7 +80,14 @@ Letters A and B were used for removable disks, and Windows used C: when internal
 
 ## Linux File System Overview
 
-Every user on Linux
+Every user on Linux gets its own personal folder, which is located in `/home/username`, also accessible via `~`.  
+Some default directories are created for each user, such as Documents, Desktop, Pictures...
+
+The root user is the only user that doesn't have its own folder in `/home`, instead it's located in `/root`.  
+
+- `/bin`: stands for binaries, contains executables for most essential commands (cat, cp, ls, echo...)
+  - these binaries are available system-wide (for all users but also for the system itself)
+- 
 
 ---
 

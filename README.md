@@ -13,6 +13,8 @@ A hypervisor is a technology that allows hosting multiple virtual computers on a
 It uses physical resources (CPU, RAM, storage, I/O devices) to create virtual machines (VMs).  
 
 VMs, even if running on the same host system, don't see each other, they're completely isolated.  
+And if something break inside a VM, it does not affect the host system.  
+Plus, it's very easy to delete the faulty VM and spin up a new one, with snapshots we can even create the exact same one.  
 
 ### Type 2 Hypervisor
 

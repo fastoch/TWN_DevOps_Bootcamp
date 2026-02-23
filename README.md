@@ -90,12 +90,29 @@ The root user is the only user that doesn't have its own folder in `/home`, inst
   - a binary is a computer-readable format (zeros and ones)
 - `/sbin`: contains system binaries, executables that require root permissions or the use of `sudo`
 - `/lib` folders: contain essential shared libraries that executables from /bin or /sbin use
-- `/usr`: the actual location of binaries and libraries, previous folders are symlinks most of the time
+- `/usr`: the actual location of binaries and libraries. In most cases, previous folders are symlinks 
 
 >[!note]
 >Modern Linux distributions maintain both /bin, /sbin, /lib and their /usr/ counterparts due to historical Unix conventions and ongoing compatibility needs.
 
-12min
+- `/usr/local`: also contains /bin, /sbin, and /lib folders. This is where the applications we install will be located.
+  - will contain third-party apps such as docker, python, minikube, ...
+  - programs installed here will be available for all users on the computer
+  - this folder is for programs that split their files across multiple subfolders
+- `/opt`: third-party apps can also be installed here
+  - but it's a folder for apps that do not split their files across different folders
+  - programs installed here will also be available for all users (system-wide installation)
+- `/boot`: contains files required for booting, only used by the system itself
+- `/etc`: main configuration location
+- `/dev`: This is where the devices that are connected to your computer will be stored: mouse, keyboard, drives, etc.
+- `/var`: files to which the system writes data during the course of its operation
+  - `/var/log`: contains log files
+  - `/var/cache`: contains cached data from applications
+- `/tmp`: stores temporary resources required for some processes
+- `/media`: contains subfolders where removable media devices inserted into the computer are automatically mounted
+- `/mnt`: used for temporary mount points, typically for manually mounting a file system to the OS
+
+21 min
 
 ---
 

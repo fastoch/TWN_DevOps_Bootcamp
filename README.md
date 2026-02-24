@@ -127,10 +127,16 @@ That's why in Unix-like operating systems, hidden files are also called "**dotfi
 - `ls` = list the contents of the current (or specified) directory
   - typically used with options such as `ls -alSh` (hidden files, long format, sorted by size, human-readable)
 - `cd <path_to_directory>` = change directory
+  - `cd` brings you back to your home folder
+  - `cd ..` brings you to the parent folder (one level up)
 - `mkdir <dir_name>` = make directory
+- `rmdir <dir_name>` = remove directory
 
 ### File operations
 
+- `touch <filename>` = create a file
+- we can also create files using an editor: `nano <filename>` or `vim filename`
+- `rm <filename>` = remove file
 
 
 ---

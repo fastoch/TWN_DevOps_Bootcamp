@@ -136,7 +136,7 @@ That's why in Unix-like operating systems, hidden files are also called "**dotfi
   - `cd ../..` brings you two levels up in the tree structure
 - `mkdir <dirname>` = make directory
 - `rmdir <dirname>` = remove an empty directory
-- `rm -r <dirname>` = remove a non-empty directory and all the files within it
+- `rm -r <dirname>` = remove a non-empty directory and all the files within it (`-r` is for recursive)
 
 ### File operations
 
@@ -146,6 +146,9 @@ That's why in Unix-like operating systems, hidden files are also called "**dotfi
 - `touch <filename>` = create a file
 - we can also create files using an editor: `nano <filename>` or `vim filename`
 - `rm <filename>` = remove file
+- `mv <filename_or_path> <new_filename_or_new_path>` = move a file or rename it, or both
+- `cp <source_path> <destination_path>` = copy a file (the name of the copy can be different from the original)
+  - if you're copying a non-empty folder: `cp -r <source> <destination>`
 
 ### Terminal shortcuts
 

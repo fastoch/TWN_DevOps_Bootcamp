@@ -120,24 +120,42 @@ That's why in Unix-like operating systems, hidden files are also called "**dotfi
 
 ## Basic Linux commands 
 
+>[!tip]
+>To save time when typing commands, take advantage of **autocompletion** by using the **Tab** key.
+
 ### Directory operations
 
 - `pwd` = print working directory
   - `~` is the same as `/home/username`
-- `ls` = list the contents of the current (or specified) directory
+- `ls` = list the contents of the current directory
+- `ls <dirname>` = list the contents of the specified directory
   - typically used with options such as `ls -alSh` (hidden files, long format, sorted by size, human-readable)
-- `cd <path_to_directory>` = change directory
+- `cd <path_to_directory>` = change working directory
   - `cd` brings you back to your home folder
   - `cd ..` brings you to the parent folder (one level up)
-- `mkdir <dir_name>` = make directory
-- `rmdir <dir_name>` = remove directory
+  - `cd ../..` brings you two levels up in the tree structure
+- `mkdir <dirname>` = make directory
+- `rmdir <dirname>` = remove an empty directory
+- `rm -r <dirname>` = remove a non-empty directory and all the files within it
 
 ### File operations
+
+>[!important]
+>Everything in Linux is a FILE, including directories, the devices we connect to our computer, and the binaries we use when we run commands. 
 
 - `touch <filename>` = create a file
 - we can also create files using an editor: `nano <filename>` or `vim filename`
 - `rm <filename>` = remove file
 
+### Terminal shortcuts
+
+- Ctrl + Alt + T = open a new terminal window
+- Ctrl + L = bring the cmd prompt at the top
+- Ctrl + D = close the terminal window
+- Ctrl + E = go to the end of the command line
+- Ctrl + A = go to the beginning of the command line
+- Ctrl + U = delete the current line, requires the cursor to be at the end of the line
+- Ctrl + W = delete the word located before the cursor
 
 ---
 

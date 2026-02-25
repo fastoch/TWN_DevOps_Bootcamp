@@ -130,6 +130,7 @@ That's why in Unix-like operating systems, hidden files are also called "**dotfi
 - `ls` = list the contents of the current directory
 - `ls <dirname>` = list the contents of the specified directory
   - typically used with options such as `ls -alSh` (hidden files, long format, sorted by size, human-readable)
+- `ls -R <dirname>` shows the contents of the specified directory and of all its subdirectories
 - `cd <path_to_directory>` = change working directory
   - `cd` brings you back to your home folder
   - `cd ..` brings you to the parent folder (one level up)
@@ -149,18 +150,43 @@ That's why in Unix-like operating systems, hidden files are also called "**dotfi
 - `mv <filename_or_path> <new_filename_or_new_path>` = move a file or rename it, or both
 - `cp <source_path> <destination_path>` = copy a file (the name of the copy can be different from the original)
   - if you're copying a non-empty folder: `cp -r <source> <destination>`
- 
-6 - 15/33
+- `cat <file>` shows the contents of a file in the stdout (standard output)
 
 ### Terminal shortcuts
 
 - Ctrl + Alt + T = open a new terminal window
 - Ctrl + L = bring the cmd prompt at the top
+- Ctrl + C = stop the running command
+- Ctrl + Shift + V = paste copied text into terminal
+- Ctrl + Shift + C = copy selected text from terminal
 - Ctrl + D = close the terminal window
 - Ctrl + E = go to the end of the command line
 - Ctrl + A = go to the beginning of the command line
 - Ctrl + U = delete the current line, requires the cursor to be at the end of the line
 - Ctrl + W = delete the word located before the cursor
+- Ctrl + R = search through your command history
+- use the up and down arrow keys to navigate through your command history
+
+### Executing commands as a super user
+
+Use `sudo` before typing your command (requires to be part of the "wheel" or "sudo" group).  
+To find which groups a user is a member of: `cat /etc/group | grep username`.  
+
+To switch to another user: `su - username`  
+The dash simulates a full login, loading the target user's environment completely.
+
+## Installing software on a Linux distro
+
+### What's a software package?
+
+A compressed archive containing all files required by the software to run.  
+Applications usually have dependencies, meaning they depend on other software.  
+
+A software package does not necessarily include needed dependencies, in which case the package manager installs the required dependencies.  
+
+### What's a package manager?
+
+
 
 ---
 

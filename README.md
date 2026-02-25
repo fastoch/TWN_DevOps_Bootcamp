@@ -149,6 +149,8 @@ That's why in Unix-like operating systems, hidden files are also called "**dotfi
 - `mv <filename_or_path> <new_filename_or_new_path>` = move a file or rename it, or both
 - `cp <source_path> <destination_path>` = copy a file (the name of the copy can be different from the original)
   - if you're copying a non-empty folder: `cp -r <source> <destination>`
+ 
+6 - 15/33
 
 ### Terminal shortcuts
 

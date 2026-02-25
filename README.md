@@ -182,11 +182,27 @@ The dash simulates a full login, loading the target user's environment completel
 A compressed archive containing all files required by the software to run.  
 Applications usually have dependencies, meaning they depend on other software.  
 
-A software package does not necessarily include needed dependencies, in which case the package manager installs the required dependencies.  
+A software package does not necessarily include all needed dependencies, in which case the package manager will try and install the missing dependencies.  
 
 ### What's a package manager?
 
+It's a tool that downloads and installs (or updates) software from a package repository.  
+It also ensures the integrity and authenticity of downloaded packages before installation.  
 
+For every package installation, it manages and resolves all required dependencies.  
+And if those dependencies also have dependencies, it will install them too.  
+
+When installing or updating software, your package manager knows where to put the different files in your Linux file system.  
+And when you uninstall a software using your package manager, it knows where to find the files that need to be deleted.  
+
+### Where do package managers come from?
+
+Most Linux distros come with their own package manager:
+- apt for Debian-based distributions = advanced package tool
+- dnf for Fedora and other Red Hat-based distros = dandified yum
+- pacman for Arch-based distros
+
+To install a package on fedora: `sudo dnf install <package_name>`
 
 ---
 

@@ -254,11 +254,24 @@ Installing software on a Linux system can be done by:
 
 ## Working with Vim editor
 
+### What is Vi/Vim?
+
+**Vi** is a built-in text editor that is by far the most distributed and used on Linux systems.  
+Depending on your Linx distro, its improved version, **Vim**, may be pre-installed.  
+
+This text editor is integrated in the CLI.  
+
 ### Why do we need a CLI text editor like Vim?
 
-
+- It's a keyboard-centric editor, which makes you faster once you get used to it.  
+- It's convenient to stay in the CLI rather than opening a dedicated text editor.  
+- Some Linux systems, especially those installed on servers, may not include any other text editor than Vi/Vim.
+- It allows you to create and edit files at the same time.
 
 ### How to edit a file in the CLI using Vim?
+
+
+
 
 ---
 

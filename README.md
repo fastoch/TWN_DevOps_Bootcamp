@@ -272,11 +272,34 @@ The Vi/Vim text editor is integrated into the CLI.
 
 ### How to edit a file in the CLI using Vim?
 
-- to edit an existing file or create and edit a new one: `vim filename`
-- Vim has multiple modes, the default one being the command mode
-  - in command mode, you can't edit the text, but you can navigate the contents, search, delete, undo, etc.
-  -  
+- to edit an existing file, or create and edit a new one: `vim filename`
+- Vim has multiple **modes**, the **default** one being the **command** mode
+  - in **command** mode, you can't edit text, but you can navigate the contents, search, delete, undo changes, etc.
+  - to switch to **insert** mode, press `i`
+  - in **insert** mode, you can edit text
+  - to switch back to **command** mode, press `ESC`
+  - to save the file and close it, type `:wq` while in command mode, and press `Enter`
+  - to quit Vim without saving the changes, type `:q!` while in command mode, and press `Enter`
 
+### Vim commands
+
+These commands are available in command mode:
+- to delete a line: `dd`
+- to delete 5 lines: `d5d`
+- to delete a word: `dw`
+- to undo changes: `u`
+- to jump to the end of the line: `$`
+- to jump to the end of the line and switch to insert mode: `A`
+- to jump to the beginning of the line: `0`
+- to jump to the the first character of the line and switch to insert mode: `I`
+- to jump to the first line of the file: `1G`
+- to jump to the third line: `3G`
+- to jump to the last line of the file: `G`
+- to search for a word: `/word`
+  - press `Enter` to go to the first match
+  - press `n` to go to the next match
+  - press `N` to go to the previous match
+- to search for a word and replace all occurrences of it: `:%s/old/new` + `Enter`
 
 ---
 

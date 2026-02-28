@@ -226,8 +226,8 @@ There is a specific command for that, and this command will pull the latest chan
 After you've updated your package index, your CLI will tell you how many packages can be upgraded.  
 These are the packages for which were found newer versions in their respective repositories.  
 
-On Fedora, the list of enabled repositories is effectively stored as a set of .repo files under `/etc/yum.repos.d/`  
-On Debian, it is stored under `/etc/apt/sources.list`  
+On Fedora, the list of enabled repositories is stored as a set of .repo files under `/etc/yum.repos.d/`  
+On Debian and Debian-based systems, it is stored under `/etc/apt/sources.list`  
 
 Some packages are not available in the official repositories, in which case we need to add unofficial repos.  
 Sometimes, they are available in official repos but not the latest version, because the software package approval process can take time.  
@@ -235,13 +235,15 @@ Sometimes, they are available in official repos but not the latest version, beca
 ### Alternative to package managers
 
 - many distros include **software centers** (GUI apps) such as Discovery or Ubuntu Software
-- We can also use the **Snap** package manager (pre-installed on Ubuntu since 2016)
+- Under the hood, Ubuntu Software uses the **Snap** package manager (pre-installed on Ubuntu since 2016)
 - There is another alternative called **Flatpak** (pre-installed on fedora since 2016)
 
 You can check if you have flatpak via `flatpak --version`  
 And you can see all installed flatpak packages via `flatpak list`  
 
-## 
+## Adding a repo 
+
+
 
 ---
 

@@ -272,8 +272,10 @@ The Vi/Vim text editor is integrated into the CLI.
 
 ### How to edit a file in the CLI using Vim?
 
-
-
+- to edit an existing file or create and edit a new one: `vim filename`
+- Vim has multiple modes, the default one being the command mode
+  - in command mode, you can't edit the text, but you can navigate the contents, search, delete, undo, etc.
+  -  
 
 
 ---

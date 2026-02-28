@@ -210,11 +210,26 @@ And when you uninstall a software using your package manager, it knows where to 
 ### Where do package managers come from?
 
 Most Linux distros come with their own package manager:
-- apt for Debian-based distributions = advanced package tool
-- dnf for Fedora and other Red Hat-based distros = dandified yum
-- pacman for Arch-based distros
+- `apt` for Debian-based distributions = advanced package tool
+- `dnf` for Fedora and other Red Hat-based distros = dandified yum
+- `pacman` for Arch-based distros
 
-To install a package on fedora: `sudo dnf install <package_name>`
+To install a package on fedora: `sudo dnf install <package_name>`  
+To remove it: `sudo dnf remove <package_name>`  
+
+Your package manager fetches those packages from specific **repositories** (hosted online).  
+On every Linux distro, there are default official repositories, to which you can add your favorite ones.  
+
+Before installing or upgrading packages, it is recommended to update your package index.  
+There is a specific command for that, and this command will pull the latest changes from the different repositories your distro is using.  
+
+After you've updated your package index, your CLI will tell you how many packages can be upgraded.  
+These are the packages for which were found newer versions in their respective repositories.  
+
+On Fedora, the list of enabled repositories is effectively stored as a set of .repo files under `/etc/yum.repos.d/`  
+On Debian, it is stored under `/etc/apt/sources.list`  
+
+
 
 ---
 

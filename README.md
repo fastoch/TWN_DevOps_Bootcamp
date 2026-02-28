@@ -183,7 +183,7 @@ The dash simulates a full login, loading the target user's environment completel
 
 ## More advanced commands
 
-https://github.com/fastoch/TWN_Linux_Commands/edit/main/README.md
+https://github.com/fastoch/TWN_Linux_Commands/blob/main/README.md
 
 ---
 
@@ -258,8 +258,9 @@ Installing software on a Linux system can be done by:
 
 **Vi** is a built-in text editor that is by far the most distributed and used on Linux systems.  
 Depending on your Linx distro, its improved version, **Vim**, may be pre-installed.  
+To check if that's the case, simply run `vi`. if it opens Vim, then you know.  
 
-This text editor is integrated in the CLI.  
+The Vi/Vim text editor is integrated into the CLI.  
 
 ### Why do we need a CLI text editor like Vim?
 
@@ -267,8 +268,10 @@ This text editor is integrated in the CLI.
 - It's convenient to stay in the CLI rather than opening a dedicated text editor.  
 - Some Linux systems, especially those installed on servers, may not include any other text editor than Vi/Vim.
 - It allows you to create and edit files at the same time.
+- Vim supports multiple file formats (syntax highlighting)
 
 ### How to edit a file in the CLI using Vim?
+
 
 
 

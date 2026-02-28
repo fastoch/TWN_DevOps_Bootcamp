@@ -241,9 +241,18 @@ Sometimes, they are available in official repos but not the latest version, beca
 You can check if you have flatpak via `flatpak --version`  
 And you can see all installed flatpak packages via `flatpak list`  
 
-## Adding a repo 
+### Wrapping up
 
+Installing software on a Linux system can be done by:
+- using the native package manager (the best option)
+- using the Snap package manager
+- adding a non-official repo and installing via the native package manager
+- using a software centre GUI application
+- using Flatpak 
 
+---
+
+## 
 
 ---
 

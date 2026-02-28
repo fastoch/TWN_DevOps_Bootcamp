@@ -252,7 +252,13 @@ Installing software on a Linux system can be done by:
 
 ---
 
-## 
+## Working with Vim editor
+
+### Why do we need a CLI text editor like Vim?
+
+
+
+### How to edit a file in the CLI using Vim?
 
 ---
 

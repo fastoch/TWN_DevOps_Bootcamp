@@ -303,5 +303,19 @@ These commands are available in command mode:
 
 ---
 
+## Linux User Accounts & Groups
+
+### 3 User Categories
+
+- **The superuser (root)** account: has unrestricted access and permissions to the whole system
+- **Regular user** accounts: those we create to log in to the system
+  - each of them has its own dedicated space = home folder `/home/username`
+- **Service user** accounts: relevant on Linux server distros
+  - dedicated user accounts for a web service, a database service, a mailing service, etc.
+  - each of these services has its own user account, which is good for security
+  - you don't want to run services with the root user!
+
+---
+
 # 3. Version Control with Git (module 3/16)
 

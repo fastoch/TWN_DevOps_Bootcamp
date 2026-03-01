@@ -315,6 +315,20 @@ These commands are available in command mode:
   - each of these services has its own user account, which is good for security
   - you don't want to run services with the root user!
 
+### Multiple users on a Linux server
+
+When a team is managing a Linux server, they shouldn't be using the root user.  
+Instead, each of them should have their own service account with a specific set of permissions.  
+This is more secure and allows for traceability - being able to know who did what on the system.  
+
+### Groups and permissions
+
+#### How do we manage permissions for users on a Linux system?  
+
+We can manage them on 2 different levels:
+- we can give permissions to users directly (user level permissions)
+- we can give permissions to groups of users
+
 ---
 
 # 3. Version Control with Git (module 3/16)

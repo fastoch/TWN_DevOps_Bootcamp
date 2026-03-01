@@ -379,7 +379,9 @@ The dash simulates a full login, loading the target user's environment completel
 The user will be asked to enter the password.  
 
 To switch to the root user, we need to use the `su` command with the `-` option.  
-The syntax is: `su -`
+The syntax is: `su -`  
+
+To switch back to the previous user: `exit`
 
 ### Group management in practice
 
@@ -401,6 +403,20 @@ The `-g` option specifies the primary group of the user.
 After changing a user's primary group, we can also delete the default group that was created automatically on user creation.  
 `delgroup username`
 
+#### Adding a user to multiple secondary groups
+
+`usermod -aG group1,group2,group3 username`  
+The `-G` option alone would overwrite the whole list of secondary groups.  
+The `a` option appends the specified groups to the existing secondary groups.
+
+#### Removing a user from a group
+
+`gpasswd -d username groupname`
+
+#### Check which groups a user belongs to
+
+`groups username` or simply `groups` if already logged in as that user
+
 ### A word about adding users and groups
 
 On most Linux distros, `adduser` and `addgroup` commands are interactive commands.  
@@ -412,6 +428,12 @@ As a rule of thumb, use `useradd` and `groupadd` in scripts (automation), and us
 when executing them manually.  
 
 The same goes for `userdel` and `deluser`, or `groupdel` and `delgroup`.  
+
+---
+
+## File ownership and permissions
+
+
 
 ---
 

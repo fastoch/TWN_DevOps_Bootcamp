@@ -433,6 +433,22 @@ The same goes for `userdel` and `deluser`, or `groupdel` and `delgroup`.
 
 ## File ownership and permissions
 
+Since everything in Linux is a file, user permissions are related to reading, writing and executing files.  
+
+To display the permissions for a specific file, we need to use the `ls` command with the `-l` option.  
+This will display the contents of a folder in a long listing format:
+- The first digit represents the file type.
+- After the file type, the permissions are represented by 3 sets of 3 digits:
+  - The first set represents the owner's permissions.
+  - The second set represents the group's permissions.
+  - The third set represents the other users' permissions.
+
+Each file has 2 different owners: a user and a group.  
+After the permissions, the `ls -l` command displays the user who owns the file, and the group that owns it.  
+
+The owner of a file is usually the user who created that file.  
+And the owning group is the primary group of that user.  
+
 
 
 ---

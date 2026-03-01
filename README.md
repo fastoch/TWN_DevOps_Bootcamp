@@ -327,7 +327,44 @@ This is more secure and allows for traceability - being able to know who did wha
 
 We can manage them on 2 different levels:
 - we can give permissions to users directly (user level permissions)
-- we can give permissions to groups of users
+- we can give permissions to groups of users (group level permissions)
+
+Best practice is to use group level permissions:
+- set permissions for a group
+- add users to that group
+- remove users from that group to remove corresponding permissions
+
+### User management in practice
+
+User accounts information is stored in the `/etc/passwd` file.  
+Everyone can read it, but only the superuser can modify it.  
+
+Each line in the `/etc/passwd` file is called a **user record**.  
+The structure is: `username:password:uid:gid:gecos:home_directory:user_default_shell`  
+
+The root user `uid` is 0.  
+The `gid` is the primary group id.  
+
+The `gecos` is the user's full name.  
+The field was named after the **General Electric Comprehensive Operating System** (GECOS), 
+which was a predecessor to the modern Unix systems.  
+
+The password is represented by an `x`, it's encrypted and stored in the `/etc/shadow` file.  
+When you display the contents of the `/etc/shadow` file, you'll see the hashed password, not the actual password.  
+
+#### Adding a user
+
+To add a user, we need to use the `adduser` command.  
+The syntax is: `adduser username`  
+
+This command will automatically choose policy-compliant uid and gid values.  
+It will also create a home folder for the user, and you'll be asked to set its password.    
+
+If you need more control over the user account creation process, you can use the `useradd` command.  
+
+### Group management in practice
+
+Groups information is stored in the `/etc/group` file.  
 
 ---
 

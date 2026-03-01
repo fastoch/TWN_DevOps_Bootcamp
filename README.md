@@ -362,9 +362,56 @@ It will also create a home folder for the user, and you'll be asked to set its p
 
 If you need more control over the user account creation process, you can use the `useradd` command.  
 
+#### Changing a user's password
+
+To change a user's password, we need to use the `passwd` command.  
+The syntax is: `passwd username`  
+
+This command will ask you to enter the new password twice.  
+The password is encrypted and stored in the `/etc/shadow` file.  
+
+#### Switching to another user
+
+To switch to another user, we need to use the `su` command.  
+The syntax is: `su - username`  
+
+The dash simulates a full login, loading the target user's environment completely.  
+The user will be asked to enter the password.  
+
+To switch to the root user, we need to use the `su` command with the `-` option.  
+The syntax is: `su -`
+
 ### Group management in practice
 
 Groups information is stored in the `/etc/group` file.  
+Whenever we create a user, the system also creates a group with the same name as the user.  
+
+#### Adding a group
+
+To add a group, we need to use the `groupadd` command.  
+The syntax is: `groupadd groupname`  
+
+#### Changing the primary group of a user
+
+To change the primary group of a user, we need to use the `usermod` command.  
+The syntax is: `usermod -g groupname username`  
+
+The `-g` option specifies the primary group of the user.  
+
+After changing a user's primary group, we can also delete the default group that was created automatically on user creation.  
+`delgroup username`
+
+### A word about adding users and groups
+
+On most Linux distros, `adduser` and `addgroup` commands are interactive commands.  
+They are more user-friendly than their non-interactive counterparts `useradd` and `groupadd`.  
+
+With `useradd` and `groupadd`, you have more control but you need to provide the parameters manually.  
+
+As a rule of thumb, use `useradd` and `groupadd` in scripts (automation), and use `adduser` and `addgroup` 
+when executing them manually.  
+
+The same goes for `userdel` and `deluser`, or `groupdel` and `delgroup`.  
 
 ---
 

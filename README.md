@@ -433,26 +433,6 @@ The same goes for `userdel` and `deluser`, or `groupdel` and `delgroup`.
 
 ## File ownership and permissions
 
-### File permissions
-
-Since everything in Linux is a file, user permissions are related to reading, writing and executing files.  
-
-To display the permissions for a specific file, we need to use the `ls` command with the `-l` option.  
-This will display the contents of a folder in a long listing format:
-- The first digit represents the file type: 
-  - `d` for directory, 
-  - `-` for regular file, 
-  - `l` for symbolic link
-- After the file type, the permissions are represented by 3 sets of 3 digits:
-  - The first set represents the owner's permissions (owning user)
-  - The second set represents the owning group's permissions
-  - The third set represents the other users' permissions
-- In each set of permissions:
-  - `r` stands for "read"
-  - `w` stands for "write"
-  - `x` stands for "execute"
-  - `-` stands for "no permission"
-
 ### File Ownership
 
 Each file has 2 different owners: a user and a group.  
@@ -468,6 +448,63 @@ The syntax is: `sudo chown <username>:<groupname> <filename>`
 To only change the owner of a file: `sudo chown <username> <filename>`  
 
 To only change the owning group of a file: `sudo chgrp <groupname> <filename>`
+
+### File permissions
+
+Since everything in Linux is a file, user permissions are related to reading, writing and executing files.  
+
+To display the permissions for a specific file, we need to use the `ls` command with the `-l` option.  
+This will display the contents of a folder in a long listing format:
+- The first digit represents the file type: 
+  - `d` for directory, 
+  - `-` for regular file, 
+  - `l` for symbolic link
+- After the file type, the permissions are represented by 3 sets of 3 digits:
+  - The first set represents the owner's permissions (owning user)
+  - The second set represents the owning group's permissions (members of that group)
+  - The third set represents the other users' permissions (everyone else)
+- In each set of permissions:
+  - `r` stands for "read"
+  - `w` stands for "write"
+  - `x` stands for "execute"
+  - `-` stands for "no permission"
+
+### Modifying permissions
+
+To modify permissions, we need to use the `chmod` command.  
+There are many ways to change permissions in Linux.
+
+The first way is by using an **octal** value.  
+The syntax is: `sudo chmod <octal value> <filename>`  
+
+The octal value is a number between 0 and 777, where each digit represents a permission:
+- The first digit represents the owner's permissions, 
+- the second digit represents the owning group's permissions, 
+- and the third digit represents the other users' permissions.
+
+Read permissions are represented by `4`, write permissions by `2` and execute permissions by `1`:  
+- `rwx` = 7
+- `rw-` = 6
+- `r-x` = 5
+- `r--` = 4
+- `-wx` = 3
+- `-w-` = 2
+- `--x` = 1
+- `---` = 0
+
+We can also modify permissions in a more human-readable way.  
+The syntax is: `sudo chmod <permissions> <filename>`
+
+For instance, `sudo chmod u=rw,g=r,o=r <filename>`, which is pretty self-explanatory and equivalent to an octal value of `644`.  
+
+We could add or remove permissions globally with:
+- `sudo chmod +x <filename>` = add execute permissions to the file for all users
+- `sudo chmod -x <filename>` = remove execute permissions from the file for all users
+
+Finally, we can add or remove permissions for a specific user or group with:
+- `sudo chmod u+x <filename>` = add execute permissions to the file for the owning user
+- `sudo chmod g+x <filename>` = add execute permissions to the file for the owning group
+- `sudo chmod o+x <filename>` = add execute permissions to the file for other users
 
 ---
 

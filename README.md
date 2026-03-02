@@ -433,6 +433,8 @@ The same goes for `userdel` and `deluser`, or `groupdel` and `delgroup`.
 
 ## File ownership and permissions
 
+### File permissions
+
 Since everything in Linux is a file, user permissions are related to reading, writing and executing files.  
 
 To display the permissions for a specific file, we need to use the `ls` command with the `-l` option.  
@@ -443,13 +445,21 @@ This will display the contents of a folder in a long listing format:
   - The second set represents the group's permissions.
   - The third set represents the other users' permissions.
 
+### File Ownership
+
 Each file has 2 different owners: a user and a group.  
 After the permissions, the `ls -l` command displays the user who owns the file, and the group that owns it.  
 
-The owner of a file is usually the user who created that file.  
-And the owning group is the primary group of that user.  
+The **owner** of a file is usually the user who created that file.  
+And the **owning group** is the primary group of that user.  
 
+### Changing the ownership of a file
 
+The syntax is: `sudo chown <username>:<groupname> <filename>`  
+
+To only change the owner of a file: `sudo chown <username> <filename>`  
+
+To only change the owning group of a file: `sudo chgrp <groupname> <filename>`
 
 ---
 

@@ -439,11 +439,19 @@ Since everything in Linux is a file, user permissions are related to reading, wr
 
 To display the permissions for a specific file, we need to use the `ls` command with the `-l` option.  
 This will display the contents of a folder in a long listing format:
-- The first digit represents the file type.
+- The first digit represents the file type: 
+  - `d` for directory, 
+  - `-` for regular file, 
+  - `l` for symbolic link
 - After the file type, the permissions are represented by 3 sets of 3 digits:
-  - The first set represents the owner's permissions.
-  - The second set represents the group's permissions.
-  - The third set represents the other users' permissions.
+  - The first set represents the owner's permissions (owning user)
+  - The second set represents the owning group's permissions
+  - The third set represents the other users' permissions
+- In each set of permissions:
+  - `r` stands for "read"
+  - `w` stands for "write"
+  - `x` stands for "execute"
+  - `-` stands for "no permission"
 
 ### File Ownership
 

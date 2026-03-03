@@ -472,9 +472,9 @@ This will display the contents of a folder in a long listing format:
 ### Modifying permissions
 
 To modify permissions, we need to use the `chmod` command.  
-There are many ways to change permissions in Linux.
+There are many ways to change permissions in Linux.  
 
-The first way is by using an **octal** value.  
+The first way (the most common) is by using an **octal** value.  
 The syntax is: `sudo chmod <octal value> <filename>`  
 
 The octal value is a number between 0 and 777, where each digit represents a permission:
@@ -492,21 +492,29 @@ Read permissions are represented by `4`, write permissions by `2` and execute pe
 - `--x` = 1
 - `---` = 0
 
-We can also modify permissions in a more human-readable way.  
-The syntax is: `sudo chmod <permissions> <filename>`
+---
 
-For instance, `sudo chmod u=rw,g=r,o=r <filename>`, which is pretty self-explanatory and equivalent to an octal value of `644`.  
+We can also modify permissions in a more human-readable way.  
+The syntax is: `sudo chmod <permissions> <filename>`  
+
+For instance, `sudo chmod u=rwx,g=rw,o=r <filename>`, which is pretty self-explanatory and equivalent to an octal value of `764`.  
+
+---
 
 We could add or remove permissions globally with:
 - `sudo chmod +x <filename>` = add execute permissions to the file for all users
 - `sudo chmod -x <filename>` = remove execute permissions from the file for all users
 
-Finally, we can add or remove permissions for a specific user or group with:
+Finally, we can add or remove permissions for specific users with:
 - `sudo chmod u+x <filename>` = add execute permissions to the file for the owning user
-- `sudo chmod g+x <filename>` = add execute permissions to the file for the owning group
+- `sudo chmod g-x <filename>` = remove execute permissions to the file for the owning group
 - `sudo chmod o+x <filename>` = add execute permissions to the file for other users
 
 ---
 
-# 3. Version Control with Git (module 3/16)
+## Pipes and Redirects
 
+
+
+---
+End of Module 2

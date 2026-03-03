@@ -514,7 +514,33 @@ Finally, we can add or remove permissions for specific users with:
 
 ## Pipes and Redirects
 
+### Input, Output & Pipes in Linux
 
+The output of one command can become the input of another command.  
+The syntax is: `command1 | command2 | command3`  
+
+Using pipes `|` allows us to chain multiple commands, which is a very powerful feature of the Linux CLI.  
+
+#### Example with the `less` command
+
+For commands that have a long output, we can use the `less` command to scroll through the output page by page:  
+`find -type f -name "*.log" | less`   
+
+We can then press the `Space` key to display the next page, and `q` to quit.  
+The last page is marked with `(END)`.  
+
+`less` is also very convenient for displaying files that are too big to fit in the terminal.  
+
+### Redirects
+
+The `>` symbol is used to redirect the output of a command to a file.  
+The syntax is: `command > filename`  
+- If the file already exists, it will be overwritten.  
+- If the file doesn't exist, it will be created.  
+
+To avoid overwriting the contents of a file, we can use the `>>` symbol.  
+The `>>` symbol is used to append the output of a command to a file.  
+The syntax is: `command >> filename`
 
 ---
 End of Module 2

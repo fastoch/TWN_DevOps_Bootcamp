@@ -514,7 +514,14 @@ Finally, we can add or remove permissions for specific users with:
 
 ## Pipes and Redirects
 
-### Input, Output & Pipes in Linux
+### Standard Input & Standard Output
+
+Every program has 3 built-in streams:
+- Standard Input = STDIN (0)
+- Standard Output = STDOUT (1)
+- Standard Error = STDERR (2)
+
+### Piping
 
 The output of one command can become the input of another command.  
 The syntax is: `command1 | command2 | command3`  
@@ -539,7 +546,10 @@ To **filter** the output of a command, we can use the `grep` command:
 grep = globally search for regular expression and print out  
 
 We can search for multiple expressions, in which case we should use quotes:  
-`history | grep "sudo dnf"`
+`history | grep "sudo dnf"`  
+
+`grep` can help us find a specific file, but also search throught the contents of a file:  
+`cat /etc/passwd | grep root`
 
 #### Piping into `wc -l`
 
@@ -555,9 +565,17 @@ The syntax is: `command > filename`
 - If the file already exists, it will be overwritten.  
 - If the file doesn't exist, it will be created.  
 
+Example: `history | grep sudo > sudo_commands.txt`  
+
 To avoid overwriting the contents of a file, we can use the `>>` symbol.  
-The `>>` symbol is used to append the output of a command to a file.  
+The `>>` symbol is used to append the output of a command to the end of a file.  
 The syntax is: `command >> filename`
+
+---
+
+## Introduction to Shell Scripting
+
+
 
 ---
 End of Module 2

@@ -521,15 +521,32 @@ The syntax is: `command1 | command2 | command3`
 
 Using pipes `|` allows us to chain multiple commands, which is a very powerful feature of the Linux CLI.  
 
-#### Example with the `less` command
+#### Piping into `less` 
 
 For commands that have a long output, we can use the `less` command to scroll through the output page by page:  
 `find -type f -name "*.log" | less`   
 
-We can then press the `Space` key to display the next page, and `q` to quit.  
+We can then press the `Space` key to display the next page, `b` to display the previous page, and `q` to quit.  
 The last page is marked with `(END)`.  
 
 `less` is also very convenient for displaying files that are too big to fit in the terminal.  
+
+#### Piping into `grep`
+
+To **filter** the output of a command, we can use the `grep` command:  
+`find -type f -name "*.log" | grep host`  
+
+grep = globally search for regular expression and print out  
+
+We can search for multiple expressions, in which case we should use quotes:  
+`history | grep "sudo dnf"`
+
+#### Piping into `wc -l`
+
+To count the number of lines in a command's output, we can use the `wc -l` command:
+`find -type f -name "*.log" | wc -l`  
+or  
+`find -type f -name "*.log" | grep host | wc -l`
 
 ### Redirects
 

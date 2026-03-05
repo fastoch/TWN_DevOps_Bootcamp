@@ -575,6 +575,56 @@ The syntax is: `command >> filename`
 
 ## Introduction to Shell Scripting
 
+The whole point of scripting is to:
+- avoid repetitive work
+- automate tasks (bulk operations)
+- keep history of configuration
+
+The idea is to:
+- write commands in a file 
+- then execute that script file
+
+Such file is called a **shell script**.  
+Shell scripts have a `.sh` file extension  
+
+### Why the name "shell"?
+
+On Unix-like systems, a shell is a program that interprets and executes the various commands that we type in the terminal.  
+It translates our commands so that the OS kernel can understand them.  
+
+### Different shell implementations
+
+- Bourne Shell = /bin/sh - used to be the default shell (named after Stephen Bourne)
+- Bourne Again Shell = /bin/bash - the current default shell on most Linux distributions
+- Fish Shell = /bin/fish - friendly interactive shell (my favorite one)
+- Z shell = /bin/zsh - another friendly interactive shell
+
+Shell and Bash terms are often used interchangeably.  
+
+- Bash is a shell program, a program that interprets and executes commands
+- But it's also a programming language with which we can write shell scripts
+
+### How to write a Bash script?
+
+We first need to create a file with a `.sh` file extension.  
+
+But since all shell script files have the same `.sh` extension, how does the OS know which shell to use?  
+We need to specify which shell we want to use at the very first line of our script:
+- `#!/bin/bash` = Bourne Again Shell
+- `#!/bin/sh` = Bourne Shell
+- `#!/bin/zsh` = Z shell
+
+That very first line is called a **shebang**.  
+
+It's called "shebang" because of the first two characters:
+- `#` = hash symbol = "sharp" in musical notation
+- `!` = exclamation mark = also called "bang" 
+
+The rest of the line is the path to the shell we want to use.  
+
+Bash is an improved and more feature-rich version of the Bourne shell.  
+But one advantage of using `/bin/sh` is that it's more universal and more likely to work on any Unix-like system.  
+
 
 
 ---

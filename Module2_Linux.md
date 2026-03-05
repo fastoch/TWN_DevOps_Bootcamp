@@ -625,6 +625,14 @@ The rest of the line is the path to the shell we want to use.
 Bash is an improved and more feature-rich version of the Bourne shell.  
 But one advantage of using `/bin/sh` is that it's more universal and more likely to work on any Unix-like system.  
 
+### Executing a shell script
+
+Once our script has been written, we can execute it via `./filename`  
+But at first, we'll get a "permission denied" error.  
+That's because by default, when we create a new file, we don't have an execute permission on that file.  
+To fix that, we need to use the `chmod` command: `chmod u+x filename`  
+
+If you're using the fish shell, you can run your script via `bash filename`  
 
 
 ---

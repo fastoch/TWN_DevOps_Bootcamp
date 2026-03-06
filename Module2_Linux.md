@@ -281,6 +281,8 @@ The Vi/Vim text editor is integrated into the CLI.
   - to save the file and close it, type `:wq` while in command mode, and press `Enter`
   - to quit Vim without saving the changes, type `:q!` while in command mode, and press `Enter`
 
+Example file to train on: `Learning_Vim.yaml`
+
 ### Vim commands
 
 These commands are available in command mode:
@@ -634,6 +636,8 @@ The rest of the line is the path to the shell we want to use.
 After the shebang, we can open our script file and write our commands: `vim filename.sh`  
 Once done, we can save and quit by typing `:wq` while in command mode.  
 
+Example script file: `learning_Bash.sh`
+
 ### Executing a shell script
 
 Once our script has been written, we can execute it by running `./filename`  
@@ -659,10 +663,30 @@ We can also store the output of a command in a variable: `variable_name=$(comman
 
 ```bash
 if [ condition ]
-then command1
-else command2
+then 
+  command1
+else 
+  command2
 fi
 ```
+
+### Basic operators
+
+#### File Test Operators (file conditions)
+
+- `if [ -e filepath ]` = if file exists
+- `if [ -d dirpath ]` = if file is a directory
+- `if [ -f filepath ]` = if file is a regular file
+- `if [ -r filepath ]` = if file is readable
+- `if [ -w filepath ]` = if file is writable
+- `if [ -x filepath ]` = if file is executable
+- `if [ -s filepath ]` = if file is not empty (size > 0)
+- `if [ -u filepath ]` = if file has its user id set
+- `if [ -g filepath ]` = if file has its group id set
+
+#### Number comparisons
+
+
 
 ---
 End of Module 2

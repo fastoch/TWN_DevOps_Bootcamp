@@ -604,9 +604,14 @@ Shell and Bash terms are often used interchangeably.
 - Bash is a shell program, a program that interprets and executes commands
 - But it's also a programming language with which we can write shell scripts
 
+Bash is an improved and more feature-rich version of the Bourne shell.  
+But one advantage of using `/bin/sh` is that it's more universal and more likely to work on any Unix-like system.  
+
 ### How to write a Bash script?
 
 We first need to create a file with a `.sh` file extension.  
+
+#### shebang
 
 But since all shell script files have the same `.sh` extension, how does the OS know which shell to use?  
 We need to specify which shell we want to use at the very first line of our script:
@@ -622,18 +627,42 @@ It's called "shebang" because of the first two characters:
 
 The rest of the line is the path to the shell we want to use.  
 
-Bash is an improved and more feature-rich version of the Bourne shell.  
-But one advantage of using `/bin/sh` is that it's more universal and more likely to work on any Unix-like system.  
+---
+
+#### Writing a shell script
+
+After the shebang, we can open our script file and write our commands: `vim filename.sh`  
+Once done, we can save and quit by typing `:wq` while in command mode.  
 
 ### Executing a shell script
 
-Once our script has been written, we can execute it via `./filename`  
+Once our script has been written, we can execute it by running `./filename`  
 But at first, we'll get a "permission denied" error.  
 That's because by default, when we create a new file, we don't have an execute permission on that file.  
 To fix that, we need to use the `chmod` command: `chmod u+x filename`  
 
-If you're using the fish shell, you can run your script via `bash filename`  
+If you're using the fish shell, you can run your script using the bash command: `bash filename`  
 
+### Variables
+
+Very important concept in scripting.  
+The idea is to store a value once and reference it multiple time throughout the script.  
+
+The syntax is: `variable_name=value`  
+There must be no spaces around the equal sign.  
+
+To then reference this variable, we can use the `$` symbol: `$variable_name`  
+
+We can also store the output of a command in a variable: `variable_name=$(command)`  
+
+### if-else statements
+
+```bash
+if [ condition ]
+then command1
+else command2
+fi
+```
 
 ---
 End of Module 2

@@ -636,7 +636,10 @@ The rest of the line is the path to the shell we want to use.
 After the shebang, we can open our script file and write our commands: `vim filename.sh`  
 Once done, we can save and quit by typing `:wq` while in command mode.  
 
-Example script file: `learning_Bash.sh`
+Example script files: `learning_Bash.sh`, `positional_param.sh`  
+
+>[!tip]
+>To skip lines, we can insert an empty `echo` between two lines.
 
 ### Executing a shell script
 
@@ -724,6 +727,27 @@ else
   command3
 fi
 ```
+
+### How to provide external variables to a shell script?
+
+#### Positional parameters
+
+Arguments passed to a script are processed in the same order in which they are provided.  
+Their indexing starts at 1.  
+
+Inside our script:
+```bash
+echo "$1"
+echo "$2"
+echo "$3"
+```
+
+On script execution:
+```bash
+./script.sh arg1 arg2 arg3
+```
+
+
 
 ---
 End of Module 2

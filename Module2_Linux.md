@@ -59,8 +59,8 @@ For example, when we create an EC2 instance on **AWS**, a type 1 hypervisor inst
 - Abstraction of the OS from the hardware
 
 That last benefit is very important, because before virtualization, the OS was tightly coupled to the hardware it was running on.  
-Which means in case of hardware failure, you had to replace the entire server, reinstall applications, reconfigure the whole thing, and potentially 
-risk losing critical data in the process depending on your backup policy reliability.  
+Which means in case of hardware failure, you had to replace the entire server, reinstall applications, 
+reconfigure the whole thing, and potentially risk losing critical data in the process depending on your backup policy reliability.  
 
 With virtualization, you have your server as a portable file that you can move around = a Virtual Machine image.  
 This VM image contains the OS, all the applications, the required configuration, and all the data you want to store on your server.  
@@ -95,7 +95,8 @@ The root user is the only user that doesn't have its own folder in `/home`, inst
 - `/usr`: the actual location of binaries and libraries. In most cases, previous folders are symlinks 
 
 >[!note]
->Modern Linux distributions maintain both /bin, /sbin, /lib and their /usr/ counterparts due to historical Unix conventions and ongoing compatibility needs.
+>Modern Linux distributions maintain both /bin, /sbin, /lib and their /usr/ counterparts due to historical Unix 
+>conventions and ongoing compatibility needs.
 
 - `/usr/local`: also contains /bin, /sbin, and /lib folders. This is where the applications we install will be located.
   - will contain third-party apps such as docker, python, minikube, ...
@@ -146,7 +147,8 @@ That's why in Unix-like operating systems, hidden files are also called "**dotfi
 ### File operations
 
 >[!important]
->Everything in Linux is a FILE, including directories, the devices we connect to our computer, and the binaries we use when we run commands. 
+>Everything in Linux is a FILE, including directories, the devices we connect to our computer, 
+>and the binaries we use when we run commands. 
 
 - `touch <filename>` = create a file
 - we can also create files using an editor: `nano <filename>` or `vim filename`
@@ -194,7 +196,8 @@ https://github.com/fastoch/TWN_Linux_Commands/blob/main/README.md
 A compressed archive containing all files required by the software to run.  
 Applications usually have dependencies, meaning they depend on other software.  
 
-A software package does not necessarily include all needed dependencies, in which case the package manager will try and install the missing dependencies.  
+A software package does not necessarily include all needed dependencies, in which case the package manager will try 
+and install the missing dependencies.  
 
 ### What's a package manager?
 
@@ -221,7 +224,8 @@ Your package manager fetches those packages from specific **repositories** (host
 On every Linux distro, there are default official repositories, to which you can add your favorite ones.  
 
 Before installing or upgrading packages, it is recommended to update your package index.  
-There is a specific command for that, and this command will pull the latest changes from the different repositories your distro is using.  
+There is a specific command for that, and this command will pull the latest changes from the different 
+repositories your distro is using.  
 
 After you've updated your package index, your CLI will tell you how many packages can be upgraded.  
 These are the packages for which were found newer versions in their respective repositories.  
@@ -230,7 +234,8 @@ On Fedora, the list of enabled repositories is stored as a set of .repo files un
 On Debian and Debian-based systems, it is stored under `/etc/apt/sources.list`  
 
 Some packages are not available in the official repositories, in which case we need to add unofficial repos.  
-Sometimes, they are available in official repos but not the latest version, because the software package approval process can take time.  
+Sometimes, they are available in official repos but not the latest version, because the software package 
+approval process can take time.  
 
 ### Alternative to package managers
 
@@ -402,8 +407,8 @@ The syntax is: `usermod -g groupname username`
 
 The `-g` option specifies the primary group of the user.  
 
-After changing a user's primary group, we can also delete the default group that was created automatically on user creation.  
-`delgroup username`
+After changing a user's primary group, we can also delete the default group that was created automatically 
+on user creation: `delgroup username`
 
 #### Adding a user to multiple secondary groups
 
@@ -499,7 +504,8 @@ Read permissions are represented by `4`, write permissions by `2` and execute pe
 We can also modify permissions in a more human-readable way.  
 The syntax is: `sudo chmod <permissions> <filename>`  
 
-For instance, `sudo chmod u=rwx,g=rw,o=r <filename>`, which is pretty self-explanatory and equivalent to an octal value of `764`.  
+For instance, `sudo chmod u=rwx,g=rw,o=r <filename>`, which is pretty self-explanatory and 
+equivalent to an octal value of `764`.  
 
 ---
 
@@ -591,8 +597,8 @@ Shell scripts have a `.sh` file extension
 
 ### Why the name "shell"?
 
-On Unix-like systems, a shell is a program that interprets and executes the various commands that we type in the terminal.  
-It translates our commands so that the OS kernel can understand them.  
+On Unix-like systems, a shell is a program that interprets and executes the various commands that 
+we type in the terminal. It translates our commands so that the OS kernel can understand them.  
 
 ### Different shell implementations
 
@@ -728,7 +734,7 @@ else
 fi
 ```
 
-### How to provide external variables to a shell script?
+### How to provide external values to a shell script?
 
 #### Positional parameters
 
@@ -748,6 +754,24 @@ On script execution:
 ./script.sh arg1 arg2 arg3
 ```
 
+The main advantage of positional parameters is having a script that is configurable.  
+Instead of hard coding all the values in the script, we can dynamically set them at runtime.  
+
+---
+
+### Reading user input
+
+This is the other way to provide external values to a shell script.  
+
+```bash
+read -p "Enter a value: " value
+echo "You entered: $value"
+```
+
+The -p option is used to prompt the user for input.  
+The syntax is: `read -p "prompt" variable_name`  
+See file `read_user_input.sh` for an example  
+Obviously, this password example is not secure :smile:
 
 
 ---

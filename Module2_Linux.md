@@ -770,8 +770,12 @@ echo "You entered: $value"
 
 The -p option is used to prompt the user for input.  
 The syntax is: `read -p "prompt" variable_name`  
+
 See file `read_user_input.sh` for an example  
 Obviously, this password example is not secure :smile:
+
+#### Accepting any number of arguments
+
 
 
 ---

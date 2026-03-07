@@ -598,8 +598,8 @@ It translates our commands so that the OS kernel can understand them.
 
 - Bourne Shell = /bin/sh - used to be the default shell (named after Stephen Bourne)
 - Bourne Again Shell = /bin/bash - the current default shell on most Linux distributions
-- Fish Shell = /bin/fish - friendly interactive shell (my favorite one)
-- Z shell = /bin/zsh - another friendly interactive shell
+- **Fish** = /bin/fish - **friendly interactive shell** (my favorite one)
+- many others...
 
 Shell and Bash terms are often used interchangeably.  
 
@@ -686,7 +686,44 @@ fi
 
 #### Number comparisons
 
+Let's say we have an external variable named `"$num_files"` that stores the number of files in a directory:
+- `if [ "$num_files" -eq 10 ]` = if number of files is equal to 10
+- `if [ "$num_files" -gt 10 ]` = if number of files is greater than 10
+- `if [ "$num_files" -lt 10 ]` = if number of files is less than 10
+- `if [ "$num_files" -ge 10 ]` = if number of files is greater than or equal to 10
+- `if [ "$num_files" -le 10 ]` = if number of files is less than or equal to 10
 
+>[!important]
+> in a Bash script, it's good practice to surround variable names with quotes
+> This avoids word splitting and unintended behavior in case the value contains spaces or special characters
+
+#### String comparisons
+
+Let's say we have an external variable named `user_group` that stores the user's primary group:
+- `if [ "$user_group" = "nana" ]` = if user_group is equal to "nana"
+- `if [ "$user_group" != "nana" ]` = if user_group is not equal to "nana"
+- `if [ "$user_group" =~ "nana" ]` = if user_group contains "nana"
+  - The `=~` operator can be used to match regular expressions, not just strings
+- `if [ -z "$user_group" ]` = if user_group is an empty string
+- `if [ -n "$user_group" ]` = if user_group is not an empty string
+
+>[!note]
+> `==` is Bash specific, while `=` is POSIX standard 
+> POSIX standard is compatible with all shell programs
+
+### elif - else if
+
+```bash
+if [ condition1 ]
+then 
+  command1
+elif [ condition2 ]
+then 
+  command2
+else 
+  command3
+fi
+```
 
 ---
 End of Module 2

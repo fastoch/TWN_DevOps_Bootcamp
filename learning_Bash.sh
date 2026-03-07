@@ -12,13 +12,13 @@ echo "OS information:"
 echo "$command_output"
 echo
 
-if [ -d ~/config ] 
+config_dir=$1
+
+if [ -d "$config_dir" ] 
 then
   echo "reading config directory contents..."
-  echo
-  config_files=$(ls ~/config)
   echo "Here are the config files:"
-  echo "$config_files"
+  ls "$config_dir"
 else 
   echo "config directory not found, creating one..."
   mkdir ~/config

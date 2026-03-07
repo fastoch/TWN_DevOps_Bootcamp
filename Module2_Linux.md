@@ -734,6 +734,7 @@ fi
 
 Arguments passed to a script are processed in the same order in which they are provided.  
 Their indexing starts at 1.  
+We can reference them from $1 to $9.  
 
 Inside our script:
 ```bash

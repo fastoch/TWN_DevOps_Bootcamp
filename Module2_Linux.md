@@ -774,8 +774,18 @@ The syntax is: `read -p "prompt" variable_name`
 See file `read_user_input.sh` for an example  
 Obviously, this password example is not secure :smile:
 
-#### Accepting any number of arguments
+### Accepting any number of arguments
 
+```bash
+#!/bin/bash
+
+echo "All params: $*" # prints out all arguments as a single string
+echo "number of params: $#" # prints out the number of arguments
+```
+
+### Shell Loops
+
+Loops enable us to execute a set of commands repeatedly.  
 
 
 ---

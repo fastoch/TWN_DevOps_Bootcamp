@@ -774,7 +774,10 @@ The syntax is: `read -p "prompt" variable_name`
 See file `read_user_input.sh` inside the `shell_scripting` folderfor an example  
 Obviously, this password example is not secure :smile:
 
-### How to accept any number of arguments?
+### Shell Loops
+
+How to accept any number of arguments?  
+We can do that using loops.  
 
 ```bash
 #!/bin/bash
@@ -783,15 +786,14 @@ echo "All params: $*" # prints out all arguments as a single string
 echo "number of params: $#" # prints out the number of arguments
 ```
 
-#### Shell Loops
-
-Loops enable us to execute some logic for every item in a list.  
-Iterating through a list of values is a common use case for loops.  
-
 >[!important]
 > A parameter is a **variable** that will receive a value when a function or a program is called.   
 > An argument is the actual **value** that is passed into that function/program when it is called.  
 
+#### For loops
+
+For loops enable us to execute some logic for every item in a list.  
+Iterating through a list of values is a common use case for loops.  
 
 ```bash
 #!/bin/bash
@@ -825,6 +827,13 @@ for arg in $*
 ```
 This will print out the name of every argument that is a directory.  
 For it to work, the directory needs to be located in the same folder as the script.  
+
+#### While loops
+
+A while loop executes some logic until a condition is met.  
+For instance, pinging a service until it responds.  
+
+
 
 ---
 End of Module 2

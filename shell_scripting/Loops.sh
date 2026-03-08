@@ -12,4 +12,5 @@ for arg in $*
 			echo "$arg is not a directory or is not located in the current folder"
 		fi
 	done
-	
+
+while 	

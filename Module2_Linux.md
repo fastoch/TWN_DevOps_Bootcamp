@@ -771,10 +771,10 @@ echo "You entered: $value"
 The -p option is used to prompt the user for input.  
 The syntax is: `read -p "prompt" variable_name`  
 
-See file `read_user_input.sh` for an example  
+See file `read_user_input.sh` inside the `shell_scripting` folderfor an example  
 Obviously, this password example is not secure :smile:
 
-### Accepting any number of arguments
+### How to accept any number of arguments?
 
 ```bash
 #!/bin/bash
@@ -783,10 +783,48 @@ echo "All params: $*" # prints out all arguments as a single string
 echo "number of params: $#" # prints out the number of arguments
 ```
 
-### Shell Loops
+#### Shell Loops
 
-Loops enable us to execute a set of commands repeatedly.  
+Loops enable us to execute some logic for every item in a list.  
+Iterating through a list of values is a common use case for loops.  
 
+>[!important]
+> A parameter is a **variable** that will receive a value when a function or a program is called.   
+> An argument is the actual **value** that is passed into that function/program when it is called.  
+
+
+```bash
+#!/bin/bash
+
+echo "all arguments: $*"
+echo "number of arguments: $#"
+
+for arg in $*
+  do
+    echo "$arg"
+  done
+```
+
+The above example is very basic.  
+Inside our for loop, we could add a conditional statement that checks if the provided arguments are directories:
+```bash
+#!/bin/bash
+
+echo "all arguments: $*"
+echo "number of arguments: $#"
+
+for arg in $*
+  do
+    if [ -d "$arg" ]
+    then
+      echo "$arg is a directory"
+    else
+      echo "$arg is not a directory or is not located in the current folder"
+    fi
+  done
+```
+This will print out the name of every argument that is a directory.  
+For it to work, the directory needs to be located in the same folder as the script.  
 
 ---
 End of Module 2

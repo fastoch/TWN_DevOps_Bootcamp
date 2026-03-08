@@ -808,7 +808,7 @@ for arg in $*
 ```
 
 The above example is very basic.  
-Inside our for loop, we could add a conditional statement that checks if the provided arguments are directories:
+Inside our for loop, we can add a conditional statement that checks if provided arguments are directories:
 ```bash
 #!/bin/bash
 
@@ -830,10 +830,21 @@ For it to work, the directory needs to be located in the same folder as the scri
 
 #### While loops
 
-A while loop executes some logic until a condition is met.  
-For instance, pinging a service until it responds.  
+A while loop executes some logic until a condition stops being true.  
 
+```bash
+balance=100
+echo "your current balance is $balance$" 
 
+while (( balance > 0 ))
+	do
+		read -p "enter a cost: " cost
+		(( balance-=cost ))
+		echo "your balance is now $balance$"
+	done	
+
+echo "You don't have any money left"
+```
 
 ---
 End of Module 2

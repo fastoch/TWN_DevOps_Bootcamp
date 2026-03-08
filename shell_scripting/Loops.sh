@@ -13,4 +13,16 @@ for arg in $*
 		fi
 	done
 
-while 	
+echo ""
+
+balance=100
+echo "your current balance is $balance$" 
+
+while (( balance > 0 ))
+	do
+		read -p "enter a cost: " cost
+		(( balance-=cost ))
+		echo "your balance is now $balance$"
+	done	
+
+echo "You don't have any money left"

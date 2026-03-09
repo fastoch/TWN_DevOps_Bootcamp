@@ -17,12 +17,20 @@ echo ""
 
 balance=100
 echo "your current balance is $balance$" 
+echo "enter \"quit\" to exit the program"
 
 while (( balance > 0 ))
-	do
+  do
 		read -p "enter a cost: " cost
+		if [ "$cost" == "quit" ]
+		then
+			break
+		fi
 		(( balance-=cost ))
 		echo "your balance is now $balance$"
-	done	
+  done	
 
-echo "You don't have any money left"
+if [ "$balance" -le 0 ]
+then
+	echo "You don't have any money left"
+fi

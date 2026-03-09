@@ -841,19 +841,53 @@ A while loop executes some logic until a condition stops being true.
 ```bash
 balance=100
 echo "your current balance is $balance$" 
+echo "enter \"quit\" to exit the program"
 
 while (( balance > 0 ))
-	do
-		read -p "enter a cost: " cost
-		(( balance-=cost ))
-		echo "your balance is now $balance$"
-	done	
+  do
+    read -p "enter a cost: " cost
+    if [ "$cost" == "quit" ]
+    then
+      break
+    fi
+    (( balance-=cost ))
+    echo "your balance is now $balance$"
+  done
 
-echo "You don't have any money left"
+if [ "$balance" -le 0 ]
+then
+  echo "You don't have any money left"
+fi
 ```
 
 >[!tip]
 >The `break` command can be used to exit a for|while|select|until loop
+
+>[!note]
+>For arithmetic operations, use the double brackets `(( ))` syntax.  
+>For string operations, use the single brackets `[ ]` syntax. 
+
+### Single square brackets vs Double square brackets
+
+- POSIX: `[ ]`
+- Bash: `[[ ]]`: more features but you lose portability
+
+When using the double square brackets, you don't need to enclose the variable names in double quotes.  
+
+### Bash vs Python
+
+Bash scripting has quite a complex syntax which is not very intuitive.  
+So, even though it is very useful in automating DevOps tasks, there are better alternatives such as:
+- **Python** (programming language)
+- **Ansible** (configuration tool)
+
+We will learn both of these in the next modules.  
+But the best engineer is the one who knows all tools available, and which one to use for a given situation.
+
+### Functions
+
+Functions are blocks of code that can be reused.  
+The syntax is: `function_name () { code }`  
 
 
 

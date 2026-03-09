@@ -790,6 +790,12 @@ echo "number of params: $#" # prints out the number of arguments
 > A parameter is a **variable** that will receive a value when a function or a program is called.   
 > An argument is the actual **value** that is passed into that function/program when it is called.  
 
+There are 4 types of loops:
+- while loops
+- for loops
+- until loops
+- select loops
+
 #### For loops
 
 For loops enable us to execute some logic for every item in a list.  
@@ -845,6 +851,11 @@ while (( balance > 0 ))
 
 echo "You don't have any money left"
 ```
+
+>[!tip]
+>The `break` command can be used to exit a for|while|select|until loop
+
+
 
 ---
 End of Module 2

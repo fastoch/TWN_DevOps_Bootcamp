@@ -886,10 +886,38 @@ But the best engineer is the one who knows all tools available, and which one to
 
 ### Functions
 
-Functions are blocks of code that can be reused.  
-The syntax is: `function_name () { code }`  
+Functions are blocks of code that can be reused, it makes your code easier to read and maintain.  
+The idea is to apply the DRY philosophy: Don't Repeat Yourself.  
 
+The syntax to declare a function is:  
+```bash
+function_name (param1, param2, param3) {
+  list_of_commands 
+}
+```  
 
+This function can then be called (invoked) like this:  
+```bash
+function_name (arg1, arg2, arg3)
+```
+
+If you know you're going to be using the same logic multiple times in your script (or in other scripts), 
+it's a good idea to create a function for that.  
+
+Practical example of a zero parameter function:
+```bash
+function print_info {
+  echo "name: $1"
+  echo "age: $2"
+  echo "email: $3"
+}
+```
+In this example, we need to provide positional arguments at runtime for the name, age and email.  
+
+Example of a function with parameters:
+```bash
+
+```
 
 ---
 End of Module 2

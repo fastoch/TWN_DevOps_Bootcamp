@@ -889,20 +889,19 @@ But the best engineer is the one who knows all tools available, and which one to
 Functions are blocks of code that can be reused, it makes your code easier to read and maintain.  
 The idea is to apply the DRY philosophy: Don't Repeat Yourself.  
 
+If you know you're going to be using the same logic multiple times in your script (or in other scripts), 
+then it's a good idea to create a function for that.  
+
 The syntax to declare a function is:  
 ```bash
-function_name (param1, param2, param3) {
+function_name() {
   list_of_commands 
 }
 ```  
 
-This function can then be called (invoked) like this:  
-```bash
-function_name (arg1, arg2, arg3)
-```
-
-If you know you're going to be using the same logic multiple times in your script (or in other scripts), 
-it's a good idea to create a function for that.  
+There are 2 steps to using functions:
+1. Declaring a function
+2. Invoking a function
 
 Practical example of a zero parameter function:
 ```bash
@@ -911,12 +910,21 @@ function print_info {
   echo "age: $2"
   echo "email: $3"
 }
+
+# invoking the function (this one requires arguments)
+print_info "John Doe" "30" "2Wf5t@example.com"
 ```
-In this example, we need to provide positional arguments at runtime for the name, age and email.  
 
 Example of a function with parameters:
 ```bash
+function sum() {
+  read -p "Enter first number: " num1
+  read -p "Enter second number: " num2
+  echo "The sum of $num1 and $num2 is $(($num1+$num2))"
+}
 
+# invoking the function
+sum
 ```
 
 ---

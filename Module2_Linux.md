@@ -905,7 +905,7 @@ There are 2 steps to using functions:
 
 Practical example of a function to which we pass arguments:
 ```bash
-function print_info {
+function print_info() {
   echo "name: $1"
   echo "age: $2"
   echo "email: $3"
@@ -939,6 +939,41 @@ To add a comment or comment out some code in a Bash script, we use the `#` chara
 This is useful to explain what a line of code does, or to disable a line of code without removing it.  
 
 ### Returning values from functions
+
+Example:
+```bash
+function multiply() {
+  read -p "Enter first number: " num1
+  read -p "Enter second number: " num2
+  result=$(($num1*$num2))
+  # following line does not display the result, it just returns it
+  return $result 
+  # following line will never be executed since it is after the `return` instruction
+  echo "The result is $result"
+}
+
+# invoking the function
+multiply
+# using the return value with $?
+echo "The result is $?"
+```
+
+### Scripting Use Cases
+
+Scripting is a very powerful skill which general purpose is to automate DevOps tasks.  
+
+- Backup scripts
+- Monitoring scripts
+- Deployment scripts (deploying applications)
+- Server Configuration scripts (infrastructure as code)
+- ...
+
+Scripts are portable and shareable files.  
+They can be hosted on Git repositories for your team, or for your own personal needs. 
+
+---
+
+## Environment Variables
 
 
 

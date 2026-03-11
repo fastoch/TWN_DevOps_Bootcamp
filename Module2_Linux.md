@@ -903,7 +903,7 @@ There are 2 steps to using functions:
 1. Declaring a function
 2. Invoking a function
 
-Practical example of a zero parameter function:
+Practical example of a function to which we pass arguments:
 ```bash
 function print_info {
   echo "name: $1"
@@ -915,7 +915,7 @@ function print_info {
 print_info "John Doe" "30" "2Wf5t@example.com"
 ```
 
-Example of a function with parameters:
+Example of a function that does not require arguments:
 ```bash
 function sum() {
   read -p "Enter first number: " num1
@@ -926,6 +926,11 @@ function sum() {
 # invoking the function
 sum
 ```
+
+### Comments in Bash
+
+To add a comment or comment out some code in a Bash script, we use the `#` character at the beginning of the line.  
+This is useful to explain what a line of code does, or to disable a line of code without removing it.
 
 ---
 End of Module 2

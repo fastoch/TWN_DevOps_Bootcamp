@@ -927,10 +927,20 @@ function sum() {
 sum
 ```
 
+#### Best practices
+
+- The function name should be a verb
+- Don't use too many parameters
+- A function should only do one thing
+
 ### Comments in Bash
 
 To add a comment or comment out some code in a Bash script, we use the `#` character at the beginning of the line.  
-This is useful to explain what a line of code does, or to disable a line of code without removing it.
+This is useful to explain what a line of code does, or to disable a line of code without removing it.  
+
+### Returning values from functions
+
+
 
 ---
 End of Module 2

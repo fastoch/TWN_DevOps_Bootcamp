@@ -975,6 +975,8 @@ They can be hosted on Git repositories for your team, or for your own personal n
 
 ## Environment Variables
 
+### What are environment variables?
+
 
 
 ---

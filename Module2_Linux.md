@@ -977,7 +977,34 @@ They can be hosted on Git repositories for your team, or for your own personal n
 
 ### What are environment variables?
 
+Environment variables are variables that store information about the environment in which a program is running.  
+They are used to store configuration settings, paths, and other information that can be accessed by a program.   
 
+Environment variables can be set at the operating system level, or they can be set within a specific program or script.  
 
+### What are environment variables used for?
+
+Environment variables are typically used to store information such as:
+- Paths to directories, such as the location of executable files or libraries.
+- Sensitive data, such as database authentication credentials or API keys.
+- System-specific information, such as the user's home directory or the default login shell.
+
+### Python example
+
+Every programming language allows us to access environment variables.  
+In Python, we can use the `os` module to access environment variables.  
+The `os` module provides functions to interact with the operating system, such as getting environment variables.
+```python
+import mysql.connector
+
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PWD")
+
+mydb = mysql.connector.connect(
+  host="https://prod-database:5432",
+  user=DB_USER,
+  password=DB_PASSWORD
+)
+```
 ---
 End of Module 2

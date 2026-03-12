@@ -1036,6 +1036,12 @@ unset DB_USER
 
 ### Persisting environment variables
 
+When we set environment variables from the CLI, they are only valid for the current session.  
+To persist them, we need to add them to the `~/.bashrc` file, which is located in every user's home directory.  
+
+This is only valid if we're using the bash shell, but not the fish shell.  
+Each shell has its own config file. For instance, the fish shell uses `~/.config/fish/config.fish`.  
+
 
 
 ---

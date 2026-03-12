@@ -982,7 +982,7 @@ They are used to store configuration settings, paths, and other information that
 
 Environment variables can be set at the operating system level, or they can be set within a specific program or script.  
 
-### What are environment variables used for?
+### What are they used for?
 
 Environment variables are typically used to store information such as:
 - Paths to directories, such as the location of executable files or libraries.
@@ -1006,5 +1006,48 @@ mydb = mysql.connector.connect(
   password=DB_PASSWORD
 )
 ```
+
+### How to create|read|update|delete (CRUD) them from the CLI?
+
+```bash
+export DB_USER="username"
+export DB_PWD="secretpwdvalue"
+```
+
+To check they were created: 
+```bash
+echo $DB_USER
+echo $DB_PWD
+```
+OR
+```bash
+printenv | grep DB
+```
+
+To change their value:
+```bash
+export DB_USER="newusername"
+```
+
+To remove them:
+```bash
+unset DB_USER
+```
+
+### Persisting environment variables
+
+
+
+---
+
+## Networking
+
+
+
+---
+
+## SSH - Secure Shell
+
+
 ---
 End of Module 2

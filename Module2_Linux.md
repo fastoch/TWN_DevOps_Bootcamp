@@ -1034,7 +1034,7 @@ To remove them:
 unset DB_USER
 ```
 
-### Persisting environment variables
+### Persisting environment variables for the current user
 
 When we set environment variables from the CLI, they are only valid for the current session.  
 To persist them, we need to add them to the `~/.bashrc` file, which is located in every user's home directory.  
@@ -1042,7 +1042,55 @@ To persist them, we need to add them to the `~/.bashrc` file, which is located i
 This is only valid if we're using the bash shell, but not the fish shell.  
 Each shell has its own config file. For instance, the fish shell uses `~/.config/fish/config.fish`.  
 
+The lines to add to your shell-specific config file are the same as the previous commands:
+```bash
+export DB_USER="username"
+export DB_PWD="secretpwdvalue"
+```
 
+Once done, we can apply the new config by running `source ~/.bashrc` or `source ~/.config/fish/config.fish`  
+This will load the new environment variables into the current shell session.  
+
+### Persisting environment variables for all users
+
+A `~/.bashrc` file is user-specific.  
+To make env vars available for all users, we need to add them to some global config file located in the `/etc` folder.  
+
+Not all Linux distros use the same file for system-wide environment variables.  
+Most (Debian, Ubuntu, Fedora, Arch) support these core locations:
+- `/etc/environment` or `/etc/environment.d`: shell-agnostic (simple KEY=value pairs)
+- `/etc/profile` or `/etc/profile.d`: allows export and logic
+- `/etc/<shell>rc` variants (`/etc/bash.bashrc` on Debian/Ubuntu).
+
+### The PATH env var
+
+It's a list of directories to search for executable files, separate by `:`.  
+To display it: `env | grep ^PATH` or `echo $PATH`    
+Example: `PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin`  
+
+This global env var tells the shell which directories to search in for executable files in response to our executed commands.  
+
+On Fedora Linux, the global `PATH` environment variable is primarily constructed and set across several 
+system-wide configuration files, rather than a single definition point.  
+
+### Adding a custom command/program
+
+Let's write a simple program:
+```bash
+#!/bin/bash
+
+echo "Welcome to Nana's DevOps Bootcamp $USER!"
+```
+
+Once we have it, we need to make it executable:
+```bash
+chmod +x welcome.sh
+```
+
+We can then add our custom program to the `PATH` environment variable by adding it to the `~/.bashrc` file:
+```bash  
+
+```
 
 ---
 

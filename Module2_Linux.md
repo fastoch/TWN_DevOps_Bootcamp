@@ -1082,21 +1082,39 @@ Let's write a simple program:
 echo "Welcome to Nana's DevOps Bootcamp $USER!"
 ```
 
-Once we have it, we need to make it executable:
+Once we have it, we need to make it executable for all users:
 ```bash
 chmod +x welcome.sh
 ```
 
-We can then add our custom program to the `PATH` environment variable by adding it to the `~/.bashrc` file:
+We can then add our custom program to the `PATH` environment variable by adding it to the `~/.bashrc` file.  
+- First, open the file: `vim ~/.bashrc`  
+- Then add the following line at the bottom of the file:
 ```bash  
-
+# appending our custom program location to the existing PATH
+PATH=$PATH:/home/$USER/DevOps_Bootcamp/shell_scripting
 ```
+
+Apply the changes by running `source ~/.bashrc`  
+
+>[!note]
+>Sourcing the ~/.bashrc file might require to first run `bash` to update the current shell's environment.
+
+Also note that the PATH we've updated is the one that's used by the bash shell.  
+If we want to use our program with the fish shell, we need to add its location to the PATH inside 
+the `~/.config/fish/config.fish` file.  
+
+Once done, we can run our custom program by typing `welcome.sh`.  
+We don't need to be inside the `shell_scripting` folder to run our program, since we've added it to the `PATH`.  
+
+Note that we didn't have to name our program `welcome.sh`, we could have simply named it `welcome`, similar to 
+how native Linux commands are named (ls, cat, grep, etc.).
 
 ---
 
 ## Networking
 
-
+March 14, 2026
 
 ---
 

@@ -6,5 +6,5 @@ Nana Janashia's DevOps Bootcamp
 
 The GitLab repo has a branch for solutions.  
 For instance, solutions to the Linux exercises can be found here:  
-https://gitlab.com/twn-devops-bootcamp/latest/02-linux/linux/-/blob/feature/solutions-update/Solutions.md?ref_type=heads
+https://gitlab.com/twn-devops-bootcamp/latest/02-linux/linux/-/blob/feature/solutions-update/Solutions.md
 

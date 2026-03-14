@@ -14,5 +14,5 @@ then
   echo "Java version is lower than 11, you should upgrade to a newer version"
 else 
   echo "Java has been successfully installed"
-  echo "Java version is $java_version"
+  echo "Java version is now $java_version"
 fi

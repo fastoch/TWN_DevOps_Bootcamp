@@ -223,23 +223,38 @@ To run the following script: `sudo ./start_node_app.sh`
 ```bash
 #!/bin/bash
 
+# Update packages
+echo "updating packages"
+dnf upgrade -y
+
 # Install NodeJS and NPM and print out which versions were installed
+echo "installing node & npm"
 dnf install nodejs -y
 dnf install npm -y
 
-echo "NodeJS version: $(node -v)"
-echo "NPM version: $(npm -v)"
+echo "NodeJS version installed: $(node -v)"
+echo "NPM version installed: $(npm -v)"
+
+# installing other required tools
+echo "installing curl, wget, net-tools"
+dnf install curl -y
+dnf install wget -y
+dnf install net-tools -y
 
 # download artifact file
 curl -O https://node-envvars-artifact.s3.eu-west-2.amazonaws.com/bootcamp-node-envvars-project-1.0.0.tgz
 
 # extract downloaded file
-tar -xzf bootcamp-node-envvars-project-1.0.0.tgz
+tar -xvzf bootcamp-node-envvars-project-1.0.0.tgz
 
 # set needed environment variables
 export APP_ENV=dev
 export DB_USER=myuser
 export DB_PWD=mysecret
 
+cd package
 
+# install dependencies
+npm install
+node server.js
 ```

@@ -141,6 +141,8 @@ function num_results() {
 num_results
 ```
 
+## Script explanation
+
 - The `>&2` is used to prevent from displaying the error message to the user.  
 - The use of double brackets in `$((results+1))` is for running arithmetic operations in bash
 - We add 1 to the number of results because we need to include the header in our count
@@ -218,8 +220,105 @@ For production, add a max attempt counter (e.g., break after 5 tries).
 We have a ready NodeJS application that needs to run on a server.  
 The app is already configured to read in environment variables.  
 
-To run the following script: `sudo ./start_node_app.sh`  
+To run the following script: `sudo ./node_app.sh`  
 
+```bash
+#!/bin/bash
+
+# Update packages
+echo "updating packages"
+dnf upgrade -y
+
+# Install NodeJS and NPM and print out which versions were installed
+echo "installing node & npm"
+dnf install nodejs -y
+dnf install npm -y
+
+echo "NodeJS version installed: $(node -v)"
+echo "NPM version installed: $(npm -v)"
+
+# installing other required tools
+echo "installing curl, wget, net-tools"
+dnf install curl -y
+dnf install wget -y
+dnf install net-tools -y
+
+# fetch NodeJS project archive from AWS s3 bucket
+curl -O https://node-envvars-artifact.s3.eu-west-2.amazonaws.com/bootcamp-node-envvars-project-1.0.0.tgz
+
+# extract the archive to ./package folder
+tar -xvzf bootcamp-node-envvars-project-1.0.0.tgz
+
+# set needed environment variables
+export APP_ENV=dev
+export DB_USER=myuser
+export DB_PWD=mysecret
+
+cd package
+
+# install dependencies
+npm install
+
+# check if app is already running and kill process if it is
+pid=$(ps aux | grep "node server" | grep -v grep | awk '{print $2}')
+if [ -n "$pid" ]; then
+  echo "Node app is already running. Killing process $pid"
+  kill $pid
+fi
+
+# start the node.js app in the background
+node server.js &
+```
+
+`ps aux | grep "node server" | grep -v grep | awk '{print $2}'` is used to get the app's process ID  
+
+The `&` at the end of the `node server.js` command starts the app in the background, 
+so that it doesn't block the terminal session where the shell script gets executed.  
+
+# Exercise 7 - check Node App status
+
+Append the following line to the script to check the app is running and which process it's running in:
+```bash
+# wait 4 seconds for the app to be up and running
+sleep 4
+
+echo -n "Node app status and PID: "
+ps aux | head -n 1 && ps aux | grep "node server" | grep -v grep
+```
+
+Append these lines to show which port the app is using:
+```bash
+echo "Node App is listening on port:"
+pid=$(ps aux | grep "node server" | grep -v grep | awk '{print $2}')
+ss -lntp | grep "$pid" | awk '{print substr($4,3,5)}'
+```
+
+DO NOT forget to use `sudo` when running the script.  
+
+## Explanation of the `ps aux` command
+
+- `ps aux` lists all processes (a = all users, u = user details, x = no TTY required) 
+- `ps aux | head -n 1` is for readability, it displays the first line of the `ps` command output, which contains the column headers
+- `&&` is used for chaining commands, the next command runs only if the previous command executed successfully
+- The quotes in the first `grep` command are required because of the space between "node" and "server"
+- The second `grep` command uses the `-v` flag to exclude lines that contain the word "grep", we don't want 
+  the results to include the output of the `grep` command itself...
+
+## Explanation of the `ss` command
+
+- `ss -ltnp` lists all listening TCP ports
+- `ss -ltnp | grep "$pid"` is used to get only the app's listening port
+
+The `ss -ltnp` command displays detailed information about listening TCP network sockets on Linux systems.  
+It's a powerful tool for socket statistics, replacing the older `netstat` for faster performance.  
+
+`ss` options explained:
+-l: Shows only listening sockets (services waiting for incoming connections)
+-t: Filters to TCP sockets specifically.
+-n: Displays addresses and ports in numeric format (no hostname or service name resolution)
+-p: Reveals the process name, PID, and file descriptor using each socket (requires root privileges for full details)
+
+Complete Bash script for Exercise 6 and 7:
 ```bash
 #!/bin/bash
 
@@ -257,10 +356,28 @@ cd package
 # install dependencies
 npm install
 
+# check if app is already running and kill process if it is
+pid=$(ps aux | grep "node server" | grep -v grep | awk '{print $2}')
+if [ -n "$pid" ]; then
+  echo "Node app is already running. Killing process $pid"
+  kill $pid
+fi
+
 # start the node.js app in the background
 node server.js &
+
+# wait 4 secondes for the app to be up and running
+sleep 4
+
+# check app status and process ID
+echo "Node app status and PID:"
+ps aux | head -n 1 && ps aux | grep "node server" | grep -v grep
+
+# get the app's listening port
+echo -n "Node App is listening on port: "
+pid=$(ps aux | grep "node server" | grep -v grep | awk '{print $2}')
+ss -lntp | grep "$pid" | awk '{print substr($4,3,5)}'
 ```
 
-The `&` at the end of the `node server.js` command starts the app in the background 
-so that it doesn't block the terminal session where we execute the shell script.  
+# Exercise 8 - Node App with Log Directory
 

@@ -56,8 +56,8 @@ After that, we pipe the result of awk into `head -n 1` to return only the first 
 
 # Exercise 3 - user processes
 
-Create the script file: `vim processes.sh`  
-Make it executable: `chmod +x processes.sh`
+Create the script file: `vim user_processes.sh`  
+Make it executable: `chmod +x user_processes.sh`
 
 Script that displays the running processes for the current user:
 ```bash
@@ -69,7 +69,7 @@ The `-o` option formats output for readability.
 
 We could run the following to count the number of processes running for the current user:
 ```bash
-./processes.sh | wc -l
+./user_processes.sh | wc -l
 ```
 
 # Exercise 4 - user processes sorted
@@ -96,7 +96,7 @@ As usual, make the file executable: `chmod +x processes_sorted.sh`
 Then, run it: `./processes_sorted.sh`  
 
 >[!tip]
->Run `./sort_processes.sh | head -n 20` to print only the first 20 lines
+>Run `./processes_sorted.sh | head -n 20` to print only the first 20 lines
 
 # Exercise 5 - number of user processes sorted
 
@@ -218,3 +218,28 @@ For production, add a max attempt counter (e.g., break after 5 tries).
 We have a ready NodeJS application that needs to run on a server.  
 The app is already configured to read in environment variables.  
 
+To run the following script: `sudo ./start_node_app.sh`  
+
+```bash
+#!/bin/bash
+
+# Install NodeJS and NPM and print out which versions were installed
+dnf install nodejs -y
+dnf install npm -y
+
+echo "NodeJS version: $(node -v)"
+echo "NPM version: $(npm -v)"
+
+# download artifact file
+curl -O https://node-envvars-artifact.s3.eu-west-2.amazonaws.com/bootcamp-node-envvars-project-1.0.0.tgz
+
+# extract downloaded file
+tar -xzf bootcamp-node-envvars-project-1.0.0.tgz
+
+# set needed environment variables
+export APP_ENV=dev
+export DB_USER=myuser
+export DB_PWD=mysecret
+
+
+```

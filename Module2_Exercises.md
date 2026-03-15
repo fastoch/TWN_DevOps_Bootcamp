@@ -256,5 +256,11 @@ cd package
 
 # install dependencies
 npm install
-node server.js
+
+# start the node.js app in the background
+node server.js &
 ```
+
+The `&` at the end of the `node server.js` command starts the app in the background 
+so that it doesn't block the terminal session where we execute the shell script.  
+

@@ -46076,3 +46076,414 @@
 1773577916.139730 server_client_reset_state: cursor to 14,19
 1773577916.139743 server_client_check_pane_buffer: pane %0 is on
 1773577916.139758 @0 active pane not changed
+1773577931.150202 client 0x5650cf0ca630, status interval 15
+1773577931.150252 cmdq_next <global>: empty
+1773577931.150265 cmdq_next </dev/pts/1>: empty
+1773577931.150276 /dev/pts/1: redraw status
+1773577931.150285 /dev/pts/1: redraw needed
+1773577931.150296 status_redraw enter
+1773577931.150306 format_defaults: c=/dev/pts/1
+1773577931.150315 format_defaults: s=none
+1773577931.150324 format_defaults: wl=none
+1773577931.150334 format_defaults: wp=none
+1773577931.150346 screen_write_start: size 188x1, no pane
+1773577931.150356 screen_write_cursormove: from 0,0 to 0,0
+1773577931.150394 format_expand1: expanding format: #[align=left range=left #{E:status-left-style}]#[push-default]#{T;=/#{status-left-length}:status-left}#[pop-default]#[norange default]#[list=on align=#{status-justify}]#[list=left-marker]<#[list=right-marker]>#[list=on]#{W:#[range=window|#{window_index} #{E:window-status-style}#{?#{&&:#{window_last_flag},#{!=:#{E:window-status-last-style},default}}, #{E:window-status-last-style},}#{?#{&&:#{window_bell_flag},#{!=:#{E:window-status-bell-style},default}}, #{E:window-status-bell-style},#{?#{&&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{E:window-status-activity-style},default}}, #{E:window-status-activity-style},}}]#[push-default]#{T:window-status-format}#[pop-default]#[norange default]#{?window_end_flag,,#{window-status-separator}},#[range=window|#{window_index} list=focus #{?#{!=:#{E:window-status-current-style},default},#{E:window-status-current-style},#{E:window-status-style}}#{?#{&&:#{window_last_flag},#{!=:#{E:window-status-last-style},default}}, #{E:window-status-last-style},}#{?#{&&:#{window_bell_flag},#{!=:#{E:window-status-bell-style},default}}, #{E:window-status-bell-style},#{?#{&&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{E:window-status-activity-style},default}}, #{E:window-status-activity-style},}}]#[push-default]#{T:window-status-current-format}#[pop-default]#[norange list=on default]#{?window_end_flag,,#{window-status-separator}}}#[nolist align=right range=right #{E:status-right-style}]#[push-default]#{T;=/#{status-right-length}:status-right}#[pop-default]#[norange default]
+1773577931.150419 format_expand1: found #*1[
+1773577931.150441 format_expand1: found #{}: E:status-left-style
+1773577931.150454 format_replace: modifier 0 is E
+1773577931.150469 format_replace: format 'status-left-style' found: default
+1773577931.150479 format_expand1: expanding format: default
+1773577931.150489 format_expand1: result is: default
+1773577931.150499 format_replace: replaced 'E:status-left-style' with 'default'
+1773577931.150509 format_expand1: found #*1[
+1773577931.150520 format_expand1: found #{}: T;=/#{status-left-length}:status-left
+1773577931.150530 format_expand1: expanding format: #{status-left-length}
+1773577931.150541 format_expand1: found #{}: status-left-length
+1773577931.150554 format_replace: format 'status-left-length' found: 10
+1773577931.150564 format_replace: replaced 'status-left-length' with '10'
+1773577931.150573 format_expand1: result is: 10
+1773577931.150584 format_replace: modifier 0 is T
+1773577931.150593 format_replace: modifier 1 is =
+1773577931.150603 format_replace: modifier 1 argument 0: 10
+1773577931.150615 format_replace: format 'status-left' found: [#{session_name}] 
+1773577931.150625 format_expand1: expanding format: [#{session_name}] 
+1773577931.150634 format_expand1: found #{}: session_name
+1773577931.150647 format_replace: format 'session_name' found: 0
+1773577931.150657 format_replace: replaced 'session_name' with '0'
+1773577931.150666 format_expand1: result is: [0] 
+1773577931.150676 format_replace: applied length limit 10: [0] 
+1773577931.150686 format_replace: replaced 'T;=/#{status-left-length}:status-left' with '[0] '
+1773577931.150696 format_expand1: found #*1[
+1773577931.150706 format_expand1: found #*1[
+1773577931.150716 format_expand1: found #*1[
+1773577931.150725 format_expand1: found #{}: status-justify
+1773577931.150736 format_replace: format 'status-justify' found: left
+1773577931.150745 format_replace: replaced 'status-justify' with 'left'
+1773577931.150755 format_expand1: found #*1[
+1773577931.150765 format_expand1: found #*1[
+1773577931.150774 format_expand1: found #*1[
+1773577931.150814 format_expand1: found #{}: W:#[range=window|#{window_index} #{E:window-status-style}#{?#{&&:#{window_last_flag},#{!=:#{E:window-status-last-style},default}}, #{E:window-status-last-style},}#{?#{&&:#{window_bell_flag},#{!=:#{E:window-status-bell-style},default}}, #{E:window-status-bell-style},#{?#{&&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{E:window-status-activity-style},default}}, #{E:window-status-activity-style},}}]#[push-default]#{T:window-status-format}#[pop-default]#[norange default]#{?window_end_flag,,#{window-status-separator}},#[range=window|#{window_index} list=focus #{?#{!=:#{E:window-status-current-style},default},#{E:window-status-current-style},#{E:window-status-style}}#{?#{&&:#{window_last_flag},#{!=:#{E:window-status-last-style},default}}, #{E:window-status-last-style},}#{?#{&&:#{window_bell_flag},#{!=:#{E:window-status-bell-style},default}}, #{E:window-status-bell-style},#{?#{&&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{E:window-status-activity-style},default}}, #{E:window-status-activity-style},}}]#[push-default]#{T:window-status-current-format}#[pop-default]#[norange list=on default]#{?window_end_flag,,#{window-status-separator}}
+1773577931.150832 format_replace: modifier 0 is W
+1773577931.150850 format_loop_windows: window loop: 0 @0
+1773577931.150859 format_defaults: c=/dev/pts/1
+1773577931.150869 format_defaults: s=$0
+1773577931.150879 format_defaults: wl=0
+1773577931.150888 format_defaults: wp=none
+1773577931.150904 format_expand1: expanding format: #[range=window|#{window_index} list=focus #{?#{!=:#{E:window-status-current-style},default},#{E:window-status-current-style},#{E:window-status-style}}#{?#{&&:#{window_last_flag},#{!=:#{E:window-status-last-style},default}}, #{E:window-status-last-style},}#{?#{&&:#{window_bell_flag},#{!=:#{E:window-status-bell-style},default}}, #{E:window-status-bell-style},#{?#{&&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{E:window-status-activity-style},default}}, #{E:window-status-activity-style},}}]#[push-default]#{T:window-status-current-format}#[pop-default]#[norange list=on default]#{?window_end_flag,,#{window-status-separator}}
+1773577931.150917 format_expand1: found #*1[
+1773577931.150926 format_expand1: found #{}: window_index
+1773577931.150939 format_replace: format 'window_index' found: 0
+1773577931.150950 format_replace: replaced 'window_index' with '0'
+1773577931.150961 format_expand1: found #{}: ?#{!=:#{E:window-status-current-style},default},#{E:window-status-current-style},#{E:window-status-style}
+1773577931.150971 format_replace: condition is: #{!=:#{E:window-status-current-style},default}
+1773577931.150985 format_expand1: expanding format: #{!=:#{E:window-status-current-style},default}
+1773577931.150995 format_expand1: found #{}: !=:#{E:window-status-current-style},default
+1773577931.151004 format_replace: modifier 0 is !=
+1773577931.151014 format_expand1: expanding format: #{E:window-status-current-style}
+1773577931.151024 format_expand1: found #{}: E:window-status-current-style
+1773577931.151034 format_replace: modifier 0 is E
+1773577931.151045 format_replace: format 'window-status-current-style' found: default
+1773577931.151055 format_expand1: expanding format: default
+1773577931.151063 format_expand1: result is: default
+1773577931.151072 format_replace: replaced 'E:window-status-current-style' with 'default'
+1773577931.151082 format_expand1: result is: default
+1773577931.151091 format_expand1: expanding format: default
+1773577931.151101 format_expand1: result is: default
+1773577931.151127 format_replace: compare != left is: default
+1773577931.151136 format_replace: compare != right is: default
+1773577931.151146 format_replace: replaced '!=:#{E:window-status-current-style},default' with '0'
+1773577931.151155 format_expand1: result is: 0
+1773577931.151166 format_replace: condition '#{!=:#{E:window-status-current-style},default}' is false
+1773577931.151175 format_expand1: expanding format: #{E:window-status-style}
+1773577931.151184 format_expand1: found #{}: E:window-status-style
+1773577931.151193 format_replace: modifier 0 is E
+1773577931.151204 format_replace: format 'window-status-style' found: default
+1773577931.151214 format_expand1: expanding format: default
+1773577931.151223 format_expand1: result is: default
+1773577931.151232 format_replace: replaced 'E:window-status-style' with 'default'
+1773577931.151241 format_expand1: result is: default
+1773577931.151252 format_replace: replaced '?#{!=:#{E:window-status-current-style},default},#{E:window-status-current-style},#{E:window-status-style}' with 'default'
+1773577931.151263 format_expand1: found #{}: ?#{&&:#{window_last_flag},#{!=:#{E:window-status-last-style},default}}, #{E:window-status-last-style},
+1773577931.151274 format_replace: condition is: #{&&:#{window_last_flag},#{!=:#{E:window-status-last-style},default}}
+1773577931.151286 format_expand1: expanding format: #{&&:#{window_last_flag},#{!=:#{E:window-status-last-style},default}}
+1773577931.151297 format_expand1: found #{}: &&:#{window_last_flag},#{!=:#{E:window-status-last-style},default}
+1773577931.151306 format_replace: modifier 0 is &&
+1773577931.151316 format_expand1: expanding format: #{window_last_flag}
+1773577931.151331 format_expand1: found #{}: window_last_flag
+1773577931.151347 format_replace: format 'window_last_flag' found: 0
+1773577931.151357 format_replace: replaced 'window_last_flag' with '0'
+1773577931.151366 format_expand1: result is: 0
+1773577931.151376 format_expand1: expanding format: #{!=:#{E:window-status-last-style},default}
+1773577931.151386 format_expand1: found #{}: !=:#{E:window-status-last-style},default
+1773577931.151395 format_replace: modifier 0 is !=
+1773577931.151405 format_expand1: expanding format: #{E:window-status-last-style}
+1773577931.151414 format_expand1: found #{}: E:window-status-last-style
+1773577931.151423 format_replace: modifier 0 is E
+1773577931.151434 format_replace: format 'window-status-last-style' found: default
+1773577931.151443 format_expand1: expanding format: default
+1773577931.151452 format_expand1: result is: default
+1773577931.151462 format_replace: replaced 'E:window-status-last-style' with 'default'
+1773577931.151472 format_expand1: result is: default
+1773577931.151481 format_expand1: expanding format: default
+1773577931.151490 format_expand1: result is: default
+1773577931.151499 format_replace: compare != left is: default
+1773577931.151508 format_replace: compare != right is: default
+1773577931.151518 format_replace: replaced '!=:#{E:window-status-last-style},default' with '0'
+1773577931.151527 format_expand1: result is: 0
+1773577931.151537 format_replace: compare && left is: 0
+1773577931.151547 format_replace: compare && right is: 0
+1773577931.151558 format_replace: replaced '&&:#{window_last_flag},#{!=:#{E:window-status-last-style},default}' with '0'
+1773577931.151568 format_expand1: result is: 0
+1773577931.151581 format_replace: condition '#{&&:#{window_last_flag},#{!=:#{E:window-status-last-style},default}}' is false
+1773577931.151595 format_replace: replaced '?#{&&:#{window_last_flag},#{!=:#{E:window-status-last-style},default}}, #{E:window-status-last-style},' with ''
+1773577931.151614 format_expand1: found #{}: ?#{&&:#{window_bell_flag},#{!=:#{E:window-status-bell-style},default}}, #{E:window-status-bell-style},#{?#{&&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{E:window-status-activity-style},default}}, #{E:window-status-activity-style},}
+1773577931.151629 format_replace: condition is: #{&&:#{window_bell_flag},#{!=:#{E:window-status-bell-style},default}}
+1773577931.151643 format_expand1: expanding format: #{&&:#{window_bell_flag},#{!=:#{E:window-status-bell-style},default}}
+1773577931.151656 format_expand1: found #{}: &&:#{window_bell_flag},#{!=:#{E:window-status-bell-style},default}
+1773577931.151667 format_replace: modifier 0 is &&
+1773577931.151679 format_expand1: expanding format: #{window_bell_flag}
+1773577931.151691 format_expand1: found #{}: window_bell_flag
+1773577931.151705 format_replace: format 'window_bell_flag' found: 0
+1773577931.151717 format_replace: replaced 'window_bell_flag' with '0'
+1773577931.151728 format_expand1: result is: 0
+1773577931.151739 format_expand1: expanding format: #{!=:#{E:window-status-bell-style},default}
+1773577931.151752 format_expand1: found #{}: !=:#{E:window-status-bell-style},default
+1773577931.151763 format_replace: modifier 0 is !=
+1773577931.151775 format_expand1: expanding format: #{E:window-status-bell-style}
+1773577931.151787 format_expand1: found #{}: E:window-status-bell-style
+1773577931.151798 format_replace: modifier 0 is E
+1773577931.151811 format_replace: format 'window-status-bell-style' found: reverse
+1773577931.151822 format_expand1: expanding format: reverse
+1773577931.151833 format_expand1: result is: reverse
+1773577931.151845 format_replace: replaced 'E:window-status-bell-style' with 'reverse'
+1773577931.151856 format_expand1: result is: reverse
+1773577931.151869 format_expand1: expanding format: default
+1773577931.151880 format_expand1: result is: default
+1773577931.151894 format_replace: compare != left is: reverse
+1773577931.151910 format_replace: compare != right is: default
+1773577931.151926 format_replace: replaced '!=:#{E:window-status-bell-style},default' with '1'
+1773577931.151950 format_expand1: result is: 1
+1773577931.151973 format_replace: compare && left is: 0
+1773577931.151989 format_replace: compare && right is: 1
+1773577931.152006 format_replace: replaced '&&:#{window_bell_flag},#{!=:#{E:window-status-bell-style},default}' with '0'
+1773577931.152021 format_expand1: result is: 0
+1773577931.152039 format_replace: condition '#{&&:#{window_bell_flag},#{!=:#{E:window-status-bell-style},default}}' is false
+1773577931.152058 format_expand1: expanding format: #{?#{&&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{E:window-status-activity-style},default}}, #{E:window-status-activity-style},}
+1773577931.152078 format_expand1: found #{}: ?#{&&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{E:window-status-activity-style},default}}, #{E:window-status-activity-style},
+1773577931.152097 format_replace: condition is: #{&&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{E:window-status-activity-style},default}}
+1773577931.152131 format_expand1: expanding format: #{&&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{E:window-status-activity-style},default}}
+1773577931.152150 format_expand1: found #{}: &&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{E:window-status-activity-style},default}
+1773577931.152166 format_replace: modifier 0 is &&
+1773577931.152182 format_expand1: expanding format: #{||:#{window_activity_flag},#{window_silence_flag}}
+1773577931.152198 format_expand1: found #{}: ||:#{window_activity_flag},#{window_silence_flag}
+1773577931.152213 format_replace: modifier 0 is ||
+1773577931.152231 format_expand1: expanding format: #{window_activity_flag}
+1773577931.152247 format_expand1: found #{}: window_activity_flag
+1773577931.152263 format_replace: format 'window_activity_flag' found: 0
+1773577931.152275 format_replace: replaced 'window_activity_flag' with '0'
+1773577931.152287 format_expand1: result is: 0
+1773577931.152298 format_expand1: expanding format: #{window_silence_flag}
+1773577931.152311 format_expand1: found #{}: window_silence_flag
+1773577931.152324 format_replace: format 'window_silence_flag' found: 0
+1773577931.152336 format_replace: replaced 'window_silence_flag' with '0'
+1773577931.152348 format_expand1: result is: 0
+1773577931.152359 format_replace: compare || left is: 0
+1773577931.152370 format_replace: compare || right is: 0
+1773577931.152382 format_replace: replaced '||:#{window_activity_flag},#{window_silence_flag}' with '0'
+1773577931.152395 format_expand1: result is: 0
+1773577931.152406 format_expand1: expanding format: #{!=:#{E:window-status-activity-style},default}
+1773577931.152419 format_expand1: found #{}: !=:#{E:window-status-activity-style},default
+1773577931.152430 format_replace: modifier 0 is !=
+1773577931.152442 format_expand1: expanding format: #{E:window-status-activity-style}
+1773577931.152454 format_expand1: found #{}: E:window-status-activity-style
+1773577931.152466 format_replace: modifier 0 is E
+1773577931.152479 format_replace: format 'window-status-activity-style' found: reverse
+1773577931.152491 format_expand1: expanding format: reverse
+1773577931.152502 format_expand1: result is: reverse
+1773577931.152515 format_replace: replaced 'E:window-status-activity-style' with 'reverse'
+1773577931.152526 format_expand1: result is: reverse
+1773577931.152538 format_expand1: expanding format: default
+1773577931.152550 format_expand1: result is: default
+1773577931.152561 format_replace: compare != left is: reverse
+1773577931.152572 format_replace: compare != right is: default
+1773577931.152585 format_replace: replaced '!=:#{E:window-status-activity-style},default' with '1'
+1773577931.152596 format_expand1: result is: 1
+1773577931.152607 format_replace: compare && left is: 0
+1773577931.152618 format_replace: compare && right is: 1
+1773577931.152631 format_replace: replaced '&&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{E:window-status-activity-style},default}' with '0'
+1773577931.152643 format_expand1: result is: 0
+1773577931.152657 format_replace: condition '#{&&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{E:window-status-activity-style},default}}' is false
+1773577931.152696 format_replace: replaced '?#{&&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{E:window-status-activity-style},default}}, #{E:window-status-activity-style},' with ''
+1773577931.152712 format_expand1: result is: 
+1773577931.152731 format_replace: replaced '?#{&&:#{window_bell_flag},#{!=:#{E:window-status-bell-style},default}}, #{E:window-status-bell-style},#{?#{&&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{E:window-status-activity-style},default}}, #{E:window-status-activity-style},}' with ''
+1773577931.152743 format_expand1: found #*1[
+1773577931.152756 format_expand1: found #{}: T:window-status-current-format
+1773577931.152768 format_replace: modifier 0 is T
+1773577931.152781 format_replace: format 'window-status-current-format' found: #I:#W#{?window_flags,#{window_flags}, }
+1773577931.152793 format_expand1: expanding format: #I:#W#{?window_flags,#{window_flags}, }
+1773577931.152805 format_expand1: found #I: window_index
+1773577931.152819 format_replace: format 'window_index' found: 0
+1773577931.152830 format_replace: replaced 'window_index' with '0'
+1773577931.152842 format_expand1: found #W: window_name
+1773577931.152858 format_replace: format 'window_name' found: fish
+1773577931.152872 format_replace: replaced 'window_name' with 'fish'
+1773577931.152885 format_expand1: found #{}: ?window_flags,#{window_flags}, 
+1773577931.152897 format_replace: condition is: window_flags
+1773577931.152910 format_replace: condition 'window_flags' found: *
+1773577931.152922 format_replace: condition 'window_flags' is true
+1773577931.152934 format_expand1: expanding format: #{window_flags}
+1773577931.152945 format_expand1: found #{}: window_flags
+1773577931.152962 format_replace: format 'window_flags' found: *
+1773577931.152973 format_replace: replaced 'window_flags' with '*'
+1773577931.152984 format_expand1: result is: *
+1773577931.152996 format_replace: replaced '?window_flags,#{window_flags}, ' with '*'
+1773577931.153008 format_expand1: result is: 0:fish*
+1773577931.153020 format_replace: replaced 'T:window-status-current-format' with '0:fish*'
+1773577931.153031 format_expand1: found #*1[
+1773577931.153043 format_expand1: found #*1[
+1773577931.153056 format_expand1: found #{}: ?window_end_flag,,#{window-status-separator}
+1773577931.153068 format_replace: condition is: window_end_flag
+1773577931.153081 format_replace: condition 'window_end_flag' found: 1
+1773577931.153093 format_replace: condition 'window_end_flag' is true
+1773577931.153124 format_replace: replaced '?window_end_flag,,#{window-status-separator}' with ''
+1773577931.153138 format_expand1: result is: #[range=window|0 list=focus default]#[push-default]0:fish*#[pop-default]#[norange list=on default]
+1773577931.153153 unref client 0x5650cf0ca630 (3 references)
+1773577931.153195 format_replace: replaced 'W:#[range=window|#{window_index} #{E:window-status-style}#{?#{&&:#{window_last_flag},#{!=:#{E:window-status-last-style},default}}, #{E:window-status-last-style},}#{?#{&&:#{window_bell_flag},#{!=:#{E:window-status-bell-style},default}}, #{E:window-status-bell-style},#{?#{&&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{E:window-status-activity-style},default}}, #{E:window-status-activity-style},}}]#[push-default]#{T:window-status-format}#[pop-default]#[norange default]#{?window_end_flag,,#{window-status-separator}},#[range=window|#{window_index} list=focus #{?#{!=:#{E:window-status-current-style},default},#{E:window-status-current-style},#{E:window-status-style}}#{?#{&&:#{window_last_flag},#{!=:#{E:window-status-last-style},default}}, #{E:window-status-last-style},}#{?#{&&:#{window_bell_flag},#{!=:#{E:window-status-bell-style},default}}, #{E:window-status-bell-style},#{?#{&&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{E:window-status-activity-style},default}}, #{E:window-status-activity-style},}}]#[push-default]#{T:window-status-current-format}#[pop-default]#[norange list=on default]#{?window_end_flag,,#{window-status-separator}}' with '#[range=window|0 list=focus default]#[push-default]0:fish*#[pop-default]#[norange list=on default]'
+1773577931.153225 format_expand1: found #*1[
+1773577931.153247 format_expand1: found #{}: E:status-right-style
+1773577931.153262 format_replace: modifier 0 is E
+1773577931.153282 format_replace: format 'status-right-style' found: default
+1773577931.153297 format_expand1: expanding format: default
+1773577931.153312 format_expand1: result is: default
+1773577931.153328 format_replace: replaced 'E:status-right-style' with 'default'
+1773577931.153344 format_expand1: found #*1[
+1773577931.153360 format_expand1: found #{}: T;=/#{status-right-length}:status-right
+1773577931.153376 format_expand1: expanding format: #{status-right-length}
+1773577931.153391 format_expand1: found #{}: status-right-length
+1773577931.153410 format_replace: format 'status-right-length' found: 40
+1773577931.153425 format_replace: replaced 'status-right-length' with '40'
+1773577931.153441 format_expand1: result is: 40
+1773577931.153457 format_replace: modifier 0 is T
+1773577931.153473 format_replace: modifier 1 is =
+1773577931.153488 format_replace: modifier 1 argument 0: 40
+1773577931.153509 format_replace: format 'status-right' found: #{?window_bigger,[#{window_offset_x}#,#{window_offset_y}] ,}"#{=21:pane_title}" %H:%M %d-%b-%y
+1773577931.153525 format_expand1: expanding format: #{?window_bigger,[#{window_offset_x}#,#{window_offset_y}] ,}"#{=21:pane_title}" %H:%M %d-%b-%y
+1773577931.153549 format_expand1: after time expanded: #{?window_bigger,[#{window_offset_x}#,#{window_offset_y}] ,}"#{=21:pane_title}" 13:32 15-Mar-26
+1773577931.153566 format_expand1: found #{}: ?window_bigger,[#{window_offset_x}#,#{window_offset_y}] ,
+1773577931.153584 format_replace: condition is: window_bigger
+1773577931.153604 format_replace: condition 'window_bigger' found: 0
+1773577931.153620 format_replace: condition 'window_bigger' is false
+1773577931.153650 format_replace: replaced '?window_bigger,[#{window_offset_x}#,#{window_offset_y}] ,' with ''
+1773577931.153666 format_expand1: found #{}: =21:pane_title
+1773577931.153682 format_expand1: expanding format: 21
+1773577931.153697 format_expand1: result is: 21
+1773577931.153712 format_replace: modifier 0 is =
+1773577931.153728 format_replace: modifier 0 argument 0: 21
+1773577931.153759 format_replace: format 'pane_title' found: ~/D/T/s/e/6-start-Node-app
+1773577931.153776 format_replace: applied length limit 21: ~/D/T/s/e/6-start-Nod
+1773577931.153790 format_replace: replaced '=21:pane_title' with '~/D/T/s/e/6-start-Nod'
+1773577931.153804 format_expand1: result is: "~/D/T/s/e/6-start-Nod" 13:32 15-Mar-26
+1773577931.153816 format_replace: applied length limit 40: "~/D/T/s/e/6-start-Nod" 13:32 15-Mar-26
+1773577931.153829 format_replace: replaced 'T;=/#{status-right-length}:status-right' with '"~/D/T/s/e/6-start-Nod" 13:32 15-Mar-26'
+1773577931.153840 format_expand1: found #*1[
+1773577931.153851 format_expand1: found #*1[
+1773577931.153870 format_expand1: result is: #[align=left range=left default]#[push-default][0] #[pop-default]#[norange default]#[list=on align=left]#[list=left-marker]<#[list=right-marker]>#[list=on]#[range=window|0 list=focus default]#[push-default]0:fish*#[pop-default]#[norange list=on default]#[nolist align=right range=right default]#[push-default]"~/D/T/s/e/6-start-Nod" 13:32 15-Mar-26#[pop-default]#[norange default]
+1773577931.153896 screen_write_cursormove: from 188,0 to 0,0
+1773577931.153914 format_draw: #[align=left range=left default]#[push-default][0] #[pop-default]#[norange default]#[list=on align=left]#[list=left-marker]<#[list=right-marker]>#[list=on]#[range=window|0 list=focus default]#[push-default]0:fish*#[pop-default]#[norange list=on default]#[nolist align=right range=right default]#[push-default]"~/D/T/s/e/6-start-Nod" 13:32 15-Mar-26#[pop-default]#[norange default]
+1773577931.153929 screen_write_start: size 380x1, no pane
+1773577931.153947 screen_write_start: size 380x1, no pane
+1773577931.153962 screen_write_start: size 380x1, no pane
+1773577931.153978 screen_write_start: size 380x1, no pane
+1773577931.154002 screen_write_start: size 380x1, no pane
+1773577931.154021 screen_write_start: size 380x1, no pane
+1773577931.154036 screen_write_start: size 380x1, no pane
+1773577931.154049 screen_write_start: size 380x1, no pane
+1773577931.154064 style_parse: align=left range=left default
+1773577931.154075 style_parse: align=left
+1773577931.154088 style_parse: range=left
+1773577931.154100 style_parse: default
+1773577931.154204 format_draw: style 'align=left range=left default' -> 'range=left,align=left,fg=black,bg=green'
+1773577931.154228 style_parse: push-default
+1773577931.154241 style_parse: push-default
+1773577931.154255 format_draw: style 'push-default' -> 'range=left,align=left,push-default,fg=black,bg=green'
+1773577931.154268 style_parse: pop-default
+1773577931.154279 style_parse: pop-default
+1773577931.154291 format_draw: style 'pop-default' -> 'range=left,align=left,pop-default,fg=black,bg=green'
+1773577931.154303 style_parse: norange default
+1773577931.154314 style_parse: norange
+1773577931.154326 style_parse: default
+1773577931.154340 format_draw: style 'norange default' -> 'align=left,fg=black,bg=green'
+1773577931.154351 style_parse: list=on align=left
+1773577931.154362 style_parse: list=on
+1773577931.154373 style_parse: align=left
+1773577931.154386 format_draw: style 'list=on align=left' -> 'list=on,align=left,fg=black,bg=green'
+1773577931.154398 format_draw: change LEFT -> LIST
+1773577931.154409 style_parse: list=left-marker
+1773577931.154420 style_parse: list=left-marker
+1773577931.154433 format_draw: style 'list=left-marker' -> 'list=left-marker,align=left,fg=black,bg=green'
+1773577931.154444 format_draw: change LIST -> LIST_LEFT
+1773577931.154456 style_parse: list=right-marker
+1773577931.154467 style_parse: list=right-marker
+1773577931.154479 format_draw: style 'list=right-marker' -> 'list=right-marker,align=left,fg=black,bg=green'
+1773577931.154492 format_draw: change LIST_LEFT -> LIST_RIGHT
+1773577931.154503 style_parse: list=on
+1773577931.154514 style_parse: list=on
+1773577931.154527 format_draw: style 'list=on' -> 'list=on,align=left,fg=black,bg=green'
+1773577931.154538 format_draw: change LIST_RIGHT -> LIST
+1773577931.154550 style_parse: range=window|0 list=focus default
+1773577931.154560 style_parse: range=window|0
+1773577931.154573 style_parse: list=focus
+1773577931.154584 style_parse: default
+1773577931.154598 format_draw: style 'range=window|0 list=focus default' -> 'list=focus,range=window|0,align=left,fg=black,bg=green'
+1773577931.154609 style_parse: push-default
+1773577931.154621 style_parse: push-default
+1773577931.154634 format_draw: style 'push-default' -> 'list=focus,range=window|0,align=left,push-default,fg=black,bg=green'
+1773577931.154646 style_parse: pop-default
+1773577931.154658 style_parse: pop-default
+1773577931.154671 format_draw: style 'pop-default' -> 'list=focus,range=window|0,align=left,pop-default,fg=black,bg=green'
+1773577931.154683 style_parse: norange list=on default
+1773577931.154693 style_parse: norange
+1773577931.154705 style_parse: list=on
+1773577931.154716 style_parse: default
+1773577931.154728 format_draw: style 'norange list=on default' -> 'list=on,align=left,fg=black,bg=green'
+1773577931.154741 style_parse: nolist align=right range=right default
+1773577931.154753 style_parse: nolist
+1773577931.154764 style_parse: align=right
+1773577931.154776 style_parse: range=right
+1773577931.154786 style_parse: default
+1773577931.154799 format_draw: style 'nolist align=right range=right default' -> 'range=right,align=right,fg=black,bg=green'
+1773577931.154810 format_draw: change LIST -> RIGHT
+1773577931.154822 style_parse: push-default
+1773577931.154833 style_parse: push-default
+1773577931.154846 format_draw: style 'push-default' -> 'range=right,align=right,push-default,fg=black,bg=green'
+1773577931.154860 style_parse: pop-default
+1773577931.154875 style_parse: pop-default
+1773577931.154895 format_draw: style 'pop-default' -> 'range=right,align=right,pop-default,fg=black,bg=green'
+1773577931.154911 style_parse: norange default
+1773577931.154926 style_parse: norange
+1773577931.154971 style_parse: default
+1773577931.154999 format_draw: style 'norange default' -> 'align=right,fg=black,bg=green'
+1773577931.155012 screen_write_collect_flush: flushed 1 items (screen_write_stop)
+1773577931.155022 format_draw: width LEFT is 4
+1773577931.155035 screen_write_collect_flush: flushed 1 items (screen_write_stop)
+1773577931.155047 format_draw: width CENTRE is 0
+1773577931.155059 screen_write_collect_flush: flushed 1 items (screen_write_stop)
+1773577931.155071 format_draw: width RIGHT is 39
+1773577931.155083 screen_write_collect_flush: flushed 1 items (screen_write_stop)
+1773577931.155095 format_draw: width ABSOLUTE_CENTRE is 0
+1773577931.155121 screen_write_collect_flush: flushed 1 items (screen_write_stop)
+1773577931.155132 format_draw: width LIST is 7
+1773577931.155143 screen_write_collect_flush: flushed 1 items (screen_write_stop)
+1773577931.155155 format_draw: width LIST_LEFT is 1
+1773577931.155166 screen_write_collect_flush: flushed 1 items (screen_write_stop)
+1773577931.155178 format_draw: width LIST_RIGHT is 1
+1773577931.155193 screen_write_collect_flush: flushed 1 items (screen_write_stop)
+1773577931.155204 format_draw: width AFTER is 0
+1773577931.155214 format_draw: focus 0-7
+1773577931.155228 format_draw: range 1|0 is LEFT 0-5
+1773577931.155239 format_draw: range 4|0 is LIST 0-8
+1773577931.155251 format_draw: range 2|0 is RIGHT 0-40
+1773577931.155268 screen_write_cursormove: from 0,0 to 0,0
+1773577931.155284 screen_write_cursormove: from 0,0 to 149,0
+1773577931.155297 screen_write_cursormove: from 149,0 to 11,0
+1773577931.155308 screen_write_cursormove: from 11,0 to 80,0
+1773577931.155319 screen_write_cursormove: from 80,0 to 4,0
+1773577931.155330 screen_write_cursormove: from 4,0 to 94,0
+1773577931.155342 format_draw: range left at 0-4
+1773577931.155353 format_draw: range window|0 at 4-11
+1773577931.155364 format_draw: range right at 149-188
+1773577931.155378 screen_write_cursormove: from 94,0 to 0,0
+1773577931.155389 screen_write_collect_flush: flushed 0 items (screen_write_stop)
+1773577931.155400 unref client 0x5650cf0ca630 (2 references)
+1773577931.155412 status_redraw exit: force=0, changed=1
+1773577931.155427 screen_redraw_set_context: /dev/pts/1 @0 ox=0 oy=0 sx=188 sy=55 1/0
+1773577931.155440 /dev/pts/1: \033[?25l
+1773577931.155456 /dev/pts/1: current mode CURSOR,KKEYPAD,WRAP,BRACKETPASTE,FOCUSON
+1773577931.155467 /dev/pts/1: setting mode KKEYPAD,WRAP,BRACKETPASTE,FOCUSON
+1773577931.155477 /dev/pts/1: redrawing status
+1773577931.155489 screen_redraw_draw_status: /dev/pts/1 @0
+1773577931.155501 tty_draw_line: px=0 py=0 nx=4294967295 atx=0 aty=55
+1773577931.155513 tty_draw_line: defaults: fg=8, bg=8
+1773577931.155535 /dev/pts/1: \033[30m
+1773577931.155549 /dev/pts/1: \033[42m
+1773577931.155561 /dev/pts/1: \033[56;1H
+1773577931.155574 /dev/pts/1: [0] 0:fish*                                                                                                                                          "~/D/T/s/e/6-start-Nod" 13:32 15-Mar-26
+1773577931.155586 /dev/pts/1: \033(B\033[m
+1773577931.155598 /dev/pts/1: \033[?12l\033[?25h
+1773577931.155610 /dev/pts/1: current mode KKEYPAD,WRAP,BRACKETPASTE,FOCUSON
+1773577931.155622 /dev/pts/1: setting mode CURSOR,KKEYPAD,WRAP,BRACKETPASTE,FOCUSON
+1773577931.155633 /dev/pts/1: redraw added 229 bytes
+1773577931.155646 server_client_reset_state: client /dev/pts/1 mode CURSOR,KKEYPAD,WRAP,BRACKETPASTE,FOCUSON
+1773577931.155658 server_client_reset_state: cursor to 14,19
+1773577931.155669 /dev/pts/1: \033[20;15H
+1773577931.155682 server_client_check_pane_buffer: pane %0 is on
+1773577931.155696 @0 active pane not changed
+1773577931.155735 /dev/pts/1: wrote 237 bytes (of 237)
+1773577931.155746 /dev/pts/1: waiting for redraw, 0 bytes left
+1773577931.155757 cmdq_next <global>: empty
+1773577931.155768 cmdq_next </dev/pts/1>: empty
+1773577931.155781 server_client_reset_state: client /dev/pts/1 mode CURSOR,KKEYPAD,WRAP,BRACKETPASTE,FOCUSON
+1773577931.155793 server_client_reset_state: cursor to 14,19
+1773577931.155804 server_client_check_pane_buffer: pane %0 is on
+1773577931.155825 @0 active pane not changed

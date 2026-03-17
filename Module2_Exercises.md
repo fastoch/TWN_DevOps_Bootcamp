@@ -286,7 +286,7 @@ echo -n "Node app status and PID: "
 ps aux | head -n 1 && ps aux | grep "node server" | grep -v grep
 ```
 
-Append these lines to show which port the app is using:
+Append these lines to show which port the app is listening on:
 ```bash
 echo "Node App is listening on port:"
 pid=$(ps aux | grep "node server" | grep -v grep | awk '{print $2}')
@@ -312,13 +312,14 @@ DO NOT forget to use `sudo` when running the script.
 The `ss -ltnp` command displays detailed information about listening TCP network sockets on Linux systems.  
 It's a powerful tool for socket statistics, replacing the older `netstat` for faster performance.  
 
-`ss` options explained:
+**`ss` options explained**:
 -l: Shows only listening sockets (services waiting for incoming connections)
 -t: Filters to TCP sockets specifically.
 -n: Displays addresses and ports in numeric format (no hostname or service name resolution)
 -p: Reveals the process name, PID, and file descriptor using each socket (requires root privileges for full details)
 
-Complete Bash script for Exercise 6 and 7:
+## Complete Bash script for Exercises 6 and 7
+
 ```bash
 #!/bin/bash
 
@@ -381,3 +382,189 @@ ss -lntp | grep "$pid" | awk '{print substr($4,3,5)}'
 
 # Exercise 8 - Node App with Log Directory
 
+Extend the script to accept a parameter input "LOG_DIRECTORY": a directory where our app will write logs.  
+
+```bash
+#!/bin/bash
+
+# Update packages
+echo "updating packages"
+dnf upgrade -y
+echo ""
+
+# Install NodeJS and NPM and print out which versions were installed
+echo "installing node & npm, curl, wget and net-tools"
+dnf install -y nodejs npm curl wget net-tools
+
+# wait 5 seconds for the packages to be installed
+sleep 5
+echo ""
+
+echo "NodeJS version installed: $(node -v)"
+echo "NPM version installed: $(npm -v)"
+echo ""
+
+# read user input for log directory (before starting the app)
+echo "Enter the log directory location (absolute path): "
+read LOG_DIRECTORY
+
+# check if log directory exists and is a directory
+if [ -d "$LOG_DIRECTORY" ]; then
+  echo "$LOG_DIRECTORY already exists"
+  export LOG_DIR=$LOG_DIRECTORY
+else
+  mkdir -p $LOG_DIRECTORY
+  echo "A new directory $LOG_DIRECTORY has been created"
+  export LOG_DIR=$LOG_DIRECTORY
+fi
+
+echo ""
+
+# download artifact file
+curl -O https://node-envvars-artifact.s3.eu-west-2.amazonaws.com/bootcamp-node-envvars-project-1.0.0.tgz
+
+# extract downloaded file
+tar -xvzf bootcamp-node-envvars-project-1.0.0.tgz
+
+# set needed environment variables
+export APP_ENV=dev
+export DB_USER=myuser
+export DB_PWD=mysecret
+
+cd package
+
+# install dependencies
+npm install
+echo ""
+
+# check if app is already running and kill the process if it is
+pid=$(ps aux | grep "node server" | grep -v grep | awk '{print $2}')
+if [ -n "$pid" ]; then
+  echo "Node app is already running. Killing process $pid"
+  kill $pid
+fi
+
+echo ""
+
+# start the node.js app in the background
+node server.js &
+
+# wait 4 secondes for the app to be up and running
+sleep 4
+
+# check app status and process ID
+echo "Node app status and PID:"
+ps aux | head -n 1 && ps aux | grep "node server" | grep -v grep
+echo ""
+
+# get the app's listening port
+echo -n "Node App is listening on port "
+pid=$(ps aux | grep "node server" | grep -v grep | awk '{print $2}')
+ss -lntp | grep "$pid" | awk '{print substr($4,3,5)}'
+```
+
+Don't forget to run the script as sudo (super user do).  
+
+# Exercise 9 - Node App with dedicated Service User
+
+We've been running the application with our regular user account.  
+But we need to adjust that and create a dedicated service user "myapp" for the application to run.  
+Let's extend the script to create the user and then run the application with that service user.  
+
+```bash
+#!/bin/bash
+
+# Update packages
+echo "updating packages"
+dnf upgrade -y
+echo ""
+
+# Install NodeJS and NPM and print out which versions were installed
+echo "installing node & npm, curl, wget and net-tools"
+dnf install -y nodejs npm curl wget net-tools
+
+sleep 10
+echo ""
+
+echo "NodeJS version installed: $(node -v)"
+echo "NPM version installed: $(npm -v)"
+echo ""
+
+# Set the service user name
+SERVICE_USER=myapp
+
+# Create the service user and its home directory if it doesn't exist
+useradd $SERVICE_USER -m
+
+# make service user the owner of the app log directory
+chown $SERVICE_USER -R $LOG_DIRECTORY
+
+################################################################################
+# executing the following commands as new service user using 'runuser' command
+################################################################################
+
+# fetch NodeJS project archive from s3 bucket
+runuser -l $SERVICE_USER -c "curl -O https://node-envvars-artifact.s3.eu-west-2.amazonaws.com/bootcamp-node-envvars-project-1.0.0.tgz"
+
+# extract downloaded file
+tar -xvzf bootcamp-node-envvars-project-1.0.0.tgz
+
+# set needed environment variables
+export APP_ENV=dev
+export DB_USER=myuser
+export DB_PWD=mysecret
+
+cd package
+
+# install dependencies
+npm install
+echo ""
+
+# check if app is already running and kill the process if it is
+pid=$(ps aux | grep "node server" | grep -v grep | awk '{print $2}')
+if [ -n "$pid" ]; then
+  echo "Node app is already running. Killing process $pid"
+  kill $pid
+fi
+
+echo ""
+
+# read user input for log directory (before starting the app)
+echo "Enter the log directory location (absolute path): "
+read LOG_DIRECTORY
+echo ""
+
+# check if log directory exists and is a directory
+if [ -d "$LOG_DIRECTORY" ]; then
+  echo "$LOG_DIRECTORY already exists"
+  export LOG_DIR=$LOG_DIRECTORY
+else
+  mkdir -p $LOG_DIRECTORY
+  echo "A new directory $LOG_DIRECTORY has been created"
+  export LOG_DIR=$LOG_DIRECTORY
+fi
+
+echo ""
+
+# start the node.js app in the background
+node server.js &
+
+# wait 4 secondes for the app to be up and running
+sleep 4
+
+# check app status and process ID
+echo "Node app status and PID:"
+ps aux | head -n 1 && ps aux | grep "node server" | grep -v grep
+echo ""
+
+# get the app's listening port
+echo -n "Node App is listening on port: "
+pid=$(ps aux | grep "node server" | grep -v grep | awk '{print $2}')
+ss -lntp | grep "$pid" | awk '{print substr($4,3,5)}'
+```
+
+## Notes about the exercie 9 script
+
+- The `-m` option in `useradd $SERVICE_USER -m` creates the new user's home directory if it doesn't exist
+- The `-l` option in `runuser -l $SERVICE_USER -c` starts a login shell for $SERVICE_USER 
+- The `-c` option in `runuser -l $SERVICE_USER -c` executes the provided command as $SERVICE_USER

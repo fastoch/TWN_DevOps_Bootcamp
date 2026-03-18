@@ -483,71 +483,68 @@ echo ""
 echo "installing node & npm, curl, wget and net-tools"
 dnf install -y nodejs npm curl wget net-tools
 
-sleep 10
+# wait 5 seconds for the packages to be installed
+sleep 5
 echo ""
 
 echo "NodeJS version installed: $(node -v)"
 echo "NPM version installed: $(npm -v)"
 echo ""
 
-# Set the service user name
-SERVICE_USER=myapp
-
-# Create the service user and its home directory if it doesn't exist
-useradd $SERVICE_USER -m
-
-# make service user the owner of the app log directory
-chown $SERVICE_USER -R $LOG_DIRECTORY
-
-################################################################################
-# executing the following commands as new service user using 'runuser' command
-################################################################################
-
-# fetch NodeJS project archive from s3 bucket
-runuser -l $SERVICE_USER -c "curl -O https://node-envvars-artifact.s3.eu-west-2.amazonaws.com/bootcamp-node-envvars-project-1.0.0.tgz"
-
-# extract downloaded file
-tar -xvzf bootcamp-node-envvars-project-1.0.0.tgz
-
-# set needed environment variables
-export APP_ENV=dev
-export DB_USER=myuser
-export DB_PWD=mysecret
-
-cd package
-
-# install dependencies
-npm install
-echo ""
-
-# check if app is already running and kill the process if it is
-pid=$(ps aux | grep "node server" | grep -v grep | awk '{print $2}')
-if [ -n "$pid" ]; then
-  echo "Node app is already running. Killing process $pid"
-  kill $pid
+# create dedicated service user if it doesn't exist
+SERVICE_USER="nodeapp"
+if ! id "$SERVICE_USER" &> /dev/null; then
+  echo "Creating dedicated service user: $SERVICE_USER"
+  useradd -r -s /bin/false -d /opt/nodeapp -m "$SERVICE_USER"
+else
+  echo "Service user $SERVICE_USER already exists"
 fi
 
+# Set the app directory and ensure owner is the service user
+APP_DIR="/opt/nodeapp"
+mkdir -p "$APP_DIR"
+chown -R "$SERVICE_USER":"$SERVICE_USER" "$APP_DIR"
 echo ""
 
 # read user input for log directory (before starting the app)
 echo "Enter the log directory location (absolute path): "
 read LOG_DIRECTORY
-echo ""
 
 # check if log directory exists and is a directory
 if [ -d "$LOG_DIRECTORY" ]; then
   echo "$LOG_DIRECTORY already exists"
-  export LOG_DIR=$LOG_DIRECTORY
 else
   mkdir -p $LOG_DIRECTORY
   echo "A new directory $LOG_DIRECTORY has been created"
-  export LOG_DIR=$LOG_DIRECTORY
 fi
 
 echo ""
 
-# start the node.js app in the background
-node server.js &
+# Change the download/extract target to $APP_DIR
+cd $APP_DIR
+curl -O https://node-envvars-artifact.s3.eu-west-2.amazonaws.com/bootcamp-node-envvars-project-1.0.0.tgz
+tar -xvzf bootcamp-node-envvars-project-1.0.0.tgz
+
+# change the working directory to the folder where the app archive was extracted
+cd package
+
+# set needed environment variables
+export APP_ENV=dev
+export DB_USER=myuser
+export DB_PWD=mysecret
+export LOG_DIR=$LOG_DIRECTORY
+
+# install dependencies as service user
+sudo -u "$SERVICE_USER" npm install
+echo ""
+
+# kill any existing node app processes
+pid=$(ps aux | grep "node server" | grep "$SERVICE_USER" | grep -v grep | awk '{print $2}')
+[ n "$pid" ] && echo "Node app is already running. Killing process $pid" && kill $pid
+echo ""
+
+# start the node.js app in the background as service user
+sudo -u "$SERVICE_USER" node server.js &
 
 # wait 4 secondes for the app to be up and running
 sleep 4
@@ -558,13 +555,17 @@ ps aux | head -n 1 && ps aux | grep "node server" | grep -v grep
 echo ""
 
 # get the app's listening port
-echo -n "Node App is listening on port: "
+echo -n "Node App is listening on port "
 pid=$(ps aux | grep "node server" | grep -v grep | awk '{print $2}')
 ss -lntp | grep "$pid" | awk '{print substr($4,3,5)}'
 ```
 
 ## Notes about the exercie 9 script
 
-- The `-m` option in `useradd $SERVICE_USER -m` creates the new user's home directory if it doesn't exist
-- The `-l` option in `runuser -l $SERVICE_USER -c` starts a login shell for $SERVICE_USER 
-- The `-c` option in `runuser -l $SERVICE_USER -c` executes the provided command as $SERVICE_USER
+- line 496: `&>/dev/null`: Redirects stdout and stderr to /dev/null, suppressing all output for a clean, silent check
+- line 498 creates the service user:
+  - The -r flag creates a system account (no password), 
+  - The -s flag sets its login shell to /bin/false so that any attempt to log in as this user will be rejected
+  - The -d flag sets the home directory to /opt/nodeapp
+  - The -m flag creates a home directory for that user if it doesn't already exist
+- line 543: we need to add a grep command to filter by the service user name

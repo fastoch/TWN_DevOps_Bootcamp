@@ -431,6 +431,7 @@ export APP_ENV=dev
 export DB_USER=myuser
 export DB_PWD=mysecret
 
+# change directory to where the app archive was extracted
 cd package
 
 # install dependencies
@@ -474,10 +475,12 @@ Let's extend the script to create the user and then run the application with tha
 ```bash
 #!/bin/bash
 
+# Update packages
 echo "updating packages"
 dnf upgrade -y
 echo ""
 
+# Install NodeJS and NPM and print out which versions were installed
 echo "installing node & npm, curl, wget and net-tools"
 dnf install -y nodejs npm curl wget net-tools
 
@@ -489,7 +492,7 @@ echo "NPM version installed: $(npm -v)"
 echo ""
 
 # create dedicated service user if it doesn't exist
-SERVICE_USER="nodeapp"
+SERVICE_USER="myapp"
 if ! id "$SERVICE_USER" &> /dev/null; then
   echo "Creating dedicated service user: $SERVICE_USER"
   useradd $SERVICE_USER -m
@@ -499,29 +502,22 @@ else
 fi
 echo ""
 
-# Set default app directory in service user's home
-APP_DIR="/home/$SERVICE_USER/app"
-mkdir -p "$APP_DIR"
-# make service user owner of the app directory
-chown -R "$SERVICE_USER:$SERVICE_USER" "$APP_DIR"
-
 # read user input for log directory (before starting the app)
 echo "Enter the log directory location (absolute path): "
-read -r LOG_DIRECTORY
+read LOG_DIRECTORY
 
 # check if log directory exists and creates it if not
 if [ -d "$LOG_DIRECTORY" ]; then
   echo "$LOG_DIRECTORY already exists"
 else
+  # create log directory 
   mkdir -p "$LOG_DIRECTORY"
   echo "A new directory $LOG_DIRECTORY has been created"
 fi
 
-# make service user owner of log directory
+# make service user owner of log directory 
 chown -R "$SERVICE_USER:$SERVICE_USER" "$LOG_DIRECTORY"
 echo ""
-
-echo "Deploying Node App as $SERVICE_USER..."
 
 # Kill existing app process if running
 pid=$(ps aux | grep "node server" | grep -v grep | awk '{print $2}')
@@ -530,53 +526,55 @@ if [ -n "$pid" ]; then
   kill $pid
 fi
 
-#########################################################################
-# executing next commands as the service user using the `runuser` command
-#########################################################################
+echo ""
 
-# SINGLE runuser block: download artifact, extract, set env vars, install deps, start app in the background
-runuser -l $SERVICE_USER -c "
-  cd '$APP_DIR' &&
-  rm -rf * .tgz* 2>/dev/null &&
-  curl -O https://node-envvars-artifact.s3.eu-west-2.amazonaws.com/bootcamp-node-envvars-project-1.0.0.tgz &&
-  tar -xvzf bootcamp-node-envvars-project-1.0.0.tgz &&"
+# executing the following commands as new user using 'runuser' command
 
+# fetch NodeJS project archive from s3 bucket
+runuser -l $NEW_USER -c "wget https://node-envvars-artifact.s3.eu-west-2.amazonaws.com/bootcamp-node-envvars-project-1.0.0.tgz"
 
-cd package
+# extract the project archive to ./package folder
+runuser -l $NEW_USER -c "tar zxvf ./bootcamp-node-envvars-project-1.0.0.tgz"
 
-  export APP_ENV=dev && 
-  export DB_USER=myuser && 
-  export DB_PWD=mysecret && 
-  export LOG_DIR=$LOG_DIRECTORY &&
-  npm install && 
-  node server.js &
+# start the nodejs application in the background, with all needed env vars with new user myapp
+runuser -l $NEW_USER -c "
+    export APP_ENV=dev && 
+    export DB_PWD=mysecret && 
+    export DB_USER=myuser && 
+    export LOG_DIR=$LOG_DIRECTORY && 
+    cd package && 
+    npm install && 
+    node server.js &"
 
 # wait 4 secondes for the app to be up and running
 sleep 4
 
 # check app status and process ID
 echo "Node app status and PID:"
-ps aux | head -n 1 && ps aux | grep "node server" | grep $SERVICE_USER | grep -v grep
+ps aux | head -n 1 && ps aux | grep "node server" | grep -v grep | grep -v npm
 echo ""
 
 # get the app's listening port
 echo -n "Node App is listening on port "
-pid=$(ps aux | grep "node server" | grep $SERVICE_USER | grep -v grep | awk '{print $2}')
+pid=$(ps aux | grep "node server" | grep -v grep | grep -v npm | awk '{print $2}')
 ss -lntp | grep "$pid" | awk '{print substr($4,3,5)}'
 ```
 
 ## Explaining the exercice 9 script
 
-- `if ! id "$SERVICE_USER" &> /dev/null` means "if the service user does not exist"
-  - the `&> /dev/null` part discards any output from stderr or stdout 
-- The `-m` flag in the `useradd` command creates a home directory for the service user if it doesn't exist
-- `read -r` is used to read input from the user without adding a trailing newline character
-- `runuser -l $SERVICE_USER -c` is used to run commands as the service user:
-  - the `-l` flag is used to **login** as the service user
-  - the `-c` flag is used to provide the **command** to execute
+`runuser -l $NEW_USER -c "cmd1 && cmd2 && cmd3"`:  
+This line uses the `runuser` command to execute the subsequent commands as the "myapp" user.  
+The `-l` option is used to specify the user name.  
+The `-c` option is used to specify the command to be executed.  
+We chain commands via `&&` to run them in sequence.  
 
-### Explaining the single runuser block
+---
 
-- `rm -rf * .tgz* 2>/dev/null` removes any existing files in the app directory except .tgz files
-  - the `2>/dev/null` discards any output from stderr
+`ps aux | head -n 1 && ps aux | grep "node server" | grep -v grep | grep -v npm`:  
+This line displays the first line of the `ps` command output, which contains the column headers,  
+and then it uses the `grep` command to get only the lines that contain the word "node server".  
+
+To only get the app's PID, we need to remove lines that contain "node server" but do not match pur app's process:
+- `grep -v grep` is used to exclude the `grep "node server"` command itself.    
+- `grep -v npm` is used to exclude the `runuser` chained command that also contains "node server".
 

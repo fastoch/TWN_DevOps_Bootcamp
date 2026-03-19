@@ -1118,10 +1118,18 @@ how native Linux commands are named (ls, cat, grep, etc.).
 
 - LAN = Local Area Network
 - each computing device has a unique IP address
-- IP = Internet Protocol
-- devices communicate via these IP addresses
-- an IPv4 address is composed of 4 bytes (32 bits), separated by periods
-- 
+  - IP = Internet Protocol
+  - devices communicate via these IP addresses
+  - an IPv4 address is composed of 4 bytes (32 bits), separated by periods
+    - bytes are also called octets
+    - a byte can have a decimal value between 0 and 255 (a binary value between 00000000 and 11111111)
+    - 1 bit = 0 or 1
+    - 1 byte = 8 bits
+  - The IPv4 address range goes from 0.0.0.0 to 255.255.255.255
+- in a LAN, devices communicate via a **switch**
+- WAN = Wide Area Network (composed of multiple interconnected LANs)
+- in a WAN, devices located in different LANs communicate via a **router**
+- The Internet is the ultimate WAN, composed of multiple interconnected WANs
 
 ---
 

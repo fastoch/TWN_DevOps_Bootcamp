@@ -502,13 +502,14 @@ echo ""
 # Set default app directory in service user's home
 APP_DIR="/home/$SERVICE_USER/app"
 mkdir -p "$APP_DIR"
+# make service user owner of the app directory
 chown -R "$SERVICE_USER:$SERVICE_USER" "$APP_DIR"
 
 # read user input for log directory (before starting the app)
 echo "Enter the log directory location (absolute path): "
 read -r LOG_DIRECTORY
 
-# check if log directory exists and is a directory
+# check if log directory exists and creates it if not
 if [ -d "$LOG_DIRECTORY" ]; then
   echo "$LOG_DIRECTORY already exists"
 else
@@ -523,11 +524,10 @@ echo ""
 echo "Deploying Node App as $SERVICE_USER..."
 
 # Kill existing app process if running
-OLD_PID=$(pgrep -f "node server.js" -u "$SERVICE_USER" 2>/dev/null)
-if [ -n "$OLD_PID" ]; then
-  echo "Killing existing app process $OLD_PID"
-  kill "$OLD_PID"
-  sleep 2
+pid=$(ps aux | grep "node server" | grep -v grep | awk '{print $2}')
+if [ -n "$pid" ]; then
+  echo "Node app is already running. Killing process $pid"
+  kill $pid
 fi
 
 #########################################################################
@@ -535,19 +535,21 @@ fi
 #########################################################################
 
 # SINGLE runuser block: download artifact, extract, set env vars, install deps, start app in the background
-runuser -l $SERVICE_USER -c "curl -O https://node-envvars-artifact.s3.eu-west-2.amazonaws.com/bootcamp-node-envvars-project-1.0.0.tgz"
+runuser -l $SERVICE_USER -c "
+  cd '$APP_DIR' &&
+  rm -rf * .tgz* 2>/dev/null &&
+  curl -O https://node-envvars-artifact.s3.eu-west-2.amazonaws.com/bootcamp-node-envvars-project-1.0.0.tgz &&
+  tar -xvzf bootcamp-node-envvars-project-1.0.0.tgz &&"
 
-runuser -l $SERVICE_USER -c "tar -xvzf bootcamp-node-envvars-project-1.0.0.tgz"
 
 cd package
 
-runuser -l $SERVICE_USER -c "
   export APP_ENV=dev && 
   export DB_USER=myuser && 
   export DB_PWD=mysecret && 
   export LOG_DIR=$LOG_DIRECTORY &&
   npm install && 
-  node server.js &"
+  node server.js &
 
 # wait 4 secondes for the app to be up and running
 sleep 4
@@ -563,10 +565,18 @@ pid=$(ps aux | grep "node server" | grep $SERVICE_USER | grep -v grep | awk '{pr
 ss -lntp | grep "$pid" | awk '{print substr($4,3,5)}'
 ```
 
-## Notes about the exercice 9 script
+## Explaining the exercice 9 script
 
-- `runuser -l $SERVICE_USER -c` is used to run commands as the service user:
-  - the -l flag is used to login as the service user
-  - the -c flag is used to provide the command to execute
-- The -m flag in the `useradd` command creates a home directory for the service user if it doesn't exist
+- `if ! id "$SERVICE_USER" &> /dev/null` means "if the service user does not exist"
+  - the `&> /dev/null` part discards any output from stderr or stdout 
+- The `-m` flag in the `useradd` command creates a home directory for the service user if it doesn't exist
 - `read -r` is used to read input from the user without adding a trailing newline character
+- `runuser -l $SERVICE_USER -c` is used to run commands as the service user:
+  - the `-l` flag is used to **login** as the service user
+  - the `-c` flag is used to provide the **command** to execute
+
+### Explaining the single runuser block
+
+- `rm -rf * .tgz* 2>/dev/null` removes any existing files in the app directory except .tgz files
+  - the `2>/dev/null` discards any output from stderr
+

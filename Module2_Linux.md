@@ -1116,8 +1116,8 @@ how native Linux commands are named (ls, cat, grep, etc.).
 
 ### Basic networking concepts
 
-- LAN = Local Area Network
-- each computing device has a unique IP address
+- **LAN** = Local Area Network
+- each computing device has a unique **IP address**
   - IP = Internet Protocol
   - devices communicate via these IP addresses
   - an IPv4 address is composed of 4 bytes (32 bits), separated by periods
@@ -1127,9 +1127,42 @@ how native Linux commands are named (ls, cat, grep, etc.).
     - 1 byte = 8 bits
   - The IPv4 address range goes from 0.0.0.0 to 255.255.255.255
 - in a LAN, devices communicate via a **switch**
-- WAN = Wide Area Network (composed of multiple interconnected LANs)
+- **WAN** = Wide Area Network (composed of multiple interconnected LANs)
 - in a WAN, devices located in different LANs communicate via a **router**
 - The Internet is the ultimate WAN, composed of multiple interconnected WANs
+- A router is what connects your computer to the Internet
+- The IP address of a router is called a **gateway**
+
+### Subnetting
+
+- a subnet = IP address range = network IP address + subnet mask
+- example: 192.168.0.0/24
+  - 192.168.0.0 = network IP address
+  - /24 = subnet mask = 255.255.255.0
+  - in this subnet, IP address ranges from 192.168.0.0 to 192.168.0.255
+  - which leaves 254 available addresses for devices
+- example 2: 192.168.0.0/16
+  - 192.168.0.0 = network IP address
+  - /16 = subnet mask = 255.255.0.0
+  - in this subnet, IP address ranges from 192.168.0.0 to 192.168.255.255
+  - which leaves 65,534 available addresses for devices
+- first address 192.168.0.0 is always the network's address, and last address is used for broadcasting
+
+### internal and external IP addresses
+
+When we send a request to an IP address within our LAN, the request goes to the switch which then forwards it 
+to the destination device within the LAN, because a switch knows all addresses of all devices within the LAN.  
+
+When we send a request to an external IP address, it will be forwarded to the Internet through a router.  
+
+That means any device on a network needs 3 pieces of data to communicate with other devices: 
+- IP address
+- subnet mask
+- gateway address
+
+### Network Address Translation (NAT)
+
+
 
 ---
 

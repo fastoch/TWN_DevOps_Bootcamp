@@ -1114,7 +1114,14 @@ how native Linux commands are named (ls, cat, grep, etc.).
 
 ## Networking
 
-March 14, 2026
+### Basic networking concepts
+
+- LAN = Local Area Network
+- each computing device has a unique IP address
+- IP = Internet Protocol
+- devices communicate via these IP addresses
+- an IPv4 address is composed of 4 bytes (32 bits), separated by periods
+- 
 
 ---
 

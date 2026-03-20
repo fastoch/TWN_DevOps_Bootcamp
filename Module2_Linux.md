@@ -1184,15 +1184,45 @@ When a device inside our network (e.g., 192.168.1.10:44321) sends a request out 
 
 When the reply comes back to the router’s public IP and that port, the router looks up the entry in this table and forwards the packet back to the correct private IP and port.
 
-### Firewall
+### Firewall (FW)
 
 When we send a request to a server on the Internet, we will usually get a response back.  
 
 But what if an outside device wants to talk directly to a device on our LAN?  
 By default, this type of communication won't be allowed, it will be blocked by our firewall.  
 
-A firewall is a set of rules that protects our network from unauthorized access.  
-We define which device on our network with a specific IP address should be accessible.  
+A firewall is a **set of rules** that protects our network from unauthorized access.  
+
+We define which device on our network (with a specific IP address) should be accessible.  
+We can also define which external devices (or which IP addresses) should be allowed to access our network.  
+
+We can say "I allow any device on the Internet to talk to my server".  
+This is usually the case when we're running a web application.  
+
+For most servers that are running some applications, we need to configure firewall rules to manage the access configuration.  
+
+When defining these rules, we need to specify a **protocol** and a **port** number.  
+Because the application running on our server will be listening on this specific port.  
+It's listening for incoming requests, and serves responses to those requests.  
+
+### What is a port?
+
+Every device has a set of ports, they're like doors to the same building.  
+We can allow specific ports on our server to be accessed.  
+Or we can allow specific ports to only be accessed by specific IP addresses.  
+
+Different applications listen on specific ports.  
+There are default or standard ports for many applications.   
+
+For example, most web servers listen on port 80.  
+MySQL databases listen on port 3306.  
+PostgreSQL databases listen on port 5432.  
+
+For every application, we need a port.  
+
+### Domain Name System (DNS)
+
+
 
 ---
 

@@ -1162,11 +1162,42 @@ That means any device on a network needs 3 pieces of data to communicate with ot
 
 ### Network Address Translation (NAT)
 
+IP addresses within a LAN (a private network) are not visible to the outside world.  
+When devices on our LAN send requests to a website, our private IP addresses are never shared with the destination server.  
+Instead, they're replaced by the public IP address of our router before leaving our private network.  
 
+That's why multiple LANs can use the same IP address range without risking any conflicts.  
+And that's made possible by Network Address Translation (NAT).  
+
+### Reverse NAT
+
+Other devices on the Internet can reach our router by using its public IP address.  
+Our router then forwards incoming requests to the appropriate device on our private network.  
+
+But how does our router know which device to forward incoming requests to?  
+
+When a device inside our network (e.g., 192.168.1.10:44321) sends a request out to the internet, the router:
+- replaces the original source IP and port with its own public IP and an ephemeral port 
+  (e.g., 203.0.113.1:10023 → 192.168.1.10:44321).
+- remembers this mapping in a NAT state table (connection tracking table), associating the external 5‑tuple 
+  (public IP, public port, destination IP, destination port, protocol) with the internal (private IP, private port).
+
+When the reply comes back to the router’s public IP and that port, the router looks up the entry in this table and forwards the packet back to the correct private IP and port.
+
+### Firewall
+
+When we send a request to a server on the Internet, we will usually get a response back.  
+
+But what if an outside device wants to talk directly to a device on our LAN?  
+By default, this type of communication won't be allowed, it will be blocked by our firewall.  
+
+A firewall is a set of rules that protects our network from unauthorized access.  
+We define which device on our network with a specific IP address should be accessible.  
 
 ---
 
 ## SSH - Secure Shell
+
 
 
 ---

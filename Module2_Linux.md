@@ -1313,7 +1313,21 @@ We will use some of the above commands and networking concepts in the next modul
 
 ## SSH - Secure Shell
 
+Imagine you've written a shell script, and you want to copy it to another server to execute it there.  
+Or you want to copy it to 10 other servers at once.  
 
+Those servers may physically be in a different location, maybe in another country.  
+How do you access remote servers in a secure manner, and configure stuff from their CLI?  
+
+The solution to these scenarios is **SSH** (Secure Shell).  
+It consists in accessing a machine over the Internet using a secure connection.  
+
+Nobody should be able to access our remote servers.  
+Which means we need to make sure the authentication process is completely secure.  
+
+There are 2 ways of authenticating to a remote server over SSH:
+- using credentials: username and password of a user registered on the remote server
+- 
 
 ---
 End of Module 2

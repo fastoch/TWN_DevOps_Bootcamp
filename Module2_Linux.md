@@ -1348,6 +1348,20 @@ So, if the public key of someone is not registered on the remote server, that pe
 
 ### SSH for Services
 
+We can also add a user on the remote server for a specific service, not just for team members.  
+Just like we use a dedicated service account to run a shell script on a Linux server.  
+
+This service could be an application like Jenkins, which also need to access the remote server via SSH to perform various tasks.  
+- We can create a Jenkins user on the remote machine 
+- then, we create an SSH key pair on the Jenkins server (which is the SSH client machine)
+- and add the public key to the authorized keys on the remote machine
+
+### Firewall and port 22
+
+Remember we said that whenever one machine wants to connect to another machine, the communication must be explicitly allowed
+through a Firewall rule. Otherwise, all such communication will be blocked by default.  
+
+And just for clear understanding, the SSH authentication is the step that comes after we've connected to the remote machine.  
 
 
 ---

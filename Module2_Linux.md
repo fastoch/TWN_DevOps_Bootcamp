@@ -1327,7 +1327,28 @@ Which means we need to make sure the authentication process is completely secure
 
 There are 2 ways of authenticating to a remote server over SSH:
 - using credentials: username and password of a user registered on the remote server
-- 
+- using an SSH key pair: public key + private key (more secure than credentials)
+
+### Configuring an SSH key pair
+
+- The client machine connecting to the remote server creates an SSH key pair
+- Only the client machine knows the private key
+- The public key is shared with the remote server
+
+The client machine proves it is authorized to establish a connection with the remote server by 
+using its private key to "unlock" the public key stored on the remote server.  
+
+The combination of these two keys that form a unique SSH key pair is required for the connection to succeed.  
+It's like a lock that can only be opened with two keys at the same time.  
+
+In practice, each team member will create their own SSH key pair on their machine.  
+And then, the remote server administrator will copy the public keys of all team members to the remote server.  
+
+So, if the public key of someone is not registered on the remote server, that person cannot connect to it.  
+
+### SSH for Services
+
+
 
 ---
 End of Module 2

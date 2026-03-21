@@ -1205,6 +1205,17 @@ When defining these rules, we need to specify a **protocol** and a **port** numb
 Because the application running on our server will be listening on this specific port.  
 It's listening for incoming requests, and serves responses to those requests.  
 
+### Port Forwarding
+
+Port forwarding is a technique used in network firewalls to allow incoming network connections to be routed to a specific device or service 
+on a private network.  
+
+To configure port forwarding on a firewall, you typically need to specify the following:
+- external port
+- internal port: port on which the service is running on your private network
+- private IP address
+- protocol: type of network traffic that should be forwarded (TCP or UDP)
+
 ### What is a port?
 
 Every device has a set of ports, they're like doors to the same building.  
@@ -1222,7 +1233,12 @@ For every application, we need a port.
 
 ### Domain Name System (DNS)
 
+The Domain Name System (DNS) is a computer system that translates human-readable names into IP addresses.  
+It's like a phone book for the Internet.  
 
+Humans can't remember IP addresses, so we use URLs instead, such as https://github.com/fastoch.  
+When we press enter to access a website, the browser sends a request to a DNS server which then finds the IP address 
+of the server that is hosting the requested website.  
 
 ---
 

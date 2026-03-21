@@ -1269,6 +1269,15 @@ It's all regulated by a dedicated organization called the **Internet Corporation
 The ICANN manages the TLD development and the architecture of the internet domain space.  
 It also authorizes Domain Name registrars, which register and assign domain names.
 
+#### How does DNS resolution work?
+
+Every computer has a DNS client pre-installed.  
+When you open a web browser and type in a URL, your OS makes a DNS query asking a DNS server to resolve that URL to the correspondng IP address.  
+
+The DNS request first goes to your local name server, which is typically operated by your ISP (internet service provider).  
+This DNS server might already have the IP address stored in its cache.  
+If not, it will go through one of the 13 root DNS servers.  
+
 ---
 
 ## SSH - Secure Shell

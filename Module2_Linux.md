@@ -1240,6 +1240,35 @@ Humans can't remember IP addresses, so we use URLs instead, such as https://gith
 When we press enter to access a website, the browser sends a request to a DNS server which then finds the IP address 
 of the server that is hosting the requested website.  
 
+#### How does DNS manage so many addresses and their names?
+
+All these names are divided into groups or **domains**.  
+Domain names follow a hierarchical structure: 
+- There are around 13 **root domains** across the world
+- Under each root domain, we have **top level domains (TLDs)**
+  - .com: commercial organizations
+  - .mil: military applications
+  - .edu: educational institutions
+  - .org: non-profit organizations
+  - .net: originally for networking technologies
+  - .gov: governmental organizations
+
+Apart from these original top level domains, there are geographical domains which were added later, 
+such as .fr for France, .ca for Canada, etc.  
+
+Finally, a bunch of other domains were also added like .biz, .dev, .int, etc.  
+
+#### Domain Name Registration
+
+When someone creates a website, they can buy a domain name like mywebsite.com.  
+It's generally a yearly subscription, and if you don't need it anymore, someone else can buy it.  
+
+But who manages these domain names? Who can sell them? Who keeps track of availability?  
+It's all regulated by a dedicated organization called the **Internet Corporation for Assigned Names and Numbers (ICANN)**.  
+
+The ICANN manages the TLD development and the architecture of the internet domain space.  
+It also authorizes Domain Name registrars, which register and assign domain names.
+
 ---
 
 ## SSH - Secure Shell

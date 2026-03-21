@@ -1275,8 +1275,39 @@ Every computer has a DNS client pre-installed.
 When you open a web browser and type in a URL, your OS makes a DNS query asking a DNS server to resolve that URL to the correspondng IP address.  
 
 The DNS request first goes to your local name server, which is typically operated by your ISP (internet service provider).  
-This DNS server might already have the IP address stored in its cache.  
-If not, it will go through one of the 13 root DNS servers.  
+- This DNS server might already have the IP address stored in its cache.  
+- If not, it will go through one of the 13 root DNS servers which manage requests for TLDs
+  - the root domain server will return the address of the top level domain server
+  - the resolver then asks the TLD server for the IP address of the website we're trying to access
+  - the TLD server redirects us to the Authoritative Name Server (knows everything about the target domain)
+  - finally, the Authoritative Name Server returns the IP address of the website
+
+Root servers are redundantly available all over the world so that you get a response quickly.  
+
+**Recap**: DNS client > resolver > root servers > TLD servers > Authoritative Name Server > IP address  
+resolver = DNS server configured on our computer
+
+Now that we have a better understanding of the DNS resolution process, the importance of caching DNS entries is clear.  
+We can cache the IP address of a website for a long time, so we don't need to resolve it every time we open a browser.
+
+### Networking commands 
+
+The following commands can be useful for troubleshooting networking issues or checking application status:
+- ifconfig
+- ip add
+- netstat
+- ps aux
+- nslookup
+- ping
+
+Of course, there are options for all these commands to enhance their capabilities.  
+
+### Conclusion
+
+As a DevOps engineer, you don't need to be a networking expert, but you need some fundational knowledge.  
+It's important to be able to troubleshoot networking issues and to understand how applications work.  
+
+We will use some of the above commands and networking concepts in the next modules.
 
 ---
 

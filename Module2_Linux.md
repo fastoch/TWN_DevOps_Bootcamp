@@ -1403,7 +1403,23 @@ Once your server has been created, you can rename it if you want.
 
 - Copy your server's IPv4 public address
 - From your Linux machine, open a terminal and run `ssh root@<IPv4_public_address>`
-- 
+- Answer 'yes' to the question "Are you sure you want to continue connecting?"
+- enter the password you've configured for your root user when creating the droplet
+
+#### Generating an SSH key pair on your laptop
+
+- from a terminal, run `ssh-keygen -t ed25519 -C "some_label"`
+  - the -t flag is used to specify the type of key, the encryption algorithm that will be used
+- specify where to save and how to name that key, default being ~/.ssh/id_ed25519
+- secure your key pair with a passphrase, not mandatory but recommended
+
+#### Copying the public key to the remote server
+
+In the location where you saved your key pair, you'll have 2 files: `id_ed25519` and `id_ed25519.pub`  
+File names can differ if you've changed them when generating the key pair.  
+The public key will be the one which file extension is `.pub`.  
+
+
 
 ---
 End of Module 2

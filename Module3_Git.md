@@ -2,7 +2,7 @@
 
 ## Module Overview
 
-In this module, we'll learn about "version control" and one ofits most popular implementation: Git.  
+In this module, we'll learn about "version control" and its most popular implementation: Git.  
 Version control is used in software development to track and manage changes to source code over time.  
 
 It's becoming more and more important in the DevOps space in order to manage the application configuration 
@@ -62,4 +62,21 @@ First of all, this will make it easier to revert changes.
 And second, it's easier to describe small changes with a commit message.  
 
 ## Basic concepts of Git
+
+Git is the most popular version control system. Alternative tools exist, such as SVN, for example.  
+The inventor of Git is Linus Torvalds, the same person who created the Linux kernel.  
+
+Git has multiple parts:
+- the remote Git repository: where the code lives
+- the UI (user interface): for interacting with the repository
+- the local Git repository: where you store your local copy of the code
+- the history of code changes: git log
+- the staging area : where your working changes are stored before committing them to the remote repo
+- the Git client: a UI tool or a CLI installed on your machine that lets you execute Git commands
+
+![how_git_works](./assets/git.png)  
+
+## How to set up a Git repo (remote & local)
+
+
 

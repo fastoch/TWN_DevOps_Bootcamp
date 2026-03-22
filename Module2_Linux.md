@@ -1447,7 +1447,31 @@ Providing the location of your private key can also be useful if you have multip
 
 #### Copying a bash script to the remote server
 
+We'll use the `scp` command (secure copy, meaning files and password are encrypted):  
+`scp /path/to/script/file root@<IPv4_public_address>:/path/to/destination`  
 
+You might need to provide the private key's location with the `-i` flag:  
+`scp -i /path/to/your/key /path/to/script/file root@<IPv4_public_address>:/path/to/destination`  
+
+#### Running the bash script on the remote server
+
+- Log in to the remote server: `ssh root@<IPv4_public_address>`  
+- check that your script is in the destination folder using the `ls -l /path/to/destination` command
+- add execute permissions to the script via `chmod u+x <script_name>`
+- execute the script via `./<script_name>`
+
+#### Final note
+
+We haven't configured any firewall rule to allow access to our droplet server.  
+That's because when we create servers on Digital Ocean, all ports are open by default.  
+
+However, it's possible to create a firewall configuration and then apply it to our droplet.  
+For that, access the Networking menu > Firewalls > Create Firewall  
+
+We'll learn all of this in the Cloud Basics module.  
+
+>[!important]
+>Once you're done with the droplet server, you can destroy it to avoid unnecessary costs.
 
 ---
 End of Module 2

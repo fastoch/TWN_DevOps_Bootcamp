@@ -1406,8 +1406,9 @@ Once your server has been created, you can rename it if you want.
 - Answer 'yes' to the question "Are you sure you want to continue connecting?"
 - enter the password you've configured for your root user when creating the droplet
 
-#### Generating an SSH key pair on your laptop
+#### Generating an SSH key pair on the client machine
 
+From your laptop:
 - from a terminal, run `ssh-keygen -t ed25519 -C "some_label"`
   - the -t flag is used to specify the type of key, the encryption algorithm that will be used
 - specify where to save and how to name that key, default being ~/.ssh/id_ed25519
@@ -1418,6 +1419,29 @@ Once your server has been created, you can rename it if you want.
 In the location where you saved your key pair, you'll have 2 files: `id_ed25519` and `id_ed25519.pub`  
 File names can differ if you've changed them when generating the key pair.  
 The public key will be the one which file extension is `.pub`.  
+
+On the droplet server, check the presence of the `~/.ssh/authorized_keys` file.  
+If it doesn't exist, create it by running `touch ~/.ssh/authorized_keys`.  
+That's the file where you'll add the public key of all client machines that will be allowed to connect to the remote server.  
+
+From your client machine: 
+- open a terminal and run `cat ~/.ssh/id_ed25519.pub`
+- copy the output
+
+Go back to the droplet's terminal: 
+- open the ~/.ssh/authorized_keys file
+- paste the public key
+- save the file
+
+#### Connecting to the remote server via SSH
+
+Close the terminal where you're connected to the remote server as root.  
+
+From the client machine:
+- open a terminal and run `ssh root@<IPv4_public_address>`
+- that's it, you're automatically logged in as root on the remote server!
+
+#### Copying a bash script to the remote server
 
 
 

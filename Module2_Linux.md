@@ -1441,6 +1441,10 @@ From the client machine:
 - open a terminal and run `ssh root@<IPv4_public_address>`
 - that's it, you're automatically logged in as root on the remote server!
 
+The ~/.ssh folder is the default location where the ssh command looks for the private key.  
+If you want to change the location, you can run `ssh -i /path/to/your/key root@<IPv4_public_address>`  
+Providing the location of your private key can also be useful if you have multiple SSH key pairs in your ~/.ssh folder.  
+
 #### Copying a bash script to the remote server
 
 

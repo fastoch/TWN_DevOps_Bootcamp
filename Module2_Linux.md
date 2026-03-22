@@ -1361,8 +1361,49 @@ This service could be an application like Jenkins, which also need to access the
 Remember we said that whenever one machine wants to connect to another machine, the communication must be explicitly allowed
 through a Firewall rule. Otherwise, all such communication will be blocked by default.  
 
-And just for clear understanding, the SSH authentication is the step that comes after we've connected to the remote machine.  
+And just for clear understanding, the SSH authentication is the step that comes AFTER we've connected to the remote machine.  
+First, the connection must be allowed, and then the authentication process happens.  
 
+Most operating have an SSH service, which is running by default on port 22.  
+So, in a Firewall rule, we need to allow the communication on port 22 on the remote machine.  
+
+In Firewall rules, we can also configure which devices from outside can access our machine or network.  
+
+In case of a web application, we said that we want to allow everyone to access it.  
+And it's secure because they only have access to that one application.  
+
+But SSH connection is very **powerful**.  
+When you connect to another machine over SSH, you get access to the **whole system** and its **CLI**.  
+And depending on the user permissions, you can do a lot of damage.  
+So, we need to be very **careful** when we allow SSH access to our machines.  
+
+The best practice is to configure a firewall rule for port 22 for specific white-listed IP addresses.  
+
+### SSH Demo
+
+- create a remote server on a cloud platform
+- generate an SSH key pair on your laptop
+- copy a bash script file to the remote server
+- ssh into the remote server and run the script
+
+#### Create a droplet on Digital Ocean 
+
+Droplets are virtual machines that anyone can setup in seconds.  
+- Sign up or sign in to Digital Ocean 
+- click on Create Droplet
+- select the region which is closest to you
+- select an OS
+- select the cheapest option
+- choose password authentication and enter the password for your root user
+- leave everything else as default and click on Create Droplet
+
+Once your server has been created, you can rename it if you want.  
+
+#### Connecting to the remote server via SSH
+
+- Copy your server's IPv4 public address
+- From your Linux machine, open a terminal and run `ssh root@<IPv4_public_address>`
+- 
 
 ---
 End of Module 2

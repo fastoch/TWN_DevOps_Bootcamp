@@ -93,4 +93,26 @@ Various online platforms can host Git repositories, the most popular ones being:
 
 - Git client needs to be installed first: can be a UI client or Git CLI
 - Git CLI requires memorizing a handful of commands
-- 
+- Git client needs to be connected with remote platform, which requires authenticating to GitHub/GitLab/...
+- For that, once Git has been installed, you need to configure your username and email:
+```bash
+git config --global user.name "<username>"
+git config --global user.email "<email>"
+```  
+
+- We can also add our public SSH key to the remote platform:
+  - generate an SSH key pair on your local machine if you don't have one
+  - log in to the remote platform
+  - go to Settings -> SSH keys
+  - add your public key
+Once we've added our public key to the remote platform, it can authenticate us when pushing to or pulling from repo.  
+
+After you've installed and configured the Git client, you can create a local repo:
+- you can either clone an already existing remote repo: `git clone <url>`
+- Or create a brand new local repo via the `git init` command
+
+If you create a brand new repo, it will be empty at first, except for the `.git` folder.  
+This folder contains information about the repo, such as the history of commits, the configuration, etc.  
+
+## Working with files in Git
+

@@ -78,5 +78,19 @@ Git has multiple parts:
 
 ## How to set up a Git repo (remote & local)
 
+### Remote repo
 
+Various online platforms can host Git repositories, the most popular ones being:
+- GitHub
+- GitLab
 
+- Repositories can be public or private depending on your choice
+- You have to sign up for an account on these platforms to use them
+- You can do a lot via these platforms UI, pretty much everything is there 
+- Some companies have their own Git servers
+
+### Local repo
+
+- Git client needs to be installed first: can be a UI client or Git CLI
+- Git CLI requires memorizing a handful of commands
+- 

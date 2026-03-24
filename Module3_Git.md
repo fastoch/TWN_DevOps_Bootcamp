@@ -160,3 +160,8 @@ And once you decide to work with Git on this project, you'll need to initialize 
 
 You do that by running the `git init` command.  
 This will create a new local repo, which you can then configure to point to a remote repo.  
+
+I can stage all files via `git add .`  
+I can commit all staged files via `git commit -m "<message>"`  
+
+At this point, our local repo isn't connnected to any remote repo.  

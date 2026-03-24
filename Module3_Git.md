@@ -154,3 +154,9 @@ Finally, to save changes to the remote repo, run: `git push`
 
 ## Initialize a Git project locally
 
+Sometimes you won't be cloning an existing Git repository.  
+Instead, you'll be creating a new project from scratch.  
+And once you decide to work with Git on this project, you'll need to initialize a local Git repo.  
+
+You do that by running the `git init` command.  
+This will create a new local repo, which you can then configure to point to a remote repo.  

@@ -116,3 +116,41 @@ This folder contains information about the repo, such as the history of commits,
 
 ## Working with files in Git
 
+It's important to know the status a file can have in Git: 
+- modified: when you make changes to a staged file
+- untracked: when you create a new file
+- staged: when you add a file to the staging area via `git add`
+- committed: when you commit your changes via `git commit`
+- pushed: when you push your changes to the remote repo via `git push`
+
+The steps to work with files in Git are:
+1. Create and edit a file
+2. Add the file to the staging area
+3. Commit changes to the local repo
+4. Push changes to the remote repo
+
+To get the status of your local git repo, run `git status`  
+This will show you which branch you're on, your untracked files, your commits and changes to be committed.  
+
+At first, your files are in the "working directory".  
+If you use the `git add` command on these files, they will be moved to the staging area.  
+
+To stage all untracked files/changes in the current folder, run `git add .`  
+To stage a specific file, run `git add <file_name>`  
+To unstage a file, run `git rm --cached <file_name>`  
+
+Staged files are ready to be committed.  
+If you modify a staged file, changes won't be part of the next commit, they will be unstaged.  
+To discard changes in the working directory, run `git restore <file_name>`  
+
+To commit your changes to the local repo, run `git commit -m "<message>"`  
+Committing is confirming that you want to save your currently staged changes to the local repo.  
+The history of your commits can be seen with `git log`  
+
+**Recap**:  
+working directory > staging area > local repo > remote repo  
+
+Finally, to save changes to the remote repo, run: `git push`  
+
+## Initialize a Git project locally
+

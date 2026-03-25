@@ -164,4 +164,12 @@ This will create a new local repo, which you can then configure to point to a re
 I can stage all files via `git add .`  
 I can commit all staged files via `git commit -m "<message>"`  
 
+### Connecting a local repo to a remote repo
+
 At this point, our local repo isn't connnected to any remote repo.  
+We need to go to GitLab or GitHub to create a new empty project.  
+Then, we need to copy our remote repo's URL.  
+And finally, we can run `git remote add origin <url>` to connect the local repo to the remote repo.  
+
+This last command tells my local repo where to push changes to.  
+Now, I can run `git push` to push my changes to the remote repo.  

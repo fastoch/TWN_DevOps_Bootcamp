@@ -152,7 +152,7 @@ working directory > staging area > local repo > remote repo
 
 Finally, to save changes to the remote repo, run: `git push`  
 
-## Initialize a Git project locally
+## Initializing a Git project locally
 
 Sometimes you won't be cloning an existing Git repository.  
 Instead, you'll be creating a new project from scratch.  
@@ -168,8 +168,32 @@ I can commit all staged files via `git commit -m "<message>"`
 
 At this point, our local repo isn't connnected to any remote repo.  
 We need to go to GitLab or GitHub to create a new empty project.  
+
 Then, we need to copy our remote repo's URL.  
 And finally, we can run `git remote add origin <url>` to connect the local repo to the remote repo.  
 
-This last command tells my local repo where to push changes to.  
+This last command tells my local repo where to push the changes to.  
+`origin` is the name of the destination  
+
 Now, I can run `git push` to push my changes to the remote repo.  
+But I'll get an **error** because repos are connected but not **branches**.  
+
+### Connecting branches
+
+We have to connect the main branch of our local repo to the main branch of our remote repo.  
+This is done via `git push --set-upstream origin main`  
+
+>[!note]
+>Older repos might not have a "main" branch.  
+>Instead they have a "master" branch.  
+
+### The .git folder holds the configuration of the repo
+
+The last two commands, `git remote add origin <url>` and `git push --set-upstream origin main`, 
+modified the configuration of our Git repo and generated information that is stored in the `.git` folder.  
+
+This folder stores the information about how to connect to the remote repo, where is the remote, which endpoint, 
+and how the branches actually connect to each other.  
+
+## Concept of Branches
+

@@ -173,7 +173,6 @@ Then, we need to copy our remote repo's URL.
 And finally, we can run `git remote add origin <url>` to connect the local repo to the remote repo.  
 
 This last command tells my local repo where to push the changes to.  
-`origin` is the name of the destination  
 
 Now, I can run `git push` to push my changes to the remote repo.  
 But I'll get an **error** because repos are connected but not **branches**.  
@@ -197,3 +196,41 @@ and how the branches actually connect to each other.
 
 ## Concept of Branches
 
+master branch = main branch  
+This is the branch that is created by default when initializing a Git repo  
+
+Typical use case in a development team is:
+- developing new features for an application
+- fixing bugs in existing features
+
+We said it's important to commit changes often and in small chunks to the main branch in the repo.  
+Imagine what a mess the repo would be if all developers pushed their changes to the same branch...  
+
+No one would know the actual state of the repo:
+- Are the bugs fully fixed? 
+- Are the new features fully implemented?
+
+No one could tell when the repo is in a state where you can build the application and deploy it somewhere.  
+The concept of branches exists in order to cleanly divide the work of different developers.  
+
+Best practice is to create a branch for each feature and each bug fix.  
+The naming standard is `feature/<feature_name>` or `bugfix/<bugfix_name>`  
+
+This way, each dev can commit its half done or work in progress changes as often as they want without 
+breaking other people's code.  
+
+And once fully implemented and tested locally, a dev can say "my feature/bugfix is ready to be merged into the main branch".  
+That's what we call a "**merge request**".  
+
+>[!important]  
+>Large feature branches that are open for too long increase the chance of merge conflicts.  
+>That's why it's important to have small features that don't take weeks to implement.  
+>Otherwise, developers will have to communicate and solve merge conflicts all the time...  
+
+Using branches allows us to always have a stable main branch.  
+Because we don't merge into the main branch until the feature/bugfix is ready.  
+
+### Creating a new branch
+
+2 ways:
+- 

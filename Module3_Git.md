@@ -198,6 +198,7 @@ and how the branches actually connect to each other.
 
 master branch = main branch  
 This is the branch that is created by default when initializing a Git repo  
+Git stopped using the "master" word around 2020.  
 
 Typical use case in a development team is:
 - developing new features for an application
@@ -233,4 +234,22 @@ Because we don't merge into the main branch until the feature/bugfix is ready.
 ### Creating a new branch
 
 2 ways:
-- 
+- via the Git platform UI (GitHub/GitLab)
+- via the `git checkout -b <branch_name>` command
+
+#### Using the UI
+
+It's best practice to create the new branch from the main one.  
+
+To start working on the new branch, I have to tell my local repo.  
+- To show all branches, run `git branch`  
+- To inform my local repo about the new branch, run `git pull`  
+- To switch to the new branch, run `git checkout <branch_name>`
+
+#### Using the command line (faster)
+
+- first, make sure you're on the main branch: run `git checkout main` if not
+- then, create the new branch and switch to it: `git checkout -b <branch_name>`
+
+This creates a branch locally, one that is based on the main branch.  
+

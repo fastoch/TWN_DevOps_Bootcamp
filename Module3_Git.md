@@ -265,10 +265,37 @@ What matters here is to keep in mind that we need to align our local repo with t
 ### main and develop branches
 
 A lot of projects actually have 2 main branches:
-- main
-- develop
+- **main**
+- **develop**
 
-The dev branch represents the intermediary main branch.  
-The main branch represents the final version of the code.  
+The "**dev**" branch represents an **intermediary** step before the code is merged into the main branch.  
+The main branch represents the **final** version of the code.  
 
-The main branch is used for releases and the develop branch is used for development. 
+The main branch is used for **releases** in **production**, while the develop branch is used for **testing/staging** environments.  
+
+During what's called a "**sprint**", features and bug fixes are implemented and then merged into the develop branch.  
+Once the sprint is over, the develop branch is merged into the main branch, and the main branch is "**released**".  
+
+### Trunk based vs Feature based development
+
+#### Trunk based development (only main branch)
+
+- better for CI/CD (continuous integration/continuous delivery) pipeline
+- pipeline is triggered every time a feature/bugfix code is merged into the main branch
+- a CI/CD pipeline tests the code, builds the application, and deploys it to the staging/production environment
+
+#### Feature based development (additional dev branch)
+
+- many features and bugfixes are collected in the dev branch
+- that big chunk of changes is merged into the main branch at the end of the sprint
+- releases happen less often and require developers to carefully synchronize when it's time to merge dev into main
+
+>[!important]
+>The best practice in DevOps, the modern way of working, is to use trunk based development.  
+>But as DevOps engineers, it's also important to know that some teams use feature based development.  
+>Different companies have different Git workflows, some even have a third branch (staging or test branch).  
+
+But the ideal goal remains to only have one main branch, and to build and deliver changes after every merge into the main branch.  
+
+## Merge Requests
+

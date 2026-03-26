@@ -252,4 +252,23 @@ To start working on the new branch, I have to tell my local repo.
 - then, create the new branch and switch to it: `git checkout -b <branch_name>`
 
 This creates a branch locally, one that is based on the main branch.  
+To inform the remote repo about the new branch: `git push --set-upstream origin <branch_name>`  
+Now the branch should be visible in the remote repo.  
 
+>[!tip]
+>We don't have to memorize all these commands.  
+>For example, when we simply run `git push`, we get a suggestion of the command to use.  
+>Git is smart enough to understand what we want to do, and helps us with appropriate suggestions.  
+
+What matters here is to keep in mind that we need to align our local repo with the remote one, and vice versa.  
+
+### main and develop branches
+
+A lot of projects actually have 2 main branches:
+- main
+- develop
+
+The dev branch represents the intermediary main branch.  
+The main branch represents the final version of the code.  
+
+The main branch is used for releases and the develop branch is used for development. 

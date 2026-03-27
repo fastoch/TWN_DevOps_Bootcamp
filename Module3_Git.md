@@ -309,3 +309,22 @@ The code reviewer can either approve or decline the merge request.
 If the request is declined, they usually provide comments so the other dev can learn from their mistakes.  
 If the request is approved, the code is merged into the main branch.  
 
+## Deleting branches
+
+What to do with a branch once it's been merged into the main branch?  
+The best practice is to delete it right after merging.  
+
+If that new code contains bugs, we should create a bugfix branch.  
+If it requires some additional work to further improve the feature, we should create a feature branch.  
+
+The advantage of deleting branches after merging into main is that you don't end up with hundreds of branches, 
+where nobody knows which one is active, which one is completed, or which one has been merged into the main branch.  
+
+Deleting branches in the remote repo is easy, the UI makes it very straightforward.  
+
+To delete branches locally:
+- `git branch` to see all branches
+- `git checkout main` to switch to main branch
+- `git pull` to update the local repo with latest changes
+- `git branch -d <branch_name>` to delete the merged branch
+

@@ -299,3 +299,6 @@ But the ideal goal remains to only have one main branch, and to build and delive
 
 ## Merge Requests
 
+When a dev is done with a feature implementation or bug fix, another dev reviews the changes before merging them into the main branch.  
+That's considered best practice, especially when coding a big feature or when job was assigned to a junior dev.  
+

@@ -302,3 +302,10 @@ But the ideal goal remains to only have one main branch, and to build and delive
 When a dev is done with a feature implementation or bug fix, another dev reviews the changes before merging them into the main branch.  
 That's considered best practice, especially when coding a big feature or when job was assigned to a junior dev.  
 
+When a dev submits code for review, we call that a **merge request** (GitLab), or a **pull request** (GitHub).  
+If this dev knows someone in their team that has expertise in the relevant area, they can assign the merge request to that person.  
+
+The code reviewer can either approve or decline the merge request.  
+If the request is declined, they usually provide comments so the other dev can learn from their mistakes.  
+If the request is approved, the code is merged into the main branch.  
+

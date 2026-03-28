@@ -365,6 +365,38 @@ Git cannot know which changes should be kept and which should be discarded.
 In such cases, you need to talk with the other dev in order to manually resolve the merge conflict.  
 In real life, you'll probably need to resolve merge conflicts on multiple files.  
 
-And once you're done resolving conflicts, you can run `git rebase --continue` followed by `git push`.  
+To resolve merge conflicts, run `git status` to first identify conflicted files.  
+Then, open these files one by one in your code editor, using the source control view.  
+You'll usually have 3 views: your changes, the desired end result, and the other dev's changes.  
 
-## .gitignore
+Once you're done resolving conflicts, you can run `git rebase --continue` followed by `git push`.  
+
+## .gitignore file
+
+Whenever developers create a project, they initiate it as a Git repo.  
+To specify which files should not be tracked, we add a `.gitignore` file to the root of the repo.  
+
+Folders and files listed in the `.gitignore` file will not be tracked by Git.  
+For instance, we don't want to track the `node_modules` folder in a Node.js project.  
+This special folder contains the app's dependencies generated when running `npm install`.  
+
+Another example of files to exclude are the ones generated when we build an application.  
+
+Example of a .gitignore file:
+```.gitignore
+.idea/*
+build/*
+dist/*
+node_modules/*
+```
+
+### Clearing Git's cache
+
+In case you've already pushed some excluded files or folders to the remote before creating the `.gitignore` file, 
+you need to run `git rm -r --cached <file_or_folder_name>` to tell Git to stop tracking them.  
+
+For example: `git rm -r --cached node_modules` will remove the node_modules folder and all its contents from the cache.  
+The -r option stands for "recursive".  
+
+## Git stash
+

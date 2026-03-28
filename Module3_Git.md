@@ -353,3 +353,18 @@ the remote commits instead of creating a merge commit.
 
 ## Resolving merge conflicts
 
+Suppose we make some changes to a specific line in one file in our local repo.  
+We then stage those changes and commit them locally.  
+
+Then, someone else makes changes to the same line in the same file in their local version of the repo, and pushes those 
+changes to the remote. Their changes differ from ours and we now have a merge conflict.  
+
+If we run `git pull -r`, we'll get an error message because of the merge conflict.  
+Git cannot know which changes should be kept and which should be discarded.  
+
+In such cases, you need to talk with the other dev in order to manually resolve the merge conflict.  
+In real life, you'll probably need to resolve merge conflicts on multiple files.  
+
+And once you're done resolving conflicts, you can run `git rebase --continue` followed by `git push`.  
+
+## .gitignore

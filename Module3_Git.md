@@ -400,3 +400,21 @@ The -r option stands for "recursive".
 
 ## Git stash
 
+When you have uncommited changes in a branch and you want to switch branches, Git gives you an error:  
+"Your local changes to the following files would be overwritten by checkout: <file_name>  
+Please commit your changes or stash them before you switch branches. Aborting"  
+
+In such case, we can save our changes for later, and then we're allowed to switch branches:  
+- `git stash` to save our changes (it hides them)
+- `git checkout <target_branch>` to switch branches  
+
+And if we want to go back to the previous branch, we can run:
+- `git checkout <previous_branch>`
+- `git stash pop` to retrieve the saved changes
+
+Another use case for `git stash` is to temporarily hide changes in the current branch.  
+We might wonder if we broke something due to changes we've made, and stashing our changes helps us verify that.  
+If stashing our changes suddenly solves an issue, then we know those changes should not be committed...  
+
+## Going back in history
+

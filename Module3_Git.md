@@ -328,3 +328,28 @@ To delete branches locally:
 - `git pull` to update the local repo with latest changes
 - `git branch -d <branch_name>` to delete the merged branch
 
+## Rebase
+
+Let's imagine we have 2 developers working on the same feature/bugfix branch.  
+One of them pushes their changes to the remote repo.  
+When the other one tries to push their changes to the remote, he will get an error:  
+"Updates were rejected because the remote contains work that you do not have locally..."  
+
+Since the local repo is out of sync with the remote one, we need to first integrate the remote changes before pushing.  
+
+Option 1 is to pull the remote changes first: `git pull` and then push our changes: `git push`  
+But the issue with that method is that it will pollute the repo history with "merge commits" for every pull request.  
+
+Option 2 is to use `git pull -r` or `git pull --rebase`.  
+It pulls the changes from remote branch, and then stacks our changes on top of them.  
+Then, we can run `git push` to push our changes to the remote repo.  
+This way, there is no merge commit in between the pull and push commands.  
+
+Option 2 is best practice, as it will result in a much cleaner project history.  
+
+To explain it differently:  
+`git pull --rebase` updates your branch by fetching remote changes first, then replays your local commits on top of 
+the remote commits instead of creating a merge commit.  
+
+## Resolving merge conflicts
+

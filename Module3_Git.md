@@ -534,3 +534,47 @@ For example, if we later decide that we want to add some changes that should bel
 - and then run `git commit --amend` to update the last commit and make it include our additional changes
 
 This doesn't create a new commit, it simply updates the last one.  
+
+### What if we've already pushed to the remote?
+
+How to undo the commit once we've pushed to the remote repo?  
+
+First, we run `git reset --hard HEAD~1` to undo the last commit and the corresponding changes locally.  
+Then, we run `git push --force` to apply the same changes on the remote repo.  
+
+We have to use the `--force` flag because the local repo is now behind the remote (one commit behind).  
+Running `git push` would show this message:  
+"Updates were rejected because the tip of your current branch is behind its remote counterpart."  
+
+>[!warning]  
+>NEVER do this in a branch which other people are working on.  
+>Make sure you're the only one working on the branch when you plan to run `git push --force`.  
+
+### Reverting 
+
+When working on a branch that's likely to be used by many developers, such as main or develop, 
+we can't undo commits that have already been pushed to the remote by using `git reset` and `git push --force`.  
+
+What we can use is the `git revert` command.  
+
+Let's assume we made changes to the main branch or develop branch.  
+We stage them and commit them.  
+Then, we push them to the remote repo.  
+
+The only way to undo this is by running `git revert <commit_hash>`.  
+This will undo the specified commit's changes.  
+The commit hash can be found via `git log` or copied from the UI.  
+
+Finally, we need to run `git push` to update the remote repo.  
+This will apply the changes to the remote.  
+Note that this will not delete the reverted commit, this will add a new commit that says "Revert <previous_commit_message>".  
+
+### Summary
+
+- `git reset` removes the old commit and its changes
+- `git revert` creates a new commit to revert the old commit's changes
+
+---
+
+## Merging branches
+

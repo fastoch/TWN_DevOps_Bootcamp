@@ -131,9 +131,9 @@ This folder contains information about the repo, such as the history of commits,
 It's important to know the status a file can have in Git: 
 - modified: when you make changes to a staged file
 - untracked: when you create a new file
-- staged: when you add a file to the staging area via `git add`
-- committed: when you commit your changes via `git commit`
-- pushed: when you push your changes to the remote repo via `git push`
+- **staged**: when you add a file to the staging area via `git add`
+- **committed**: when you commit your changes via `git commit`
+- **pushed**: when you push your changes to the remote repo via `git push`
 
 The steps to work with files in Git are:
 1. Create and edit a file
@@ -497,4 +497,40 @@ Run `git checkout <branch_name>`.
 
 ---
 
-## Undoing commits
+## Undoing and changing commits
+
+Let's imagine we make some changes, stage them and then commit.  
+Our local repo knows about this last commit, but the remote doesn't.  
+Before pushing to the remote, we realize that we made a mistake and decide to cancel the last commit.  
+
+For that, we can run `git reset --hard HEAD~1`  
+The number after the tilde `~` is the number of commits we want to go back.  
+
+>[!tip]  
+>By running `git log` before and after a `git reset`, we can see the difference.  
+
+After running `git reset --hard HEAD~1`, the last commit is gone and our changes got reverted.  
+We can check that with the `git log` and `git status` commands.  
+
+The `--hard` flag cancels the provided number of commits and also discards correponding changes.  
+
+---
+
+Now, let's say we don't want to discard the changes when we cancel the commit.  
+We can run `git reset --soft HEAD~1`, which will cancel the last commit but keep the changes.  
+
+>[!note]  
+>The `--soft` flag is the default, so we can actually run `git reset HEAD~1` instead.  
+
+After running a soft reset, we can correct some of our changes, then stage and commit again.  
+
+---
+
+There's another way to update the last commit that I made in my local repo.  
+
+For example, if we later decide that we want to add some changes that should belong to the previous commit, we can: 
+- make those changes 
+- stage them via `git add`
+- and then run `git commit --amend` to update the last commit and make it include our additional changes
+
+This doesn't create a new commit, it simply updates the last one.  

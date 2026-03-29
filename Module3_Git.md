@@ -10,6 +10,8 @@ as part of the infrastructure as code (IaC) concept.
 
 As a DevOps engineer, we need to know how to use Git.  
 
+---
+
 ## What is Version Control?
 
 - Multiple developers are working on the same project, they need a place to **share** their work.  
@@ -22,6 +24,8 @@ As a DevOps engineer, we need to know how to use Git.
 - They make some changes and then **push** those changes back to the repository.
 - The process repeats until all the developers have pushed their changes to the repo
 - This process is called **version control**.
+
+---
 
 ## Merging & Conflicts
 
@@ -37,6 +41,8 @@ And that can be very tedious...
 Because of that, the best practice is to push and pull code as often as possible.  
 This way, Git doesn't have to merge huge changes that overlap too much.  
 This is called **Continuous Integration (CI)**.  
+
+---
 
 ## Breaking changes
 
@@ -61,6 +67,8 @@ Which is why your commits shouldn't be too large.
 First of all, this will make it easier to revert changes.  
 And second, it's easier to describe small changes with a commit message.  
 
+---
+
 ## Basic concepts of Git
 
 Git is the most popular version control system. Alternative tools exist, such as SVN, for example.  
@@ -75,6 +83,8 @@ Git has multiple parts:
 - the Git client: a UI tool or a CLI installed on your machine that lets you execute Git commands
 
 ![how_git_works](./assets/git.png)  
+
+---
 
 ## How to set up a Git repo (remote & local)
 
@@ -114,6 +124,8 @@ After you've installed and configured the Git client, you can create a local rep
 If you create a brand new repo, it will be empty at first, except for the `.git` folder.  
 This folder contains information about the repo, such as the history of commits, the configuration, etc.  
 
+---
+
 ## Working with files in Git
 
 It's important to know the status a file can have in Git: 
@@ -151,6 +163,8 @@ The history of your commits can be seen with `git log`
 working directory > staging area > local repo > remote repo  
 
 Finally, to save changes to the remote repo, run: `git push`  
+
+---
 
 ## Initializing a Git project locally
 
@@ -193,6 +207,8 @@ modified the configuration of our Git repo and generated information that is sto
 
 This folder stores the information about how to connect to the remote repo, where is the remote, which endpoint, 
 and how the branches actually connect to each other.  
+
+---
 
 ## Concept of Branches
 
@@ -297,6 +313,8 @@ Once the sprint is over, the develop branch is merged into the main branch, and 
 
 But the ideal goal remains to only have one main branch, and to build and deliver changes after every merge into the main branch.  
 
+---
+
 ## Merge Requests
 
 When a dev is done with a feature implementation or bug fix, another dev reviews the changes before merging them into the main branch.  
@@ -308,6 +326,8 @@ If this dev knows someone in their team that has expertise in the relevant area,
 The code reviewer can either approve or decline the merge request.  
 If the request is declined, they usually provide comments so the other dev can learn from their mistakes.  
 If the request is approved, the code is merged into the main branch.  
+
+---
 
 ## Deleting branches
 
@@ -327,6 +347,8 @@ To delete branches locally:
 - `git checkout main` to switch to main branch
 - `git pull` to update the local repo with latest changes
 - `git branch -d <branch_name>` to delete the merged branch
+
+---
 
 ## Rebase
 
@@ -351,6 +373,8 @@ To explain it differently:
 `git pull --rebase` updates your branch by fetching remote changes first, then replays your local commits on top of 
 the remote commits instead of creating a merge commit.  
 
+---
+
 ## Resolving merge conflicts
 
 Suppose we make some changes to a specific line in one file in our local repo.  
@@ -370,6 +394,8 @@ Then, open these files one by one in your code editor, using the source control 
 You'll usually have 3 views: your changes, the desired end result, and the other dev's changes.  
 
 Once you're done resolving conflicts, you can run `git rebase --continue` followed by `git push`.  
+
+---
 
 ## .gitignore file
 
@@ -398,6 +424,8 @@ you need to run `git rm -r --cached <file_or_folder_name>` to tell Git to stop t
 For example: `git rm -r --cached node_modules` will remove the node_modules folder and all its contents from the cache.  
 The -r option stands for "recursive".  
 
+---
+
 ## Git stash
 
 When you have uncommited changes in a branch and you want to switch branches, Git gives you an error:  
@@ -416,5 +444,57 @@ Another use case for `git stash` is to temporarily hide changes in the current b
 We might wonder if we broke something due to changes we've made, and stashing our changes helps us verify that.  
 If stashing our changes suddenly solves an issue, then we know those changes should not be committed...  
 
+---
+
 ## Going back in history
 
+For every project, Git has a history, which is the log of commits.  
+You can access it via `git log`.  
+
+Each commit has a unique identifier, which is the **commit hash**.  
+This ID can be very useful in some cases.  
+
+Each commit also has a commit message, an author and a timestamp.  
+
+To get the commit history of a specific file, run `git log <file_name>`  
+
+Using the commit hash, we can go back to a specific version of our project:  
+`git checkout <commit_hash>`  
+
+You'll eventually need to stash uncommitted changes before your `git checkout` command gets accepted.  
+
+### About the "detached HEAD" state
+
+When you run git checkout <commit_hash>, you get a message: “**You are in 'detached HEAD' state**”.  
+It means Git has moved your working directory to that specific commit, but not to a branch.  
+
+**HEAD** is Git’s pointer to “where you are” in the repo.  
+Normally it points to a branch (like "main" or "feature-xyz"), and that branch points to a commit.  
+In detached‑HEAD state, HEAD points directly to a commit (the one you've checked out), not to any branch.  
+
+The message you get is just a warning that you’re not on a branch and any new commits won’t be saved.  
+Most of the time, we don't want to save changes in such scenario, we just want to go back in time for testing purposes.  
+
+However, if you do want to keep those commits, you can run:  
+`git switch -b new-branch-name`  
+This creates a new branch starting from the current detached commit, so your work is now safely attached to a branch.  
+
+Applying that technique allows us to go back in time by creating a new branch that contains the desired version of our project, 
+the one that matches the commit we've specified.  
+
+### Let's do a recap of this time travel process
+
+- run ` git log` to see the commit history, then select the desired commit and copy its hash
+- run `git checkout <commit_hash>` to go back in time
+  - you might need to run `git stash` in case of uncommited changes before you can run `git checkout <commit_hash>`
+- run `git switch -b new-branch-name` to create a new branch that has the desired version of your project and immediately switch to it
+
+This takes us back to the state of the application code that we had at the time of the specified commit.  
+
+### Going back to the up-to-date state of the project
+
+Run `git checkout <branch_name>`.  
+
+---
+
+## Undoing commits

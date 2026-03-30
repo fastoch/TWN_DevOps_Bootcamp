@@ -578,3 +578,42 @@ Note that this will not delete the reverted commit, this will add a new commit t
 
 ## Merging branches
 
+Let's say that you have a bugfix branch that has been open for some days while a lot of things have been 
+merged into the main branch. So you are way behind the main branch changes in your bugfix branch.  
+
+Let's also say that changes from other branches from other developers are needed so that you can test your bug fix.  
+
+You want to pull the changes from the main branch to your bugfix branch.  
+To do that, you first need to make sure that your local main branch is up to date:  
+- `git checkout main`
+- `git pull`
+
+Then, you can switch to your bugfix branch:  
+- `git checkout bugfix/<bug_name>`
+
+And finally, you can merge the main branch into your bugfix branch:  
+- `git merge main`
+
+Now, you can test you bug fix and, if it works, you can commit and push your changes to the remote:
+- `git add .`
+- `git commit`
+- `git push`
+
+Once your bugfix branch has been pushed to the remote, you can go to the remote UI and make a merge/pull request 
+from your bugfix branch so that it gets merged into the main branch.  
+
+Make sure to check the box for deleting the source branch after merging.  
+
+Someone will review the code in your bugfix branch code and approve the merge request if everything looks fine.  
+This time, the code reviewer will run a `git merge` but from the UI, not from the command line.  
+And it will merge the changes from your bugfix branch into the main one.  
+
+>[!note]  
+>We can merge any branch into any other branch.  
+>But the standard case for using `git merge` is either merging the main branch into a feature|bugfix branch, 
+>or merging the feature|bugfix branch into the main branch.
+
+---
+
+## Git for DevOps
+

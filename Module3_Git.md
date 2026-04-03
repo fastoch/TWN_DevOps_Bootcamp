@@ -619,20 +619,32 @@ And it will merge the changes from your bugfix branch into the main one.
 
 For which use cases do we need Git as DevOps engineers?  
 
-### 1. When working with the infrastructure as code (IaC) concept
+### 1. Infrastructure as code (IaC) 
 
 For example, you're working with a dev team that is deploying their app to Kubernetes (**K8s**).  
-You're responsible for creating various Kubernetes config files (manifests) and these files have to be managed somewhere.  
-Let's say you have files for creating volumes, for deploying some databases, maybe some Helm charts, etc.  
+You're responsible for creating various Kubernetes config files (**manifests**) and these files have to be managed somewhere.  
+When working with K8s, you need to write some YAML files for creating volumes, deploying databases, maybe Helm charts, etc.  
 
 In addition to that, let's say your K8s cluster is deployed on AWS.  
 In order to communicate with AWS and manage your **EKS** instance (Elastic K8s Service), you need to use automation tools such 
 as **Terraform** or **Ansible**.  
-Which means you also need to write some Terraform and Ansible config files.  
+Which means you also need to write some Terraform and Ansible **config files**.  
 
-Finally, you'll probably also need to write some Bash or Python scripts for various tasks.  
+Finally, you'll probably also need to write some Bash or Python **scripts** for various tasks.  
 
 All those scripts and config files might evolve over time, so we need a way to keep track of their different versions.  
 We also need a place to store them securely and where we could share them with the rest of our DevOps team.  
 
-### 2. 
+### 2. CI/CD Pipeline and Build Automation
+
+The basis of build automation or CI/CD pipeline is that you:
+- checkout the application code
+- test the code
+- build the application
+- deploy the application
+
+For that, you need to set up integration between the build automation tool and the git repo that is hosting your code.  
+We'll see how to do that in the upcoming modules.  
+
+---
+End of Module 3

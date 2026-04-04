@@ -128,7 +128,7 @@ Just like key-value DBs, they should be used on top of a primary DB.
 
 ### Document Databases
 
-They are more versatile than the two previous types of DBs.  
+They are more versatile, much more general purpose than the two previous types of DBs.  
 Popular implementations are **MongoDB**, **CouchDB**, and **DynamoDB**.  
 
 - **Documents** are "containers" for key-value pairs.  
@@ -136,7 +136,32 @@ Popular implementations are **MongoDB**, **CouchDB**, and **DynamoDB**.
 - You can also have multiple documents in a **collection**.  
 - Collections can be organized into a relational hierarchy
 
-This type of DB is also used to store unstructured data, they are schema-less.  
-This mimics a little
+This type of DB is also used to store **unstructured data**, they are **schema-less**.  
+This mimics a little bit the relational DB model, but still you have no joins here.  
+
+Compared to relational DB, it's slower in updates because the data can be nested within the hierarchy of documents.  
+But faster to read the data because that data is already structured as a collection of all related information into one document.  
+No need to put pieces of data together by reading multiple tables like we would do in a relational DB.  
+
+Some of the uses cases for Document DB can be using it for mobile applications, games, Content Management Systems (CMS), and many more.  
+
+Unlike key-value and wide-column DBs, Document DBs **can be used as a primary DB** for your application data.  
 
 ### Relational Databases
+
+For use cases where pieces of data are interconnected and related, you need a relational DB.  
+Popular implementations are **MySQL** and **PostgreSQL**.  
+
+Relations DBs are the most widely used and most popular.  
+They're used to store **structured data**, which means they have a **predefined schema**.  
+You cannot start adding data before you define the schema and the data type.  
+
+And because it's used for structured data, its query format is **SQL** = Structured Query Language.  
+
+In a relational DB, the data is stored in **tables** which have **rows** and **columns**.  
+Each entry (row) in a table has a unique ID called a **primary key**.  
+It can also have a **foreign key**, which points to the primary key of another table.  
+
+By using foreign keys, you can define relationships between tables.  
+And we also avoid repeating data in multiple tables.  
+

@@ -3,7 +3,7 @@
 Applications use databases to persist data.  
 Let's see how databases are integrated in the software development process.  
 
-## Database for development
+## Database in development process
 
 Developers need a database for local development. To set this up, we have two options:
 - each dev installs and sets up its own DB on their machine, and connects the application to that DB
@@ -14,7 +14,7 @@ However, option 1 allows you to play around with the DB without affecting other 
 
 An ideal solution would be to use both options, choosing which one to use depending on the situation.  
 
-## How does your app talk to the DB?
+### How does your app talk to the DB?
 
 Each programming language has libraries/modules for DB connection.  
 And for each type of database, there's a different library/module.  
@@ -62,3 +62,24 @@ All of these services also have endpoints and credentials, which are also define
 
 This is practical to have all of these configuration elements defined in one place, because we know exactly where to look for 
 when we need to change some value.  
+
+### Databases in production
+
+Before deploying an application, we need to install and configure the DB for the production environment.  
+That DB can run on the same server where the app will run, or on a separately managed server.  
+
+Developers themselves do not usually manage the databases.  
+The DB is usually managed by a DBA (DB administrator) or a DevOps engineer.  
+
+As a DevOps engineer, you need to know how to install and configure a DB.  
+You also need to know how to manage them:
+- replicating the DB to another server (failover)
+- doing regular backups
+- restore the DB from a backup
+
+Of course, you also need to know how to connect an application to a DB.  
+
+---
+
+## Database Types
+

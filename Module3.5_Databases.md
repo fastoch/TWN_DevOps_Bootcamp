@@ -83,3 +83,60 @@ Of course, you also need to know how to connect an application to a DB.
 
 ## Database Types
 
+### Key-Value Databases
+
+Popular ones are **Redis**, **Memcached**, and **etcd** from Kubernetes.  
+- Each key-value pair is like a JavaScript object
+- every key is unique and points to a specific value
+- you can write data using key-value pair
+- you can read the data using the key
+
+In key-value DBs, the data model is very simple, there are no joins, no relationships.  
+
+These databases are **very fast**, they store their data in memory (RAM), unlike most traditional DBs which persist data 
+on disk‑based storage, such as hard‑disk drives (HDDs) or solid‑state drives (SSDs).  
+
+But they offer limited storage capacity, and are not suited for long-term data persistence.  
+
+They are used for: 
+- in-memory caching, to make your application faster
+- as a message queue, for some message broker applications
+
+Key-value DBs are mostly used as cache DBs on top of another primary long-term storage DB, such as MongoDB or MySQL.
+
+### Wide Column Databases
+
+Key-Value DBs are pretty limited in their schema.  
+If you need to store more complex data, Column DBs are a good alternative to key-value DBs.  
+Popular implementations of Column DBs are **Cassandra**, and **Apache HBASE**.  
+
+They also use keys, but each key is divided into multiple columns.  
+Unlike relational databases, they don't have a predefined schema = **schema-less**.  
+
+You can have any number of colums of any data type.  
+Which means they can handle unstructured data with a dynamic number of columns per key.  
+
+- It's also very scalable and can be easily distributed across mutliple servers.  
+- Its query language is very similar to SQL but much simpler.  
+- There are no joins or some similar complex concepts from relational databases.
+
+In short, they handle more complex data types than key-value DBs, but are simpler and limited when compared to relational DBs.  
+
+The main use case for Column DBs is handling large amounts of unstructured data.  
+They're mostly used for **time-series** data, like records from IoT devices (smart cards and sensors).  
+Just like key-value DBs, they should be used on top of a primary DB.  
+
+### Document Databases
+
+They are more versatile than the two previous types of DBs.  
+Popular implementations are **MongoDB**, **CouchDB**, and **DynamoDB**.  
+
+- **Documents** are "containers" for key-value pairs.  
+- You can have multiple key-value pairs in a document.  
+- You can also have multiple documents in a **collection**.  
+- Collections can be organized into a relational hierarchy
+
+This type of DB is also used to store unstructured data, they are schema-less.  
+This mimics a little
+
+### Relational Databases

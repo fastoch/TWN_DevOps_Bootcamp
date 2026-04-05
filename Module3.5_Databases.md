@@ -102,9 +102,9 @@ They are used for:
 - in-memory caching, to make your application faster
 - as a message queue, for some message broker applications
 
-Key-value DBs are mostly used as cache DBs on top of another primary long-term storage DB, such as MongoDB or MySQL.
+Key-value DBs are mostly used as cache DBs on top of a primary long-term storage DB, such as MongoDB or MySQL.
 
-### Wide Column Databases
+### Wide-Column Databases
 
 Key-Value DBs are pretty limited in their schema.  
 If you need to store more complex data, Column DBs are a good alternative to key-value DBs.  
@@ -117,21 +117,21 @@ You can have any number of colums of any data type.
 Which means they can handle unstructured data with a dynamic number of columns per key.  
 
 - It's also very scalable and can be easily distributed across mutliple servers.  
-- Its query language is very similar to SQL but much simpler.  
+- Its query language is similar to SQL but much simpler.  
 - There are no joins or some similar complex concepts from relational databases.
 
-In short, they handle more complex data types than key-value DBs, but are simpler and limited when compared to relational DBs.  
+In short, they handle more complex data types than key-value DBs, but are limited when compared to relational DBs.  
 
-The main use case for Column DBs is handling large amounts of unstructured data.  
+The main use case for Wide-Column DBs is handling large amounts of unstructured data.  
 They're mostly used for **time-series** data, like records from IoT devices (smart cards and sensors).  
 Just like key-value DBs, they should be used on top of a primary DB.  
 
-### Document Databases
+### Document-oriented Databases
 
 They are more versatile, much more general purpose than the two previous types of DBs.  
 Popular implementations are **MongoDB**, **CouchDB**, and **DynamoDB**.  
 
-- **Documents** are "containers" for key-value pairs.  
+- What we call **Documents** are "containers" for key-value pairs.  
 - You can have multiple key-value pairs in a document.  
 - You can also have multiple documents in a **collection**.  
 - Collections can be organized into a relational hierarchy
@@ -140,10 +140,12 @@ This type of DB is also used to store **unstructured data**, they are **schema-l
 This mimics a little bit the relational DB model, but still you have no joins here.  
 
 Compared to relational DB, it's slower in updates because the data can be nested within the hierarchy of documents.  
+
 But faster to read the data because that data is already structured as a collection of all related information into one document.  
 No need to put pieces of data together by reading multiple tables like we would do in a relational DB.  
 
-Some of the uses cases for Document DB can be using it for mobile applications, games, Content Management Systems (CMS), and many more.  
+Some of the uses cases for Document DB can be using it for mobile applications, for games, for Content Management Systems (CMS), 
+and many more.  
 
 Unlike key-value and wide-column DBs, Document DBs **can be used as a primary DB** for your application data.  
 
@@ -164,4 +166,49 @@ It can also have a **foreign key**, which points to the primary key of another t
 
 By using foreign keys, you can define relationships between tables.  
 And we also avoid repeating data in multiple tables.  
+
+---
+
+### Relational DBs are ACID-compliant
+
+Relational SQL databases are **ACID**-compliant:
+- Atomicity
+- Consistency
+- Isolation
+- Durability
+
+That means that whenever there's a transaction in a relational DB, data consistency and validity is guaranteed.  
+No matter what technical issues happen during that transaction.  
+
+For example, if a transaction is updating values in 10 different tables, and a disruption happens after 5 tables are updated, 
+no changes will be made at all. And that is achieved by a DB mechanism that prepares all the changes, and commits all of them 
+at once if everything is okay, or rollbacks if something goes wrong.  
+
+Either all changes get applied or none. There cannot be partial changes.  
+
+---
+
+### Relational DBs and Scalability
+
+The counterpart of being ACID-compliant is that SQL databases are very difficult to **scale**.  
+Which means that running SQL relational DBs in a **distributed environment** like a K8s cluster can be **challenging**.  
+
+However, there are modern SQL DBs such as **CockroachDB** that are specifically designed to solve that **scalability** issue 
+and run easily on modern cloud-hosted infrastructures (which are distributed environments).  
+https://www.cockroachlabs.com/docs/stable/  
+
+---
+
+### SQL vs NoSQL Databases
+
+Because SQL has been so popular till now, the alternative solutions to SQL are categorized as "NoSQL".  
+Among the NoSQL DBs, you'll find key-value DBs, wide-column DBs, document-oriented DBs, and Graph DBs.  
+
+The main difference between SQL and NoSQL DBs is that SQL DBs are **relational** while NoSQL ones are **non-relational**.  
+
+### Graph Databases
+
+For too complex many-to-many relations, which in SQL requires multiple joins or an intermediary table to connect such 
+many-to-many relations, there is an alternative which is Graph DBs.  
+
 

@@ -112,11 +112,13 @@ git config --global user.email "<email>"
 
 To check your current Git config: `git config --list`  
 
-- We can also add our public SSH key to the remote platform:
-  - generate an SSH key pair on your local machine if you don't have one
-  - log in to the remote platform
-  - go to Settings -> SSH keys
-  - add your public key
+#### Important step - adding our public SSH key to the remote repo
+
+We can also add our public SSH key to the remote platform:
+- generate an SSH key pair on your local machine if you don't have one
+- log in to the remote platform
+- go to Settings -> SSH keys
+- add your public key
 Once we've added our public key to the remote platform, it can authenticate us when pushing to or pulling from repo.  
 
 After you've installed and configured the Git client, you can create a local repo:
@@ -191,7 +193,7 @@ And finally, we can run `git remote add origin <url>` to connect the local repo 
 This last command tells my local repo where to push the changes to.  
 
 Now, I can run `git push` to push my changes to the remote repo.  
-But I'll get an **error** because repos are connected but not **branches**.  
+But I'll get an **error** because repositories are connected but not **branches**.  
 
 ### Connecting branches
 

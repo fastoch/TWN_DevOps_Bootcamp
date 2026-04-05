@@ -110,6 +110,8 @@ git config --global user.name "<username>"
 git config --global user.email "<email>"
 ```  
 
+To check your current Git config: `git config --list`  
+
 - We can also add our public SSH key to the remote platform:
   - generate an SSH key pair on your local machine if you don't have one
   - log in to the remote platform

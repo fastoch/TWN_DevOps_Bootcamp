@@ -211,4 +211,37 @@ The main difference between SQL and NoSQL DBs is that SQL DBs are **relational**
 For too complex many-to-many relations, which in SQL requires multiple joins or an intermediary table to connect such 
 many-to-many relations, there is an alternative which is Graph DBs.  
 
+Graph DBs take away some of the complexity that comes with correlated data.  
+Popular implementations are **Neo4j** and **Dgraph**.  
 
+In Graph DBs, instead of having an extra intermediary table to connect two entities that have a many-to-many relationship, 
+we connect those entities directly.  
+
+Tables are replaced with **Nodes** (data) and connectors are replaced with **Edges** (relationships).  
+
+It's easier to query such related data in Graph DBs than using multiple joins.  
+
+This DB type is great for: 
+- detecting patterns in the application data.  
+- and tools like recommendation engines
+
+### Search Databases
+
+They work similar to document-oriented DBs.  
+The difference is that in the background, the Search DB will analyze all the text from the data objects and create 
+an index of all the individual words, just like a classic index in a book.  
+
+When a user does a search, a Search DB only scans the index of all relevant results, instead of searching every document 
+in the DB. Which of course makes it way faster to search through large amounts of data sets.    
+
+Popular implementations are **Elasticsearch** and **Solr**.  
+
+---
+
+## Wrap Up
+
+- Choose DB type based on your App needs, or based on your specific use case
+- You can also use a combination of DBs, like a primary DB for storing data and a secondary DB for searching or caching.
+
+---
+End of Module

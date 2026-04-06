@@ -20,27 +20,32 @@ Repo to use for this exercise: https://gitlab.com/twn-devops-bootcamp/latest/03-
 
 # Exercice 2 - .gitignore
 
-Build folders and editor specific folders are present in the remote repository.  
-We should include them in the .gitignore file as a best practice, so they're not tracked by Git:
-- first, switch to the project folder: `cd ~/DevOps/git-exercises`
-- create a `.gitignore` file and add the following entries :
+We don't want build folders and editor specific folders to be present in the remote repository.  
+We should include them in a `.gitignore` file as a best practice, so they're not tracked by Git:
+- first, switch to the project folder if not already there: `cd ~/DevOps/git-exercises`
+- create a `.gitignore` file and edit it using Vim
+- add the following entries :
   ```.gitignore
   .idea
   .DS_Store
   out
   build
   ```
-- since these elements have already been committed, we need to remove them from Git cache:  
-  - for folders: `git rm -r --cached build out .idea`
-  - for the file: `git rm --cached .DS_Store`
-- stage changes, commit and push them to the remote repo: 
+- write and quit
+- since some of these elements have already been committed, we need to remove them from Git cache:  
+  - for the IntelliJ folder, we need the recursive flag: `git rm -r --cached .idea`
+  - for the macOS file: `git rm --cached .DS_Store`
+- Now that our Git cache is clean, we can stage changes, commit and push them to the remote repo: 
   ```bash
   git add .
   git commit -m "Add .gitignore file"
   git push
   ```
+- Check my remote repo to make sure files included in my .gitignore are not present anymore.
 
 # Exercice 3
+
+
 
 # Exercice 4
 

@@ -1,4 +1,4 @@
-# Exercice 1 - clone, make it yours, and push
+# Exercice 1 - clone existing repo, make it yours, push to your own remote
 
 Repo to use for this exercise: https://gitlab.com/twn-devops-bootcamp/latest/03-git/git-exercises  
 
@@ -18,7 +18,7 @@ Repo to use for this exercise: https://gitlab.com/twn-devops-bootcamp/latest/03-
   - add my public key to GitLab
 - push to my GitLab repo: `git push -u origin master`
 
-# Exercice 2 - .gitignore
+# Exercice 2 - edit .gitignore, empty Git cache, commit and push
 
 We don't want build folders and editor specific folders to be present in the remote repository.  
 We should include them in a `.gitignore` file as a best practice, so they're not tracked by Git:
@@ -43,9 +43,18 @@ We should include them in a `.gitignore` file as a best practice, so they're not
   ```
 - Check my remote repo to make sure files included in my .gitignore are not present anymore.
 
-# Exercice 3
+# Exercice 3 - create feature branch, make changes, commit and push
 
-
+- create feature branch: `git checkout -b feature/my-feature`
+- open the `build.gradle` file (at the project's root) in Vim and set the `logstash-logback-encoder` version to 7.3
+- open the `index.html` file (in src/main/webapp) and add an image:
+  ```html
+  <img src="https://www.careeraddict.com/uploads/article/58721/illustration-group-people-team-meeting.jpg">
+  ```  
+- check change using `git diff`
+- stage changes: `git add .`
+- commit changes: `git commit -m "Add image to index.html and set logstash-logback-encoder version to 7.3"`
+- push changes: `git push`
 
 # Exercice 4
 

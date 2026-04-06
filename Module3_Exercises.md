@@ -41,23 +41,31 @@ We should include them in a `.gitignore` file as a best practice, so they're not
   git commit -m "Add .gitignore file"
   git push
   ```
-- Check my remote repo to make sure files included in my .gitignore are not present anymore.
+
+Now I can check my remote repo to make sure files included in my .gitignore are not present anymore.
 
 # Exercice 3 - create feature branch, make changes, commit and push
 
-- create feature branch: `git checkout -b feature/my-feature`
-- open the `build.gradle` file (at the project's root) in Vim and set the `logstash-logback-encoder` version to 7.3
+- `cd` into the project folder
+- create feature branch: `git checkout -b feature/ex3-changes`
+- open the `build.gradle` file (at the project's root) in Vim and set the `logstash-logback-encoder` version to '7.3'
 - open the `index.html` file (in src/main/webapp) and add an image:
   ```html
-  <img src="https://www.careeraddict.com/uploads/article/58721/illustration-group-people-team-meeting.jpg">
+  <img src="https://www.careeraddict.com/uploads/article/58721/illustration-group-people-team-meeting.jpg" />
   ```  
-- check change using `git diff`
+- check changes using `git diff`
 - stage changes: `git add .`
 - commit changes: `git commit -m "Add image to index.html and set logstash-logback-encoder version to 7.3"`
-- push changes: `git push`
+- inform the remote repo about the new branch and push changes: `git push --set-upstream origin feature/ex3-changes`
 
-# Exercice 4
+The last command pushes local commits to the remote repository (creating the branch there if needed) and configures future 
+`git push` or `git pull` commands to default to `feature/ex3-changes`.  
 
+Only thing left to do is comparing main branch and feature branch on the remote repo to see my changes.  
+
+# Exercice 4 - Bugfix branch
+
+You find out there is a bug in your project, so you need to fix it using a new bugfix branch:  
 
 
 # Exercice 5

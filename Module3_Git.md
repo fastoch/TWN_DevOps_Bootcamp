@@ -200,6 +200,9 @@ But I'll get an **error** because repositories are connected but not **branches*
 We have to connect the main branch of our local repo to the main branch of our remote repo.  
 This is done via `git push --set-upstream origin main`  
 
+This command pushes local commits to the remote repository (creating the branch there if needed) and configures future 
+`git push` or `git pull` commands to default to the specified branch (`main` in our case, but it could be any branch).  
+
 >[!note]
 >Older repos might not have a "main" branch.  
 >Instead they have a "master" branch.  
@@ -272,6 +275,7 @@ To start working on the new branch, I have to tell my local repo.
 - then, create the new branch and switch to it: `git checkout -b <branch_name>`
 
 This creates a branch locally, one that is based on the main branch.  
+
 To inform the remote repo about the new branch: `git push --set-upstream origin <branch_name>`  
 Now the branch should be visible in the remote repo.  
 

@@ -1,4 +1,4 @@
-# Exercice 1 - clone existing repo, make it yours, push to your own remote
+# Exercice 1 - clone and create new repo
 
 Repo to use for this exercise: https://gitlab.com/twn-devops-bootcamp/latest/03-git/git-exercises  
 
@@ -18,7 +18,7 @@ Repo to use for this exercise: https://gitlab.com/twn-devops-bootcamp/latest/03-
   - add my public key to GitLab
 - push to my GitLab repo: `git push -u origin master`
 
-# Exercice 2 - edit .gitignore, empty Git cache, commit and push
+# Exercice 2 - create .gitignore, empty Git cache, push changes
 
 We don't want build folders and editor specific folders to be present in the remote repository.  
 We should include them in a `.gitignore` file as a best practice, so they're not tracked by Git:
@@ -44,7 +44,7 @@ We should include them in a `.gitignore` file as a best practice, so they're not
 
 Now I can check my remote repo to make sure files included in my .gitignore are not present anymore.
 
-# Exercice 3 - create feature branch, make changes, commit and push
+# Exercice 3 - feature branch
 
 - `cd` into the project folder
 - create feature branch: `git checkout -b feature/ex3-changes`
@@ -73,16 +73,23 @@ Only thing left to do is comparing main branch and feature branch on the remote 
 You find out there is a bug in your project, so you need to fix it using a new bugfix branch:  
 - create new bugfix branch: `git checkout -b bugfix/ex4-changes`
 - fix the spelling error in the `Application.java` file: 
-  - from the project folder: `cd src/main/java/com/example/Application.java` 
+  - from the project folder: `cd src/main/java/com/example` 
+  - `vim Application.java`
   - at line 22, replace "Java app starte" with "Java app started"
+  - write and quit
 - check changes: `git diff`
 - stage them if correct: `git add .`
 - commit: `git commit -m "Fix spelling error in Application.java"`
-- push to remote repo: `git push -u origin bugfix/ex4-changes`
+- push to remote repo on the bugfix branch: `git push -u origin bugfix/ex4-changes`
 
-# Exercice 5
+# Exercice 5 - merge request
 
-
+You are done with the feature, now it needs to be tested and deployed.  
+For that, merge your feature branch into master using a merge request.  
+- connect to your GitLab account and select the "TWN-mod3-git-exercises" project
+- click on "Code > Branches" in the left pane
+- find the feature branche and click on "new merge request" on its right
+- 
 
 # Exercice 6
 

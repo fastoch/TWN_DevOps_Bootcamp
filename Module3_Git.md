@@ -441,7 +441,7 @@ The -r option stands for "recursive".
 ## Git stash
 
 When you have uncommited changes in a branch and you want to switch branches, Git gives you an error:  
-"Your local changes to the following files would be overwritten by checkout: <file_name>  
+"Your local changes to the following files would be overwritten by checkout: <file_name>"  
 Please commit your changes or stash them before you switch branches. Aborting"  
 
 In such case, we can save our changes for later, and then we're allowed to switch branches:  

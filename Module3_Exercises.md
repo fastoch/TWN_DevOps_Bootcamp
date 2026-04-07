@@ -58,15 +58,22 @@ Now I can check my remote repo to make sure files included in my .gitignore are 
 - commit changes: `git commit -m "Add image to index.html and set logstash-logback-encoder version to 7.3"`
 - inform the remote repo about the new branch and push changes: `git push --set-upstream origin feature/ex3-changes`
 
-The last command pushes local commits to the remote repository (creating the branch there if needed) and configures future 
-`git push` or `git pull` commands to default to `feature/ex3-changes`.  
+>[!note]  
+>The `--set-upstream` option is the long version of `-u`  
+
+This command does 3 things: 
+- it creates the branch on the remote repo if not already existing
+- it pushes my local changes to the remote 
+- it sets the specified branch as the reference for future `git pull` and `git push` commands
 
 Only thing left to do is comparing main branch and feature branch on the remote repo to see my changes.  
 
 # Exercice 4 - Bugfix branch
 
 You find out there is a bug in your project, so you need to fix it using a new bugfix branch:  
-
+- create new bugfix branch: `git checkout -b bugfix/ex4-bugfix`
+- fix the spelling error in the `Application.java` file: 
+- 
 
 # Exercice 5
 

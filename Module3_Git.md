@@ -200,6 +200,9 @@ But I'll get an **error** because repositories are connected but not **branches*
 We have to connect the main branch of our local repo to the main branch of our remote repo.  
 This is done via `git push --set-upstream origin main`  
 
+>[!note]  
+>The `--set-upstream` option is the long version of `-u`  
+
 This command pushes local commits to the remote repository (creating the branch there if needed) and configures future 
 `git push` or `git pull` commands to default to the specified branch (`main` in our case, but it could be any branch).  
 
@@ -277,9 +280,10 @@ To start working on the new branch, I have to tell my local repo.
 This creates a branch locally, one that is based on the main branch.  
 
 To inform the remote repo about the new branch: `git push --set-upstream origin <branch_name>`  
+Short version: `git push -u origin <branch_name>`  
 Now the branch should be visible in the remote repo.  
 
->[!tip]
+>[!tip]  
 >We don't have to memorize all these commands.  
 >For example, when we simply run `git push`, we get a suggestion of the command to use.  
 >Git is smart enough to understand what we want to do, and helps us with appropriate suggestions.  

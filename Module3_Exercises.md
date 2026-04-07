@@ -71,11 +71,18 @@ Only thing left to do is comparing main branch and feature branch on the remote 
 # Exercice 4 - Bugfix branch
 
 You find out there is a bug in your project, so you need to fix it using a new bugfix branch:  
-- create new bugfix branch: `git checkout -b bugfix/ex4-bugfix`
+- create new bugfix branch: `git checkout -b bugfix/ex4-changes`
 - fix the spelling error in the `Application.java` file: 
-- 
+  - from the project folder: `cd src/main/java/com/example/Application.java` 
+  - at line 22, replace "Java app starte" with "Java app started"
+- check changes: `git diff`
+- stage them if correct: `git add .`
+- commit: `git commit -m "Fix spelling error in Application.java"`
+- push to remote repo: `git push -u origin bugfix/ex4-changes`
 
 # Exercice 5
+
+
 
 # Exercice 6
 

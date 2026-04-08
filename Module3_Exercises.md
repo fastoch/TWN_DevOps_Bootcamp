@@ -46,6 +46,8 @@ Now I can check my remote repo to make sure files included in my .gitignore are 
 
 # Exercice 3 - feature branch
 
+Initially, the `logstash-logback-encoder` version is set to '5.2' in the `build.gradle` file.  
+
 - `cd` into the project folder
 - create feature branch: `git checkout -b feature/ex3-changes`
 - open the `build.gradle` file (at the project's root) in Vim and set the `logstash-logback-encoder` version to '7.3'
@@ -106,12 +108,28 @@ Alternatively, do the merge request from GitLab UI:
 You are on the local bugfix branch. You notice the logger library version is old, so you update it to version 7.2:
 - switch to local bugfix branch: `git checkout bugfix/ex4-changes`
 - open the `build.gradle` file in Vim and set the `logstash-logback-encoder` version to '7.2'
+- write and quit
+- stage and commit the change locally: `git add .` then `git commit -m "Set logstash-logback-encoder version to 7.2"`
 
+Some time went by since you opened your bugfix branch, so you want the up-to-date master state to avoid major conflicts.  
 
-Since you've set the logger library version to 7.3 in the feature branch and you've already merged that into master, 
+Since you've previously set the logger library version to 7.3 in the feature branch, and given that you've already merged 
+that branch into master, when you'll try and merge your master branch into the bugfix branch, you'll get a merge conflict.  
 
+- merge the master branch into the bugfix branch: `git merge master`  
+- fix the merge conflict by editing the `build.gradle` file and setting the `logstash-logback-encoder` version to '7.3'
+- Run `git status` to confirm all conflicted files are resolved  
+- if everything looks good, add the resolved files to the index: `git add .`
+- finalize the merge into your bugfix branch: `git merge --continue`
+- push your bugfix branch to the remote repo: `git push`
 
-# Exercice 7
+# Exercice 7 - Revert commit
+
+While still on the bugfix branch, fix the spelling mistake in the index.html file and commit the fix:
+- in the index.html file inside src/main/webapp/, at line 12, replace "devlopper" with "developper"
+- commit the change: `git add .` then `git commit -m "Fix spelling error in index.html"`
+- 
+
 
 # Exercice 8
 

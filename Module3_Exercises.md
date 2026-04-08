@@ -86,12 +86,30 @@ You find out there is a bug in your project, so you need to fix it using a new b
 
 You are done with the feature, now it needs to be tested and deployed.  
 For that, merge your feature branch into master using a merge request.  
+
+From the CLI:
+- switch to local master branch: `git checkout master`
+- merge feature branch into master: `git merge feature/ex3-changes`
+- push the merge to remote master: `git push`
+
+To make sure it worked, check the remote repo on GitLab:
+- go to Code > Branches and mouse over the commit counter (2 numbers separated by a pipe) beside the feature branch
+- it should indicate "0 commits behind master, 0 commits ahead"
+
+Alternatively, do the merge request from GitLab UI:
 - connect to your GitLab account and select the "TWN-mod3-git-exercises" project
 - click on "Code > Branches" in the left pane
-- find the feature branche and click on "new merge request" on its right
-- 
+- find the feature branch and click on "new merge request" on its right
 
-# Exercice 6
+# Exercice 6 - Fix merge conflict
+
+You are on the local bugfix branch. You notice the logger library version is old, so you update it to version 7.2:
+- switch to local bugfix branch: `git checkout bugfix/ex4-changes`
+- open the `build.gradle` file in Vim and set the `logstash-logback-encoder` version to '7.2'
+
+
+Since you've set the logger library version to 7.3 in the feature branch and you've already merged that into master, 
+
 
 # Exercice 7
 

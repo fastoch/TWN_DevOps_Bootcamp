@@ -505,7 +505,7 @@ This takes us back to the state of the application code that we had at the time 
 
 ### Going back to the up-to-date state of the project
 
-Run `git checkout <branch_name>`.  
+Run `git checkout <branch_name>`
 
 ---
 
@@ -583,7 +583,7 @@ Note that this will not delete the reverted commit, this will add a new commit t
 
 ### Summary
 
-- `git reset` removes the old commit and its changes
+- `git reset` removes the old commit and its changes, cannot be used after pushing to the remote
 - `git revert` creates a new commit to revert the old commit's changes
 
 ---

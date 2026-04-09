@@ -105,7 +105,7 @@ Alternatively, do the merge request from GitLab UI:
 
 # Exercice 6 - Fix merge conflict
 
-You are on the local bugfix branch. You notice the logger library version is old, so you update it to version 7.2:
+You are on the local bugfix branch. You notice the logger library version is old (5.2), so you update it to version 7.2:
 - switch to local bugfix branch: `git checkout bugfix/ex4-changes`
 - open the `build.gradle` file in Vim and set the `logstash-logback-encoder` version to '7.2'
 - write and quit
@@ -117,11 +117,14 @@ Since you've previously set the logger library version to 7.3 in the feature bra
 that branch into master, when you'll try and merge your master branch into the bugfix branch, you'll get a merge conflict.  
 
 - merge the master branch into the bugfix branch: `git merge master`  
-- fix the **merge conflict** by editing the `build.gradle` file and setting the `logstash-logback-encoder` version to '7.3'
+- fix the **merge conflict** by editing the `build.gradle` file and setting the logger library version to '7.3'
 - Run `git status` to confirm all conflicted files are resolved  
 - if everything looks good, add the resolved files to the index: `git add .`
 - finalize the merge of master into your bugfix branch: `git merge --continue`
 - push changes to the remote repo: `git push`
+
+>[!note]  
+>Strangely enough, I didn't have any merge conflict after running `git merge master`  
 
 # Exercice 7 - Revert commit
 
@@ -143,14 +146,34 @@ But since you've already pushed to remote, you must revert the last commit:
 - revert the commit: `git revert <commit_hash>`
 - push the revertion to the remote repo: `git push`
 
->[!note]:  
->For this last part, we didn't need to run `git log` and then copy the commit hash, we could have used `git revert HEAD~1` instead.  
->And then `git push` to update the remote.
+>[!note]  
+>For this last part, we didn't need to run `git log` and then copy the commit hash.  
+>We could have used `git revert HEAD~1` instead. And then `git push` to update the remote.
 
 # Exercice 8 - Reset commit
 
+Still on bugfix branch.  
 
+You found one last thing that must be fixed. Bruno just moved to DevOps team, so his role must be updated.  
+- Update the text accordingly in the index.html file
+- stage and commit: `git add .` then `git commit -m "Update Bruno's role in index.html"`
 
-# Exercice 9
+After talking to a colleague, you find out Bruno's role has already been updated in another branch.  
+Since last commit was only done locally, you can reset it:
+- cancel last commit and discard changes: `git reset --hard HEAD~1`
 
-# Exercice 10
+# Exercice 9 - Merge
+
+This time you want to merge your branch directly into master without merge request.
+- make sure master branch is up-to-date: `git checkout master` then `git pull`
+- merge bugfix branch into master: `git merge bugfix/ex4-changes`
+- push the merge to remote repo: `git push`
+
+# Exercice 10 - Delete branches
+
+Now that you are done, both feature and bugfix branches got deployed and you can delete them.  
+- run `git branch` to see all branches
+- Delete both branches locally: 
+  - `git branch -d feature/ex3-changes` 
+  - `git branch -d bugfix/ex4-changes`
+- Delete both branches on the remote repo via GitLab UI

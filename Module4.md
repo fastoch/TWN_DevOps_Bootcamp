@@ -58,7 +58,7 @@ For a Java application, the artifact will be a JAR or WAR file (includes whole c
 Before moving on to the demos, we need to install a couple of tools.  
 
 We will use build tools to build a **Java application**. For that, we need to install: 
-- Java SDK (Software Development Kit)
+- JDK (Java Development Kit)
 - Maven (build tool for Java applications)
 - Gradle (alternative to Maven)  
 
@@ -72,6 +72,8 @@ I'll be using VSCodium, which is the free and open-source version of Visual Stud
 
 ## Installation guide for Linux (Fedora 43)
 
+### Dev tools
+
 - install your favorite code editor or IDE (I already have VSCodium)
 - install Git: `git version` to check if already installed, `sudo dnf install git` if not
 
@@ -79,3 +81,12 @@ I'll be using VSCodium, which is the free and open-source version of Visual Stud
 
 - From the CLI, `cd` into the folder where you want to clone the project
 - run `git clone https://gitlab.com/twn-devops-bootcamp/latest/04-build-tools/java-maven-app.git`
+- open the project in VSCodium or run `cd java-maven-app` and then `code .`
+
+### Install JDK
+
+- from the CLI, check OpenJDK version: `java --version`
+- if you don't have OpenJDK installed, run `sudo dnf install java`
+
+### Install Maven
+

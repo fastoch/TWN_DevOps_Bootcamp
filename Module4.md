@@ -17,6 +17,11 @@ For JS, we will look at npm.
 So we will learn how to **build** and **package** Java and JavaScript applications into **artifacts** using these tools.  
 As well as how to add and install application dependencies, and so on...  
 
+Links to the projects used in this module are:
+- Java-app: https://gitlab.com/twn-devops-bootcamp/latest/04-build-tools/java-app
+- Java-maven-app: https://gitlab.com/twn-devops-bootcamp/latest/04-build-tools/java-maven-app
+- React-nodejs-app: https://github.com/techworld-with-nana/react-nodejs-example
+
 ## Introduction to Build Tools
 
 When you're done implementing an application, it must be made available somewhere for the end users.  
@@ -50,3 +55,27 @@ For a Java application, the artifact will be a JAR or WAR file (includes whole c
 
 ## Install Build Tools
 
+Before moving on to the demos, we need to install a couple of tools.  
+
+We will use build tools to build a **Java application**. For that, we need to install: 
+- Java SDK (Software Development Kit)
+- Maven (build tool for Java applications)
+- Gradle (alternative to Maven)  
+
+Finally, we'll build a **JavaScript application**, which requires installing:
+- Node.js (JavaScript runtime)
+- npm (Node Package Manager)
+
+It's also important to have a good **code editor** to work with.  
+Most popular being IntelliJ IDEA and Visual Studio Code.  
+I'll be using VSCodium, which is the free and open-source version of Visual Studio Code.  
+
+## Installation guide for Linux (Fedora 43)
+
+- install your favorite code editor or IDE (I already have VSCodium)
+- install Git: `git version` to check if already installed, `sudo dnf install git` if not
+
+### Clone and open Java Maven project in VSCodium
+
+- From the CLI, `cd` into the folder where you want to clone the project
+- run `git clone https://gitlab.com/twn-devops-bootcamp/latest/04-build-tools/java-maven-app.git`

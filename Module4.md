@@ -18,9 +18,9 @@ So we will learn how to **build** and **package** Java and JavaScript applicatio
 As well as how to add and install application dependencies, and so on...  
 
 Links to the projects used in this module are:
-- Java-app: https://gitlab.com/twn-devops-bootcamp/latest/04-build-tools/java-app
-- Java-maven-app: https://gitlab.com/twn-devops-bootcamp/latest/04-build-tools/java-maven-app
-- React-nodejs-app: https://github.com/techworld-with-nana/react-nodejs-example
+- Java-Maven-App: https://gitlab.com/twn-devops-bootcamp/latest/04-build-tools/java-maven-app
+- Java-Gradle-App: https://gitlab.com/twn-devops-bootcamp/latest/04-build-tools/java-app
+- React-NodeJS-App: https://github.com/techworld-with-nana/react-nodejs-example
 
 ## Introduction to Build Tools
 
@@ -77,6 +77,8 @@ I'll be using VSCodium, which is the free and open-source version of Visual Stud
 - install your favorite code editor or IDE (I already have VSCodium)
 - install Git: `git version` to check if already installed, `sudo dnf install git` if not
 
+IDE = Integrated Development Environment
+
 ### Clone and open Java Maven project in VSCodium
 
 - From the CLI, `cd` into the folder where you want to clone the project
@@ -85,8 +87,73 @@ I'll be using VSCodium, which is the free and open-source version of Visual Stud
 
 ### Install JDK
 
+JDK = Java Development Kit
+
 - from the CLI, check OpenJDK version: `java --version`
 - if you don't have OpenJDK installed, run `sudo dnf install java`
 
 ### Install Maven
+
+Maven is a build automation and project‑management tool, originally created for Java projects but now used for other languages as well.  
+
+In practice it’s the machinery that compiles your code, runs tests, packages the result (like a JAR or WAR), 
+and manages dependencies with a single command such as `mvn clean install`.  
+
+Maven requires a JDK to be installed. Once you've installed the JDK, you can install Maven:
+- from the CLI, `mvn -version` or `mvn -v` to check if Maven is already installed
+- if you don't have Maven installed, run `sudo dnf install maven`
+
+>[!note]  
+>No need to add the `--ignore-dependencies` flag when using the `dnf` package manager.  
+>It's not recommended on a modern Fedora system; use dnf’s dependency resolver instead.
+
+### Build your Java-Maven application
+
+Once you have JDK and Maven installed, `cd` into the project folder and run `mvn package`.  
+This will build the application and package it into a JAR file.  
+If all goes well, you should see a "BUILD SUCCESS" message.  
+In the next videos, we'll explain that process in detail.  
+
+### Setting up Gradle project
+
+Now that we've set up a Java Maven project, let's see how to set up a Java Gradle project.  
+Since Java (openJDK) is already installed, we just need to install Gradle.  
+
+Fedora's standard repos don't package Gradle due to its complexity as a Java-based build tool with frequent upstream releases, dependency management needs, and potential licensing/maintenance overhead for distro packagers.  
+Searches like `dnf search gradle` typically return no matches.  
+
+Recommended alternatives for Fedora are:
+- manual binary install
+- SDKMAN
+
+Manual binary install:
+```bash
+# download latest version of Gradle binary
+wget https://services.gradle.org/distributions/gradle-9.4.1-bin.zip -P /tmp
+# unzip it to /opt
+sudo unzip /tmp/gradle-9.4.1-bin.zip -d /opt/
+# create a symbolic link (symlink) for future upgrades
+sudo ln -s /opt/gradle-9.4.1 /opt/gradle
+# make Gradle binary available system‑wide and save that config in a shell script that runs automatically for every user login
+echo 'export PATH=/opt/gradle/bin:$PATH' | sudo tee /etc/profile.d/gradle.sh
+# source the script for the current session
+source /etc/profile.d/gradle.sh
+# check Gradle version
+gradle -v
+```  
+
+SDKMAN:
+```bash
+# install SDKMAN
+curl -s "https://get.sdkman.io" | bash
+# source SDKMAN init script
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+# install Gradle
+sdk install gradle
+# check Gradle version
+gradle -v
+```  
+
+Now we can `cd` into the desired project folder and clone the Java Gradle project:  
+`git clone https://gitlab.com/twn-devops-bootcamp/latest/04-build-tools/java-app.git`  
 

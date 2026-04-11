@@ -97,7 +97,7 @@ JDK = Java Development Kit
 Maven is a build automation and project‑management tool, originally created for Java projects but now used for other languages as well.  
 
 In practice it’s the machinery that compiles your code, runs tests, packages the result (like a JAR or WAR), 
-and manages dependencies with a single command such as `mvn clean install`.  
+and manages dependencies for you.  
 
 Maven requires a JDK to be installed. Once you've installed the JDK, you can install Maven:
 - from the CLI, `mvn -version` or `mvn -v` to check if Maven is already installed
@@ -111,8 +111,7 @@ Maven requires a JDK to be installed. Once you've installed the JDK, you can ins
 
 Once you have JDK and Maven installed, `cd` into the project folder and run `mvn package`.  
 This will build the application and package it into a JAR file.  
-If all goes well, you should see a "BUILD SUCCESS" message.  
-In the next videos, we'll explain that process in detail.  
+If all goes well, you should see a "**BUILD SUCCESS**" message.  
 
 ### Setting up Gradle project
 
@@ -156,4 +155,24 @@ gradle -v
 
 Now we can `cd` into the desired project folder and clone the Java Gradle project:  
 `git clone https://gitlab.com/twn-devops-bootcamp/latest/04-build-tools/java-app.git`  
+
+>[!note]  
+>Depending ou your IDE, you might need to configure it to use your local installation of Gradle.  
+
+To build this Java Gradle application, `cd` into the project folder and run `gradle build`.  
+You'll get a "BUILD SUCCESS" message if all goes well.  
+
+### Setting up the React Node.js project
+
+We saw how to set up a Java Maven project and a Java Gradle project.  
+Now, let's see how to set up a React Node.js project.  
+
+React is a JavaScript library for building user interfaces (frontend).  
+Node.js is a JavaScript runtime environment that executes JavaScript code on the server-side (backend).  
+
+- from the CLI, `cd` into the folder where you want to clone the project
+- run `git clone https://github.com/techworld-with-nana/react-nodejs-example.git`
+- 
+
+## Build an artifact
 

@@ -186,4 +186,23 @@ Node.js is a JavaScript runtime environment that executes JavaScript code on the
 
 ## Build an artifact
 
+Building an artifact = packaging an application into a single file  
+
+To build an artifact, a movable file that contains all the code and dependencies of a project, we use 
+a **build tool** that is specific to the programming language used in the project.  
+
+As we saw in our previous example, a Java project artifact can be built using Maven and Gradle.  
+But what do these tools do? And how do they build an artifact?  
+
+These tools install the dependencies, they compile your whole code and compress it to reduce the size of the artifact.  
+They can also run other tasks.  
+
+### Maven vs Gradle
+
+- **Language**: Maven uses **XML** while Gradle uses **Groovy** (more convenient for scripting)
+- Both have a CLI tool and commands to execute various tasks (installing deps, compiling, building artifacts, etc.)
+- `gradle build` will generate a .jar file inside the `build/libs` folder
+- `mvn package` will generate a .jar file inside the `target` folder
+
+## Build Tools for Development
 

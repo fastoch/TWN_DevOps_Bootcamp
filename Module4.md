@@ -216,3 +216,22 @@ Maven and Gradle both have their own **dependencies file**, where the dependenci
 - Dependencies file for Maven is `pom.xml`
 - Dependencies file for Gradle is `build.gradle`
 
+### Where do these dependencies (deps) come from?
+
+Gradle and Maven use the same dependency repositories, like https://mvnrepository.com, to find dependencies.  
+
+Let's say you need a library to connect your Java application to ElasticSearch:
+- You find a dependency for that in the remote Maven repository
+- You add the dependency to your `pom.xml` file by specifying its name and version
+- It gets downloaded and installed in your **local repository**
+
+When we use Maven or Gradle to build an artifact, the dependencies listed in our `pom.xml` or `build.gradle` file 
+are automatically downloaded before the build process starts.  
+
+When you add a new dependency to your dependencies file, most code editors detect it and make you synchronize 
+your dependencies in order to download the missing dependency from the remote repo to your local repo.  
+
+The **local repository** where all of your dependencies live is usually in your home folder: `~/.m2/repository`
+
+## How to run the Application?
+

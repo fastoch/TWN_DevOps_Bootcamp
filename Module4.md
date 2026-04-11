@@ -171,8 +171,19 @@ React is a JavaScript library for building user interfaces (frontend).
 Node.js is a JavaScript runtime environment that executes JavaScript code on the server-side (backend).  
 
 - from the CLI, `cd` into the folder where you want to clone the project
-- run `git clone https://github.com/techworld-with-nana/react-nodejs-example.git`
-- 
+- clone the project: `git clone https://github.com/techworld-with-nana/react-nodejs-example.git`
+- install Node.js if not already installed: `sudo dnf install nodejs`
+- check Node installation: `node -v`
+- install NPM if not already installed: `sudo dnf install npm`
+- check NPM installation: `npm -v`
+
+>[!note]  
+>Depending on your OS, npm might be automatically installed when you install Node.js.  
+
+- change directory to the project folder: `cd react-nodejs-example`
+- `code .` to open the project in VSCodium
+- from inside the project folder, run `npm install` to install dependencies
 
 ## Build an artifact
+
 

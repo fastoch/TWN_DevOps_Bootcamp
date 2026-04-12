@@ -248,11 +248,23 @@ and then start the application with `java -jar <artifact_name>.jar`.
 ## Build JavaScript applications
 
 JavaScript (JS) doesn't have such a special artifact type like Java does.  
-A JS application can be packaged into a `.zip` or a `.tar` file.  
+A JS application can be packaged into a `.zip` or `.tar` file.  
 
-Build tools for JS apps are **npm** and **yarn**.  
+For JS applications, the tools we use are **npm** and **yarn**.  
 npm is much more widely used and popular, but they are very similar tools.  
 
-They both use the same `package.json` file to manage dependencies.  
+npm and yarn both use the same `package.json` file to manage dependencies.  
 (While Maven uses `pom.xml` and Gradle uses `build.gradle`).  
+Each dependency required by our application is listed in that `package.json` file: name and version.  
 
+Note that npm and yarn are **package managers**, NOT build tools like Gradle and Maven.  
+Their job is to install dependencies, they're not used to build the application, nor to transpile 
+and then build the JS artifact.  
+
+When we build a JS application artifact, either we do not transpile it and compress it, or we use other tools 
+to do that because npm and yarn do not have commands for that.  
+
+To install dependencies via npm or yarn, we use the `npm install` or `yarn install` command.  
+This will install all dependencies listed in the `package.json` file.  
+
+Both npm and yarn use the npm repository: https://www.npmjs.com/  

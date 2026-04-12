@@ -258,13 +258,70 @@ npm and yarn both use the same `package.json` file to manage dependencies.
 Each dependency required by our application is listed in that `package.json` file: name and version.  
 
 Note that npm and yarn are **package managers**, NOT build tools like Gradle and Maven.  
-Their job is to install dependencies, they're not used to build the application, nor to transpile 
-and then build the JS artifact.  
+Their job is to install dependencies, they're not used to build the application, nor to transpile and then build the artifact.  
 
-When we build a JS application artifact, either we do not transpile it and compress it, or we use other tools 
-to do that because npm and yarn do not have commands for that.  
+For that reason, when we build a JS application artifact, either we do not transpile it and compress it, 
+or we use other tools to do that because npm and yarn do not have commands for that.  
 
 To install dependencies via npm or yarn, we use the `npm install` or `yarn install` command.  
 This will install all dependencies listed in the `package.json` file.  
 
 Both npm and yarn use the npm repository: https://www.npmjs.com/  
+Which is pretty similar to the Maven repository: https://mvnrepository.com/  
+
+Most useful `npm` commands are:
+- `npm install` to install dependencies
+- `npm start` to run the application
+- `npm stop` to stop the application
+- `npm test` to run tests
+- `npm publish` to publish the artifact
+
+### What does the .zip/.tar file include?
+
+Once we've packaged/built our application into a `.zip` or `.tar` file, that artifact mostly contains the application code.  
+It does NOT include the dependencies because those are managed by the package manager.  
+
+>[!note]  
+>There are modules for npm and yarn that give them the ability to include dependencies in the artifact.  
+>But by default, dependencies are not included.  
+
+Which means that whenever we want to run the artifact on a server, we first have to install dependencies.  
+Then we can unpack the .zip/.tar file and run the application.  
+
+We can copy the artifact and the package.json file to the server.  
+Or we can include the package.json file in the artifact to have them both in one file.   
+
+### Creating an artifact file from a NodeJS application
+
+We can simply execute `npm pack` to create the artifact file. This will generate a `.tgz` file that contains: 
+- the application code, 
+- the package.json file, 
+- maybe other files such as a Dockerfile, or a README.md
+
+Of course, we can configure what gets packaged into the artifact, what gets excluded, and the package name.  
+
+>[!note]  
+>A .tgz file is essentially a TAR archive compressed with Gzip, so .tgz is just a shorthand for .tar.gz  
+
+### Running a JS application locally
+
+Via npm or yarn, we can run the application with `npm start` or `yarn start`.  
+Both commands execute the "start" script defined in the package.json file's "scripts" section.  
+
+### JavaScript vs Java
+
+Compared to the Java ecosystem, the JavaScript world is much more flexible.  
+It's not as structured and standardized.  
+
+That's why developers working on JS applications decide themselves how they want to create their artifacts, 
+which tools they want to use, whether they package the dependencies or the package.json in the artifact, etc.  
+
+### What about frontend JS?
+
+We saw an example for backend JS code (Node.js is a backend/server-side language).  
+
+What if we want to do frontend JS, developing a React application for example?  
+In the backend, we could have Java, Python, Node.js, or any other programming language.  
+
+To achieve this, we can choose among different approaches:
+- package the frontend code and backend code separately

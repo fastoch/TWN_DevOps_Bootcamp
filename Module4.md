@@ -316,12 +316,44 @@ It's not as structured and standardized.
 That's why developers working on JS applications decide themselves how they want to create their artifacts, 
 which tools they want to use, whether they package the dependencies or the package.json in the artifact, etc.  
 
-### What about frontend JS?
+### What about Frontend JS?
 
-We saw an example for backend JS code (Node.js is a backend/server-side language).  
+We saw an example for backend JS code (Node.js is a server-side runtime environment).  
 
-What if we want to do frontend JS, developing a React application for example?  
-In the backend, we could have Java, Python, Node.js, or any other programming language.  
+What if we want to create a frontend JS app, developing a React application for example?  
 
-To achieve this, we can choose among different approaches:
-- package the frontend code and backend code separately
+To package a fullstack application, we can choose different approaches:
+- package the frontend code and backend code separately, having separate artifacts
+- package both together, and have a common artifact 
+
+The same goes for handling dependencies: 
+- separate package.json files for frontend and backend
+- common package.json file
+
+#### Dependency version
+
+In a package.json file, the version numbers indicate importance as follows: MAJOR.MINOR.PATCH  
+
+The arrow symbol in `^4.0.2` means "the latest minor or patch version but nothing above 4 for the major version".  
+This helps keep things updated without risking any breaking changes caused by major version updates.  
+This way, we always get the latest bug fixes and new features for version 4 of the dependency.  
+
+#### Frontend requirements
+
+Frontend/React code needs to be transpiled, because otherwise web browsers won't understand it.  
+Browsers don't support latest JS versions of other fancy code decorations like JSX (React).  
+
+It also needs to be compressed/minified, so it's not too large for the browser to download.  
+In order to load the app faster in the browser, we need to shrink the size of CSS and JS files.  
+
+There are separate tools (from npm/yarn) for transpiling and compressing.  
+We call them Build Tools or Bundlers, most popular being **Webpack**, **Vite**, or Parcel.  
+
+With tools like Webpack, you can build both backend and frontend, and you can do all sorts of things.  
+
+And in case our fullstack application has a React frontend and a Java backend, same concepts apply.  
+You can build the frontend application using Webpack and manage its dependencies using npm or yarn.  
+However, you would package the whole application in a .war file.  
+
+## Common concepts & differences of build tools
+

@@ -235,3 +235,24 @@ The **local repository** where all of your dependencies live is usually in your 
 
 ## How to run the Application?
 
+Now let's say we built an artifact, and we stored it in an artifact repository.  
+How do we run the application with this artifact?  
+
+The command for executing a .jar file is: `java -jar <artifact_name>.jar`  
+
+If you're on a fresh server where you have Java installed, you can download the artifact from the repository, 
+and then start the application with `java -jar <artifact_name>.jar`.
+
+---
+
+## Build JavaScript applications
+
+JavaScript (JS) doesn't have such a special artifact type like Java does.  
+A JS application can be packaged into a `.zip` or a `.tar` file.  
+
+Build tools for JS apps are **npm** and **yarn**.  
+npm is much more widely used and popular, but they are very similar tools.  
+
+They both use the same `package.json` file to manage dependencies.  
+(While Maven uses `pom.xml` and Gradle uses `build.gradle`).  
+

@@ -355,5 +355,41 @@ And in case our fullstack application has a React frontend and a Java backend, s
 You can build the frontend application using Webpack and manage its dependencies using npm or yarn.  
 However, you would package the whole application in a .war file.  
 
-## Common concepts & differences of build tools
+## Common concepts 
 
+These concepts of dependency management, building the application artifact, etc. apply to all programming languages.  
+
+These tools we've described follow common patterns:
+- package managers for dependency management
+- repository for hosting and downloading dependencies
+- commands to install dependencies, run the application, and build the artifact
+
+## How to publish an artifact into artifactory?
+
+**Artifactory** = Artifact repository  
+Popular examples: Nexus, JFrog 
+
+Build tools like Maven, Gradle, npm and yarn have commands for publishing/pushing artifacts.  
+And when you need the artifact fetched on your server, you can use commands such as `curl` or `wget`.  
+
+## Build Tools & Docker
+
+Building and moving different artifact types was made much easier with Docker.  
+Thanks to Docker, we now work with only one type of artifact for all our applications, no matter the programming language.  
+And this **universal artifact** type is the **Docker image**.  
+
+Building a Docker image = "Dockerizing" or "containerizing" the application.  
+Docker images are self-contained, they contain everything needed to run the application.  
+
+We no longer need for a repository for each artifact type.  
+We just need a repo that supports Docker images.  
+
+No need to install dependencies on the target server, we copy the `package.json` file and run `npm install` inside 
+the Docker image, as part of the container creation process.  
+
+No need to install npm or Java on the target server, we can start the application directly from the Docker image.  
+
+We can even pass the environment variables that we need by defining them in the **Dockerfile**, which is the file format 
+used to build Docker images.  
+
+## Build Tools for DevOps

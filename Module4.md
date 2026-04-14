@@ -392,4 +392,57 @@ No need to install npm or Java on the target server, we can start the applicatio
 We can even pass the environment variables that we need by defining them in the **Dockerfile**, which is the file format 
 used to build Docker images.  
 
+>[!important]  
+>Using Docker doesn't prevent us from having to build the application (package it).  
+>Once we've built our artifact, we can create a Docker image out of it.  
+
+The artifact that results from the build process needs to get packaged into the Docker image.  
+So it's a double packaging process so to say.  
+
+### Example Dockerfile for a Node.js application
+
+```dockerfile
+FROM node:25-alpine
+
+RUN mkdir -p /usr/app
+WORKDIR /usr/app
+
+COPY package*.json ./
+RUN npm install --only=production
+
+COPY app/* ./
+
+CMD ["node", "server.js"]
+```
+
+Explanation:
+- We specify the base image: `node:25-alpine` = lightweight Linux distro with Node.js 25 preinstalled
+- We create a directory called `/usr/app`
+- We set the working directory to `/usr/app`
+- We copy the `package.json` and `package-lock.json` files to the working directory
+- We install the dependencies (`--only=production` is for not installing dev dependencies)
+- We copy the source code of the application to the working directory
+- We specify the command to start the application: `CMD ["node", "server.js"]`
+
+>[!important]  
+>In this simple example, we don't build the app before copying files into the Docker image.  
+>Later on, we'll see how to make a **multi-stage build** to significantly reduce the size of the Docker image.  
+>We'll also talk about "**layer caching**" to reduce the time it takes to build the Docker image.
+
+### Dockerfile for a Java application
+
+Instead of copying the Java files to the image, we've built the app first outside of the Docker image.  
+And once we have the .jar file, we copy it to the future Docker container file system.  
+```dockerfile
+FROM amazoncorretto:17-alpine-jdk
+
+EXPOSE 8080
+
+WORKDIR /usr/app
+COPY ./build/libs/java-app-1.0-SNAPSHOT.jar ./
+
+ENTRYPOINT ["java", "-jar", "java-app-1.0-SNAPSHOT.jar"]
+```
+
 ## Build Tools for DevOps
+

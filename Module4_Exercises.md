@@ -22,6 +22,22 @@ https://gitlab.com/twn-devops-bootcamp/latest/04-build-tools/build-tools-exercis
 # Exercise 1 - Build the .jar artifact
 
 You want to deploy the artifact to share that library with all team members.  
-To build the .jar file: ``
 
-The Build will fail, because of a compile error in a test, so you can't build the jar.
+Since this is a Java/Gradle project, we can build the .jar file by:
+- making sure Java is installed: `java --version`
+- making sure Gradle is installed: `gradle -v`
+- making sure we're in the project folder, using the `cd` command if not
+- running `gradle build`
+
+The Build will fail, because of a compile error in a test, so you can't build the jar for now.
+
+# Exercise 2 - Run Tests
+
+- Inside the project folder, go to `/src/test/java`
+- Open the `AppTest.java` file to modify line 22
+- replace `"true"` (string) with `true` (boolean) 
+- write and quit (if using Vim)
+- run `gradle test` to execute only the tests and check the fix
+
+I can't do this exercise because the build config used in the project uses deprecated Gradle features.  
+Furthermore, it requires an old version of Java (17) which is not available anymore on my Fedora 43.  

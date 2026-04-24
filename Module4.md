@@ -123,7 +123,7 @@ Searches like `dnf search gradle` typically return no matches.
 
 Recommended alternatives for Fedora are:
 - manual binary install
-- SDKMAN
+- SDKMAN (recommended)
 
 Manual binary install:
 ```bash
@@ -141,7 +141,7 @@ source /etc/profile.d/gradle.sh
 gradle -v
 ```  
 
-SDKMAN:
+SDKMAN (bash install):
 ```bash
 # install SDKMAN
 curl -s "https://get.sdkman.io" | bash
@@ -153,7 +153,7 @@ sdk install gradle
 gradle -v
 ```  
 
-Now we can `cd` into the desired project folder and clone the Java Gradle project:  
+Now we can `cd` into the folder where we want to clone the Java Gradle project and run:  
 `git clone https://gitlab.com/twn-devops-bootcamp/latest/04-build-tools/java-app.git`  
 
 >[!note]  

@@ -16,5 +16,12 @@ On DigitalOcean, servers are called **droplets**.
 - we'll use the default Ubuntu image
 - choose the Basic plan
 - CPU options > Regular
-- plan > the cheapest (4$/month): 1 vCPU, 512 MB RAM, 10 GB SSD
-- Authentication > 
+- plan > the cheapest ($4.00/month, $0.006/hour): 1 vCPU, 512 MB RAM, 10 GB SSD
+- Authentication > SSH key
+  - similar to what we did with GitLab, we'll create a key pair on our laptop for DigitalOcean
+  - name the key so that you know it's for DigitalOcean
+  - `cat ~/.ssh/id_ed25519_DigitalOcean.pub` to display the public key 
+  - copy the public key
+  - on DigitalOcean platform, click on "Add an SSH key"
+  - paste the public key
+- click on "Add Payment Method and Create Droplet"

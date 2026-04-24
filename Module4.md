@@ -425,13 +425,13 @@ Explanation:
 - We specify the command to start the application: `CMD ["node", "server.js"]`
 
 >[!important]  
->In this simple example, we don't build the app before copying files into the Docker image.  
+>In this example, we don't build the app before copying files into the Docker image, it's not required for a Node.js app.  
 >Later on, we'll see how to make a **multi-stage build** to significantly reduce the size of the Docker image.  
 >We'll also talk about "**layer caching**" to reduce the time it takes to build the Docker image.
 
 ### Dockerfile for a Java application
 
-Instead of copying the Java files to the image, we've built the app first outside of the Docker image.  
+Instead of copying the Java files to the image, we've built the app first, outside of the Docker image.  
 And once we have the .jar file, we copy it to the future Docker container file system.  
 ```dockerfile
 FROM amazoncorretto:17-alpine-jdk
@@ -446,3 +446,26 @@ ENTRYPOINT ["java", "-jar", "java-app-1.0-SNAPSHOT.jar"]
 
 ## Build Tools for DevOps
 
+The important distinction to make here is the usage of these tools for software developers vs DevOps engineers.  
+
+When devs create an application, writing the code for it, they install dependencies and run the app locally.  
+They don't build the application locally.  
+
+As a DevOps engineer, we should help the devs when it comes to commands and configuring the building of the artifact.  
+Because we know where the application will run and how it will run: in which environment, under which circumstances, etc.  
+For example, in a K8s cluster which is deployed on AWS, so in an EKS cluster (Elastic Kubernetes Service).  
+
+None of the following steps happen on the developer machine, it all happens in the build automation tool:
+- Building the artifact and the Docker image
+- Pushing the application code and Docker image to the repository
+- Deploying the application on the target server
+
+And this build automation tool (CI/CD pipeline) is the responsibility of the DevOps team.  
+The CI/CD pipeline includes: 
+- installing dependencies
+- running the tests against the application code
+- if tests pass, building/bundling the app and creating the Docker image
+- pushing the artifact and the Docker image to the repository
+- deploying the application on the target server
+
+Later on, we'll see what parts of those build tools we need for setting up our CI/CD pipeline.

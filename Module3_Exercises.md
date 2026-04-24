@@ -10,7 +10,7 @@ Repo to use for this exercise: https://gitlab.com/twn-devops-bootcamp/latest/03-
 - make initial commit: `git commit -m "Initial commit"`
 - create my own remote repo: `git remote add origin git@gitlab.com:<gitlab_user>/<gitlab_repo>.git`
   - in my case: `git remote add origin git@gitlab.com:fastoch/TWN-mod3-git-exercises.git`
-- adding our public SSH key to the remote repo:
+- adding my public SSH key to GitLab (if not already done):
   - generate an SSH key pair on my local machine: `ssh-keygen -t ed25519 -C "fastoch-gitlab"`
   - display my public key via the command `cat ~/.ssh/id_ed25519.pub` and copy it
   - log in to the remote platform (GitLab), create an account if needed

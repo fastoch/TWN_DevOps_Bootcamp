@@ -83,5 +83,14 @@ For now, inbound rules should only allow incoming traffic from your laptop for S
 
 ## Deploy and run application on your Droplet server
 
+Link to the java-react project used in this chapter is:  
+https://gitlab.com/twn-devops-bootcamp/latest/05-cloud/java-react-example  
 
+To deploy this Java-React project on your Droplet server, use the following steps:
+- ssh into the droplet
+- run `apt update` to update the package index
+- run `apt install <java_package_name>` to install the desired version of Java
+- build the java artifact on your laptop: 
+- copy the .jar file from to the droplet: 
+- start the java application on the droplet: `java -jar <artifact_name>.jar`
 

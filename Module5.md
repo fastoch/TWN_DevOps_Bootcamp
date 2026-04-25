@@ -81,16 +81,64 @@ For now, inbound rules should only allow incoming traffic from your laptop for S
 - while being connected to the droplet as root, run `apt update`
 - after that, you can install any package you need using `apt install <package_name>`
 
-## Deploy and run application on your Droplet server
+## Deploy and run an application on your Droplet server
 
 Link to the java-react project used in this chapter is:  
 https://gitlab.com/twn-devops-bootcamp/latest/05-cloud/java-react-example  
 
-To deploy this Java-React project on your Droplet server, use the following steps:
-- ssh into the droplet
+On your laptop, clone the project:  
+`git clone https://gitlab.com/twn-devops-bootcamp/latest/05-cloud/java-react-example.git`
+- change directory to the project folder: `cd java-react-example`
+- install versions of java and gradle that are compatible with the project
+- build the artifact on your laptop: `gradle build`
+
+Inside the project folder, go to `/build/libs` to see the .jar file created by Gradle.  
+
+- secure copy the .jar file from your laptop to the droplet:  
+`scp build/libs/java-react-example.jar root@<IPv4_public_address>:/path/to/destination`
+
+To run the Java-React app on your Droplet server:
+- `ssh` into the droplet
 - run `apt update` to update the package index
 - run `apt install <java_package_name>` to install the desired version of Java
-- build the java artifact on your laptop: 
-- copy the .jar file from to the droplet: 
-- start the java application on the droplet: `java -jar <artifact_name>.jar`
+- change directory to the folder where you copied the .jar file: `cd /path/to/destination`
+- start the app: `java -jar java-react-example.jar`
+
+You should see the port which your app's web server is listening on.  
+It's an Apache Tomcat server listening on port 7071.  
+
+### Accessing the app from a web browser 
+
+- on your laptop, open a web browser and go to DigitalOcean
+- go to the Networking menu > Firewalls
+- click on the firewall you created earlier
+- in the inbound rules, add a new rule to allow access to port 7071:
+  -  Type: custom
+  -  Protocol: TCP
+  -  Port range: 7071
+  -  Sources: all IPv4/IPv6 addresses
+  -  Save
+- go to your droplet's view and copy its public IP address
+- paste it in your web browser followed by `:7071`
+- you should see the app's home page
+
+You've successfully deployed an application on a DigitalOcean droplet.  
+And then you were able to access it from a web browser!   
+
+### Running the app in detached mode
+
+While being connected to the droplet via SSH, run `java -jar java-react-example.jar &`.  
+This allows you to keep using the same terminal while the app is running in the background.  
+
+This way, you can check which **process** the app is running in: `ps aux | grep java`  
+
+With `netstat`, you can also see which port the app is listening on: 
+- install netstat: `apt install net-tools`
+- run `netstat -lpnt | grep java` 
+In the output of this command, the app can be identified via its **PID** (process ID).
+
+## Create and configure a Linux user on a cloud server
+
+This is not recommended to run services and applications as root.  
+We should create a non-root user and run the app as that user.  
 

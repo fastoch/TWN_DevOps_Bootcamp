@@ -10,7 +10,8 @@ https://gitlab.com/twn-devops-bootcamp/latest/04-build-tools/build-tools-exercis
 
 # Exercise 0 - clone the project and create your own Git repo
 
-- clone existing project: `git clone https://gitlab.com/twn-devops-bootcamp/latest/04-build-tools/build-tools-exercises.git`
+- clone existing project:  
+  `git clone https://gitlab.com/twn-devops-bootcamp/latest/04-build-tools/build-tools-exercises.git`
 - enter the project's directory: `cd build-tools-exercises`
 - remove the remote repo reference: `rm -rf .git`
 - initialize a local Git repo: `git init`
@@ -40,4 +41,4 @@ The Build will fail, because of a compile error in a test, so you can't build th
 - run `gradle test` to execute only the tests and check the fix
 
 I can't do this exercise because the build config used in the project uses deprecated Gradle features.  
-Furthermore, it requires an old version of Java (17) which is not available anymore on my Fedora 43.  
+It also requires an old version of Java (17) which is not available anymore on my Fedora 43.  

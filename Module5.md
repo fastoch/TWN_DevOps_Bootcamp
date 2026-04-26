@@ -135,10 +135,31 @@ This way, you can check which **process** the app is running in: `ps aux | grep 
 With `netstat`, you can also see which port the app is listening on: 
 - install netstat: `apt install net-tools`
 - run `netstat -lpnt | grep java` 
-In the output of this command, the app can be identified via its **PID** (process ID).
+
+In the output of this last command, the app can be identified via its **PID** (process ID).  
+And you can see the **port** it's listening on.
 
 ## Create and configure a Linux user on a cloud server
 
 This is not recommended to run services and applications as root.  
 We should create a non-root user and run the app as that user.  
+
+As a security best practice, we must create a separate user for every application.  
+Or, in a microservice architecture, for every service that our application is made of.  
+
+And each of these users should only be given the permissions it needs in order to run.  
+
+### Creating a non-root Linux user
+
+- ssh into the droplet as root
+- run `adduser <username>`
+- set the new user's password
+
+### Adding the new user to the sudo group
+
+- run
+
+>[!important]
+>On some Linux distributions, the sudo group does not exist.  
+>Instead, we need to add the non-root user to the **wheel** group.  
 

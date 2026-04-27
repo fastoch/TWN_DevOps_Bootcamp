@@ -157,9 +157,36 @@ And each of these users should only be given the permissions it needs in order t
 
 ### Adding the new user to the sudo group
 
-- run
+We need the new user to be able to run some commands as root.  
+For that, we need to add the new user to the **sudo** group:
+- run `usermod -aG sudo <username>`
+- run `su - <username>` to switch to the new user
+- run `sudo <command>` to execute a command as root while being logged in as the new user
 
 >[!important]
->On some Linux distributions, the sudo group does not exist.  
+>On non-Debian-based Linux distributions, the **sudo** group does not exist.  
 >Instead, we need to add the non-root user to the **wheel** group.  
 
+>[!tip]
+>The prompt shows a `#` if the user is logged in as root, and a `$` if logged in as a non-root user.
+
+### Accessing the server as a non-root user
+
+If you exit the previous SSH session, and then try to ssh into the droplet with your non-root user,
+it will fail with a "permission denied" error.  
+
+That is because the SSH key we configured in the DigitalOcean UI is only valid for the root user.  
+
+To fix this, we can follow these steps: 
+- from your laptop, copy the public key that you've created for the DigitalOcean server
+- ssh back into the droplet as root: `ssh root@<IPv4_public_address>`
+- switch to the new non-root user: `su - <username>`
+- create the .ssh folder: `mkdir .ssh`
+- create and edit the authorized_keys file: `sudo vim .ssh/authorized_keys`
+- paste the public key (cmd/ctrl + shift + v)
+- save the file: `:wq`
+- exit the new user's session: `exit`
+- exit the SSH session: `exit`
+- ssh back into the droplet as the new user: `ssh <username>@<IPv4_public_address>`
+
+Now it should work!

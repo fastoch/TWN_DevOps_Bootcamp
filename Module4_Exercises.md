@@ -11,7 +11,7 @@ https://gitlab.com/twn-devops-bootcamp/latest/04-build-tools/build-tools-exercis
 # Exercise 0 - clone the project and create your own Git repo
 
 - clone existing project:  
-  `git clone https://gitlab.com/twn-devops-bootcamp/latest/04-build-tools/build-tools-exercises.git`
+  `git clone git@gitlab.com:twn-devops-bootcamp/latest/04-build-tools/build-tools-exercises.git`
 - enter the project's directory: `cd build-tools-exercises`
 - remove the remote repo reference: `rm -rf .git`
 - initialize a local Git repo: `git init`

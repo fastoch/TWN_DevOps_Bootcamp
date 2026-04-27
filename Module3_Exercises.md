@@ -2,7 +2,7 @@
 
 Repo to use for this exercise: https://gitlab.com/twn-devops-bootcamp/latest/03-git/git-exercises  
 
-- Clone the exercise repo: `git clone https://gitlab.com/twn-devops-bootcamp/latest/03-git/git-exercises.git`
+- Clone the exercise repo: `git clone git@gitlab.com:twn-devops-bootcamp/latest/03-git/git-exercises.git`
 - Then switch to the project folder: `cd git-exercises`
 - Before pushing to my own personal repo, I need to remove the remote repo reference: `rm -rf .git`
 - create my own local repo: `git init`
@@ -11,7 +11,7 @@ Repo to use for this exercise: https://gitlab.com/twn-devops-bootcamp/latest/03-
 - create my own remote repo: `git remote add origin git@gitlab.com:<gitlab_user>/<gitlab_repo>.git`
   - in my case: `git remote add origin git@gitlab.com:fastoch/TWN-mod3-git-exercises.git`
 - adding my public SSH key to GitLab (if not already done):
-  - generate an SSH key pair on my local machine: `ssh-keygen -t ed25519 -C "fastoch-gitlab"`
+  - generate an SSH key pair on my local machine: `ssh-keygen -t ed25519 -C "fastoch-GitLab"`
   - display my public key via the command `cat ~/.ssh/id_ed25519.pub` and copy it
   - log in to the remote platform (GitLab), create an account if needed
   - go to Settings > Access > SSH keys

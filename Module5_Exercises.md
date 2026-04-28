@@ -17,9 +17,17 @@ so they ask you to make it available online, so everyone can access it.
 - create my own remote repo: `git remote add origin git@gitlab.com:fastoch/TWN-mod5-cloud-exercises.git`
 - push to my remote repo: `git push -u origin master`
 
-# Exercise 1 - 
+# Exercise 1 - Package NodeJS App
 
+To have just 1 file, you create an artifact from the Node App.  
+To package our Node app into a .tgz file:
+- Make sure your app has a valid `package.json`, since `npm pack` builds the tarball from that manifest.
+- while being in the project folder, go to the app folder where the package.json lives: `cd app`
+- run `npm pack` to build the tarball
 
+# Exercise 2 - Create a droplet server on DigitalOcean
+
+- 
 
 # Exercice solutions
 

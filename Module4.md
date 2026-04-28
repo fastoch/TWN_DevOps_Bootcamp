@@ -278,8 +278,7 @@ Most useful `npm` commands are:
 
 ### What does the .zip/.tar file include?
 
-Once we've packaged/built our application into a `.zip` or `.tar` file, that artifact mostly contains the application code.  
-It does NOT include the dependencies because those are managed by the package manager.  
+Once we've packaged/built our application into a `.zip` or `.tar` file, that artifact mostly contains the application code. It does NOT include the dependencies because those are managed by the package manager.  
 
 >[!note]  
 >There are modules for npm and yarn that give them the ability to include dependencies in the artifact.  

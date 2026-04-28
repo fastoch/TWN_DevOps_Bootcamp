@@ -17,6 +17,10 @@ so they ask you to make it available online, so everyone can access it.
 - create my own remote repo: `git remote add origin git@gitlab.com:fastoch/TWN-mod5-cloud-exercises.git`
 - push to my remote repo: `git push -u origin master`
 
+# Exercise 1 - 
+
+
+
 # Exercice solutions
 
 You can find example solutions here:  

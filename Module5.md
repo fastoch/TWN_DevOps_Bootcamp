@@ -181,7 +181,7 @@ To fix this, we can follow these steps:
 - from your laptop, copy the public key that you've created for the DigitalOcean server
 - ssh back into the droplet as root: `ssh root@<IPv4_public_address>`
 - switch to the new non-root user: `su - <username>`
-- create the .ssh folder: `mkdir .ssh`
+- create the .ssh folder inside the new user's home directory: `mkdir .ssh`
 - create and edit the authorized_keys file: `sudo vim .ssh/authorized_keys`
 - paste the public key (cmd/ctrl + shift + v)
 - save the file: `:wq`

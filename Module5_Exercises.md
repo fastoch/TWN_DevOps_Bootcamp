@@ -69,9 +69,28 @@ scp -i /path/to/my-key.pem app/bootcamp-node-project-1.0.0.tgz ubuntu@<EC2_VM_pu
 - ssh into the VM: `ssh -i /path/to/my-key.pem ubuntu@<EC2_VM_public_IP>`
 - check if the app folder exists and what it contains: `ls -al app/`
 
-# Run Node App
+# Exercise 5 -Run Node App
 
-- start the Node app in detached mode
+- ssh into the EC2 VM: `ssh -i /path/to/my-key.pem ubuntu@<EC2_VM_public_IP>`
+- cd into the app folder: `cd app`
+- unpack the Node project artifact: `tar -zxvf bootcamp-node-project-1.0.0.tgz`
+- cd into unpacked directory: `cd package`
+- install dependencies: `npm install`
+- start the Node app in detached mode: `node server.js &`
+
+# Exercise 6 - Access the Node App from a web browser
+
+- after starting the Node app, you see that it's listening on port 3000
+- copy the public IP address of the EC2 instance from the AWS UI
+- paste it in your web browser followed by `:3000`
+- you shouldn't be able to see the app's home page
+
+It's not working because we first need to allow access to port 3000 on the EC2 instance.  
+To allow access to a specific port on an EC2 instance in AWS, you edit the Security Group attached to that instance and add an inbound rule for that port:
+- in AWS UI, go to your EC2 instance's view
+- go to the **Security** tab and click the link under "Security Groups"
+- click the "Edit Inbound Rules" button
+- 
 
 # Exercice solutions
 

@@ -39,8 +39,8 @@ I chose to use AWS instead of DigitalOcean, since Amazon lets you spin up an Ubu
 For Ubuntu EC2 instances, root login is disabled by default.  
 For accessing my VM using SSH, we must use `ubuntu` as the username instead of `root`:
 - copy the Public IPv4 address of the EC2 instance from the AWS UI
-- set correct permissions for your key: `chmod 400 /path/to/your-key.pem`
-- run `ssh -i /path/to/your-key.pem ubuntu@<EC2_VM_public_IP>`
+- set correct permissions for my key: `chmod 400 /path/to/your-key.pem`
+- run `ssh -i /path/to/my-key.pem ubuntu@<EC2_VM_public_IP>`
 - You'll get a "Welcome to Ubuntu" message on successful connection
 
 The `-i` flag is for specifying the identity file (the private key file) to use for authentication.  
@@ -52,7 +52,26 @@ The `-i` flag is for specifying the identity file (the private key file) to use 
 
 Now you have a new fresh server with nothing installed on it.  
 Since you want to run a NodeJS application, you need to install Node and npm on it:
-- 
+- ssh into the VM: `ssh -i /path/to/my-key.pem ubuntu@<EC2_VM_public_IP>`
+- update the package list: `sudo apt update`
+- if some packages are outdated, upgrade them: `sudo apt upgrade`
+- install Node and npm: `sudo apt install nodejs npm`
+
+# Exercise 4 - Copy the app artifact from your laptop to the VM
+
+- create the future destination folder for your app: `mkdir app`
+- exit the SSH session: `exit`
+- cd into the project folder: `cd ~/DevOps/cloud-basics-exercises`
+- secure-copy the app folder to the EC2 VM:  
+```bash
+scp -i /path/to/my-key.pem app/bootcamp-node-project-1.0.0.tgz ubuntu@<EC2_VM_public_IP>:~/app
+```
+- ssh into the VM: `ssh -i /path/to/my-key.pem ubuntu@<EC2_VM_public_IP>`
+- check if the app folder exists and what it contains: `ls -al app/`
+
+# Run Node App
+
+- start the Node app in detached mode
 
 # Exercice solutions
 

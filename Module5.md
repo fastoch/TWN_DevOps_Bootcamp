@@ -100,6 +100,7 @@ Inside the project folder, go to `/build/libs` to see the .jar file created by G
 To run the Java-React app on your Droplet server:
 - `ssh` into the droplet
 - run `apt update` to update the package index
+- run `apt upgrade` is some packages are outdated
 - run `apt install <java_package_name>` to install the desired version of Java
 - change directory to the folder where you copied the .jar file: `cd /path/to/destination`
 - start the app: `java -jar java-react-example.jar`

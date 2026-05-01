@@ -107,5 +107,8 @@ But it's also important to configure easy backup and restore, especially when yo
 >[!important]
 >DO NOT use a VM with less resources than 4GB RAM / 2 CPUs, as you will encounter performance issues if you do so.  
 
-
-
+On DigitalOcean, or any other cloud provider, you can run Nexus on server that has the following specs:
+- Ubuntu LTS
+- 8 GB RAM / 4 CPUs
+- 160 GB SSD Disk
+- 

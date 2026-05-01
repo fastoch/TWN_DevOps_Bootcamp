@@ -67,3 +67,20 @@ Nexus is available in two forms: open-source and commercial.
 Here's a sample of supported formats on Nexus:  
 ![Nexus supported formats](./assets/Nexus_formats.png)  
 
+### Features of Artifactory Managers like Nexus
+
+- integrate with LDAP: simplifies configuration of access management for big teams 
+- flexible and powerful REST API for integration with other tools
+
+### About the REST API
+
+Nexus is not designed for manual management.  
+It's going to be part of the whole build automation process and CI/CD pipeline.  
+![CI_CD_pipeline](./assets/CI_CD.png)  
+
+For example, when Jenkins builds the artifact, it needs to push it to Nexus.  
+So we need integration between Jenkins and Nexus.  
+
+And for automated delivery/deployment, we need to fetch artifacts from Nexus to the deployment server.  
+We do that part by using some script or some automated tool, which also requires integration with Nexus.  
+

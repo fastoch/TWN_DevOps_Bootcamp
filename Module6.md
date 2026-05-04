@@ -104,8 +104,10 @@ But it's also important to configure easy backup and restore, especially when yo
 
 ## 2. Install and run Nexus on a cloud server
 
+### Creating the cloud server
+
 >[!important]
->DO NOT use a VM with less resources than 4GB RAM / 2 CPUs, as you will encounter performance issues if you do so.  
+>DO NOT use a VM with less resources than 4GB RAM / 2 vCPUs, as you will encounter performance issues if you do so.  
 
 To create a droplet on DigitalOcean onto which you'll be able to install and run Nexus:
 - select the region which is closest to you
@@ -118,6 +120,8 @@ To create a droplet on DigitalOcean onto which you'll be able to install and run
 The current cost (May 2026) is 48$/month.  
 
 Once the droplet is created, configure the firewall > inbound rule for allowing SSH access via port 22.  
+
+### Logging into the droplet
 
 Now, we can SSH into our droplet: `ssh root@<IPv4_public_address>`  
 
@@ -132,5 +136,21 @@ Once logged in to the droplet, let's install Java version 17, that's the specifi
 - enter the opt folder: `cd /opt`
 - download Nexus package: `wget https://download.sonatype.com/nexus/3/nexus-3.91.1-04-linux-x86_64.tar.gz`
   - the latest version can be found here: https://help.sonatype.com/en/download.html
-- 
+- extract the package: `tar -xvzf nexus-3.91.1-04-linux-x86_64.tar.gz`
+- we now have 2 directories: `nexus-3.91.1-04` and `sonatype-work`
+  - the first one contains the runtime and the Nexus application itself
+  - the second one contains:
+    - subdirectories depending on your Nexus config
+    - IP addresses that accessed your Nexus instance
+    - logs
+    - your uploaded files and metadata
+- The `sonatype-work` folder can be used as a backup since it contains all the config and data
+
+### Starting Nexus
+
+>[!warning]
+>Services should not run with root user permissions.  
+>The best practice is to create and use a dedicated user account for the service.  
+
+The dedicated user account should only have the necessary permissions to run Nexus and interact with it.  
 

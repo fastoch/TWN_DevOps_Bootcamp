@@ -107,8 +107,30 @@ But it's also important to configure easy backup and restore, especially when yo
 >[!important]
 >DO NOT use a VM with less resources than 4GB RAM / 2 CPUs, as you will encounter performance issues if you do so.  
 
-On DigitalOcean, or any other cloud provider, you can run Nexus on server that has the following specs:
+To create a droplet on DigitalOcean onto which you'll be able to install and run Nexus:
+- select the region which is closest to you
 - Ubuntu LTS
-- 8 GB RAM / 4 CPUs
+- Basic plan
+- CPU options > Regular
+- 8 GB RAM / 4 vCPUs
 - 160 GB SSD Disk
+
+The current cost (May 2026) is 48$/month.  
+
+Once the droplet is created, configure the firewall > inbound rule for allowing SSH access via port 22.  
+
+Now, we can SSH into our droplet: `ssh root@<IPv4_public_address>`  
+
+>[!note]
+>We previously set up a SSH key pair on our local machine, so we don't need to create a new one.  
+>DigitalOcean already has the public part of the key, as we've added it to create our first droplet.  
+>Refer to Module5.md for more details.  
+
+Once logged in to the droplet, let's install Java version 17, that's the specific version that Nexus supports.  
+- run `java` to see that it's not installed and get suggestions of how to install it
+- copy and run the suggested command that installs Java 17
+- enter the opt folder: `cd /opt`
+- download Nexus package: `wget https://download.sonatype.com/nexus/3/nexus-3.91.1-04-linux-x86_64.tar.gz`
+  - the latest version can be found here: https://help.sonatype.com/en/download.html
 - 
+

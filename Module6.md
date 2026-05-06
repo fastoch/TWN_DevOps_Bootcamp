@@ -175,3 +175,25 @@ To make sure that Nexus runs as the user `nexus`:
 
 - switch from root to nexus user: `su - nexus`
 - run `/opt/nexus-3.91.1-04/bin/nexus start`
+- make sure it's running: `ps aux | grep nexus`
+- the nexus process is the one that starts with "/usr/lib/jvm" and ends with "NexusMain" 
+- identify the process id and run `netstat -lntp`
+- you can see the app is accessible for external requests at port 8081
+
+Which means that we can access the Nexus service from a browser at: `http://<IPv4_public_address>:8081`  
+On the condition that this port is open on our cloud server...  
+
+To allow incoming traffic on the port that Nexus is listening on, we need to:
+- go to DigitalOcean's UI
+- go to the droplet we've created for running Nexus
+- configure the firewall > new inbound rule > type: custom > protocol: TCP > port: 8081
+- save the new rule
+- copy the droplet's public IP address
+- open a web browser and go to `http://<IPv4_public_address>:8081`
+- you should see the Nexus UI
+
+For comparison, to allow SSH connection to the droplet, we configured the firewall as follows:
+- Inbound rule > type: SSH > protocol: TCP > port: 22 > sources: our laptop's public IP
+
+## 3. Intro to Nexus
+

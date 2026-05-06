@@ -121,14 +121,17 @@ The current cost (May 2026) is 48$/month.
 
 Once the droplet is created, configure the firewall > inbound rule for allowing SSH access via port 22.  
 
-### Logging into the droplet
+### Installing Nexus on the cloud server
 
-Now, we can SSH into our droplet: `ssh root@<IPv4_public_address>`  
+Let's SSH into our droplet: `ssh root@<IPv4_public_address>`  
 
 >[!note]
 >We previously set up a SSH key pair on our local machine, so we don't need to create a new one.  
 >DigitalOcean already has the public part of the key, as we've added it to create our first droplet.  
 >Refer to Module5.md for more details.  
+
+Nexus is built using **Java**, so it is typically deployed as a Java application.  
+Nevertheless, you can run Nexus on a platform that supports the JVM without having to install Java separately.  
 
 Once logged in to the droplet, let's install Java version 17, that's the specific version that Nexus supports.  
 - run `java` to see that it's not installed and get suggestions of how to install it
@@ -146,11 +149,29 @@ Once logged in to the droplet, let's install Java version 17, that's the specifi
     - your uploaded files and metadata
 - The `sonatype-work` folder can be used as a backup since it contains all the config and data
 
-### Starting Nexus
+### Configuring the server before running Nexus
 
 >[!warning]
 >Services should not run with root user permissions.  
->The best practice is to create and use a dedicated user account for the service.  
+>The best practice is to create a dedicated user account and run the service as that user.  
 
 The dedicated user account should only have the necessary permissions to run Nexus and interact with it.  
 
+To create a dedicated user account for running Nexus:
+- ssh into the droplet as root
+- run `adduser nexus`
+
+Now, if we run `ls -l /opt`, we can see that we need to change the ownership for the `nexus` and `sonatype-work` folders.  
+Right now, the owner is root. To change the owner to the new user:   
+- run `chown -R nexus:nexus /opt/nexus-3.91.1-04`
+- run `chown -R nexus:nexus /opt/sonatype-work`
+
+To make sure that Nexus runs as the user `nexus`:
+- run `vim /opt/nexus-3.91.1-04/bin/nexus.rc`
+- set the value for `run_as_user` to `"nexus"` and uncomment the line by removing the `#` at the beginning
+- write and quit
+
+### Running Nexus on the server
+
+- switch from root to nexus user: `su - nexus`
+- run `/opt/nexus-3.91.1-04/bin/nexus start`

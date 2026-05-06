@@ -197,3 +197,25 @@ For comparison, to allow SSH connection to the droplet, we configured the firewa
 
 ## 3. Intro to Nexus
 
+There's a paid version of Nexus, but the free version should be enough in most cases, since it already gives us access 
+to a lot of supported repository formats.  
+
+We also have a default user that gets created when we deploy Nexus.  
+The username is `admin` and the password can be found by running this command:  
+`cat /opt/sonatype-work/nexus3/admin.password`  
+
+We can use that admin account to sign in to the Nexus UI.  
+Once logged in as admin, we can create other users and give them different permissions.  
+
+In a big company, we can do an LDAP integration with Nexus.  
+**LDAP** only handles **authentication** (verifying user identity via login credentials).  
+The **authorization** is handled in Nexus UI (deciding if a user has permission to access a repository).  
+
+Using the admin account, we can also go to the Settings page and configure the server.  
+
+## 4. Repository Types
+
+In lecture 2 of this module, we've installed and configured Nexus on a cloud server (a droplet on DigitalOcean).  
+We've seen how to access Nexus UI using a web browser on our laptop.  
+We're still in Nexus UI, logged in as admin.  
+

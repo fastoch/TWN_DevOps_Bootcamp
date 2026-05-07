@@ -222,9 +222,53 @@ We're still in Nexus UI, logged in as admin.
 The central concept in Nexus is managing repositories (repos), after all Nexus is a repo manager.  
 We can have multiple repos of different formats like Helm charts, Docker images, Java archives, JS artifacts...  
 
-By default, we'll find the most popular repo formats in Nexus, such as Maven2 or Nuget.  
+By default, we'll find the most popular repo formats in Nexus, such as Maven2 (Java) or Nuget (.NET).  
+
 Repo **formats** must not be confused with repo **types**.  
-Nexus includes 3 main repo types: hosted, grouped, and proxy.  
+Nexus includes 3 main repo types: hosted, group, and proxy.  
 
 ### Proxy repo
+
+This is a repository that is linked to a remote repository, such as Maven Central or Docker Hub.  
+
+If a component is requested from the remote repo by our application, the request goes to the proxy repo instead of 
+directly to the remote repo.  
+
+Then, one of two things happens:
+1. The component is already present (cached) in the proxy repo (on Nexus) and will be fetched from there  
+2. The component is not present in the proxy, then request is forwarded to the remote and the component will be fetched 
+from the remote, and also cached in the proxy for further use  
+
+What advantages does this have?  
+- it saves network bandwidth and time for retrieving the component once it's been cached in Nexus
+- it gives developers a single endpoint for multiple repos; they only need to configure it in their build tool
+
+To configure a proxy repo on Nexus, we need to provide the URL of the remote repo that is being proxied.  
+
+### Hosted repo
+
+It is a repository that lives on our Nexus server and stores artifacts that we publish there.  
+
+
+### Group repo
+
+A virtual repository that aggregates several actual repositories and exposes them through one single URL.  
+Instead of configuring our build tools (Maven, npm, Docker, etc.) to talk to multiple repos (hosted + proxy), we:
+- Put those repos into a group
+- Point our client to only the group URL
+
+Nexus then searches the member repositories in order until it finds the component/image/package.
+
+### Repo Types Summary
+
+| Type   | Where artifacts come from                    | Typical use                                    |
+| ------ | -------------------------------------------- | ---------------------------------------------- |
+| Hosted | You publish/upload them into Nexus           | Internal/private artifacts, proprietary libs   |
+| Proxy  | Nexus downloads from a remote repo on demand | Caching Maven Central, Docker Hub, npmjs, etc. |
+| Group  | Virtual view combining hosted + proxy repos  | Single URL for clients (e.g. all Maven deps)   |
+
+### Create new repo on Nexus
+
+In addition to pre-existing ones that come out-of-the-box when we start Nexus, we can create our own repos.  
+We can chose from all available formats and types, and combine them to create a custom repo that suits our needs.  
 

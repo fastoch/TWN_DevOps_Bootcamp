@@ -216,6 +216,15 @@ Using the admin account, we can also go to the Settings page and configure the s
 ## 4. Repository Types
 
 In lecture 2 of this module, we've installed and configured Nexus on a cloud server (a droplet on DigitalOcean).  
-We've seen how to access Nexus UI using a web browser on our laptop.  
+We've seen how to access Nexus UI from a web browser on our laptop.  
 We're still in Nexus UI, logged in as admin.  
+
+The central concept in Nexus is managing repositories (repos), after all Nexus is a repo manager.  
+We can have multiple repos of different formats like Helm charts, Docker images, Java archives, JS artifacts...  
+
+By default, we'll find the most popular repo formats in Nexus, such as Maven2 or Nuget.  
+Repo **formats** must not be confused with repo **types**.  
+Nexus includes 3 main repo types: hosted, grouped, and proxy.  
+
+### Proxy repo
 

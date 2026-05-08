@@ -275,8 +275,8 @@ We can chose from all available formats and types, and combine them to create a 
 
 ## 5. Publish Artifact to Repository
 
-We'll see how to upload a .jar file from a Maven (or Gradle) project to a Nexus repo.  
-We'll use the Maven hosted repo that already comes with Nexus.  
+We'll see how to upload a .jar file from a local Maven (or Gradle) project to a Nexus repo.  
+We'll use the Maven hosted repo format that comes by default with Nexus.  
 
 For both Maven and Gradle, there's a special command for pushing to a remote repo.  
 But before we execute that command, we need to configure both build tools to connect to Nexus, which requires:
@@ -324,7 +324,7 @@ Links to the projects used in this lecture:
 - Java Gradle App: https://gitlab.com/twn-devops-bootcamp/latest/06-nexus/java-app
 - Java Maven App: https://gitlab.com/twn-devops-bootcamp/latest/06-nexus/java-maven-app
 
-#### Configuring Gradle project 
+#### Configuring Java Gradle project 
 
 We need to add a plugin to the project so we can publish a .jar file to a Maven-formatted repository:
 - In the `build.gradle` file of the Java/Gradle project, add the following lines right after the `java` block:
@@ -344,6 +344,7 @@ publishing {
     maven {
       name 'nexus'
       url "http://[your_nexus_IP]:[your_nexus_port]/repository/[repo_name]/"
+      allowInsecureProtocol = true
       credentials {
         username project.nexusUsername
         password project.nexusPassword
@@ -360,6 +361,7 @@ The `repositories` block defines the Nexus repositories where the artifacts will
 In the `maven` block, we define: 
 - the name of the repo manager
 - the targeted Nexus repo URL (easy to copy from Nexus UI)
+- `allowInsecureProtocol = true` is required because we're not accessing our Nexus repo using HTTPS
 - and the credentials of the user that we've created in Nexus UI
 
 >[!important]
@@ -372,3 +374,29 @@ In the `maven` block, we define:
 nexusUsername = my_nexus_user
 nexusPassword = my_nexus_user_password
 ```
+
+Finally, we need to configure the name of the application, which is defined in the `settings.gradle` file:
+```
+rootProject.name = 'my-java-gradle-app'
+```
+This setting will be used to generate the name of the .jar file.  
+
+#### Building and pushing the artifact to Nexus
+
+>[!important]
+>Since we've modified the Gradle project structure, we need to sync those changes before building.  
+>IDEs like IntelliJ IDEA detect changes automatically but may require manual sync.  
+
+Once the project is synced, we can run `gradle build` to build the artifact.  
+This command will generate a .jar file in the `build/libs` directory, as defined in the `build.gradle` file.  
+
+To push the artifact to Nexus, we need to run `gradle publish`.  
+This command will upload the .jar file to the Maven hosted repo defined in the `maven` block of the `build.gradle` file.  
+
+>[!note]
+>The `gradle build` and `gradle publish` commands need to be run while being inside the project folder.    
+>They will be executed by the Jenkins job we'll create in the upcoming modules.  
+
+The `gradle publish` command is not available in Gradle by default.  
+We can use it because we previously added the `maven-publish` plugin to the `build.gradle` file.  
+

@@ -222,22 +222,22 @@ We're still in Nexus UI, logged in as admin.
 The central concept in Nexus is managing repositories (repos), after all Nexus is a repo manager.  
 We can have multiple repos of different formats like Helm charts, Docker images, Java archives, JS artifacts...  
 
-By default, we'll find the most popular repo formats in Nexus, such as Maven2 (Java) or Nuget (.NET).  
+By default, we'll find the most popular repo formats in Nexus, such as maven2 (Java) or nuget (.NET).  
 
 Repo **formats** must not be confused with repo **types**.  
-Nexus includes 3 main repo types: hosted, group, and proxy.  
+Nexus includes 3 main repo types: proxy, hosted, and group.  
 
-### Proxy repo
+### Proxy repo 
 
-This is a repository that is linked to a remote repository, such as Maven Central or Docker Hub.  
+This is a repository that is **linked to a remote repository**, such as Maven Central or Docker Hub.  
 
 If a component is requested from the remote repo by our application, the request goes to the proxy repo instead of 
 directly to the remote repo.  
 
 Then, one of two things happens:
 1. The component is already present (cached) in the proxy repo (on Nexus) and will be fetched from there  
-2. The component is not present in the proxy, then request is forwarded to the remote and the component will be fetched 
-from the remote, and also cached in the proxy for further use  
+2. The component is not present in the proxy, then the request is forwarded to the remote repo and the component will be 
+fetched from that remote, and also cached in the proxy repo for further use  
 
 What advantages does this have?  
 - it saves network bandwidth and time for retrieving the component once it's been cached in Nexus
@@ -245,15 +245,16 @@ What advantages does this have?
 
 To configure a proxy repo on Nexus, we need to provide the URL of the remote repo that is being proxied.  
 
-### Hosted repo
+### Hosted repo 
 
-It is a repository that lives on our Nexus server and stores artifacts that we publish there.  
-
+It's a repository that lives on our Nexus server and stores the artifacts and components that we publish there.  
+It's a place where we store our artifacts for internal use, such as our own libraries.  
+We can also host our own custom artifacts, such as Docker images or Helm charts.
 
 ### Group repo
 
 A virtual repository that aggregates several actual repositories and exposes them through one single URL.  
-Instead of configuring our build tools (Maven, npm, Docker, etc.) to talk to multiple repos (hosted + proxy), we:
+Instead of configuring our build tools (Maven, npm, Docker, etc.) to talk to multiple repos, we:
 - Put those repos into a group
 - Point our client to only the group URL
 
@@ -271,4 +272,28 @@ Nexus then searches the member repositories in order until it finds the componen
 
 In addition to pre-existing ones that come out-of-the-box when we start Nexus, we can create our own repos.  
 We can chose from all available formats and types, and combine them to create a custom repo that suits our needs.  
+
+## 5. Publish Artifact to Repository
+
+We'll see how to upload a .jar file from a Maven (or Gradle) project to a Nexus repo.  
+We'll use the Maven hosted repo that already comes with Nexus.  
+
+For both Maven and Gradle, there's a special command for pushing to a remote repo.  
+But before we execute that command, we need to configure both build tools to connect to Nexus, which requires:
+- Nexus repo URL
+- Credentials 
+
+### 1. Create a Nexus user
+
+- In Nexus UI, go to Security > Users
+- default users are: admin and anonymous
+- Click "Create local user"
+- Fill in the user details
+- Click "Create"
+
+>[!important]
+>The Linux account we created to run the Nexus service as a non-root process (in chapter 2) is separate from the Nexus Repository users managed in the UI.  
+
+Note that in real-worl scenarios, we wouldn't create users manually in the UI.  
+Instead, we would use LDAP integration to import already existing users from our LDAP server into Nexus.  
 

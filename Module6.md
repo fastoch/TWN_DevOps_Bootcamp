@@ -294,14 +294,14 @@ But before we execute that command, we need to configure both build tools to con
 - Click "Create local user" at the bottom
 
 >[!important]
->The Linux account we created to run the Nexus service as a non-root process (in chapter 2) is separate from the Nexus Repository users managed in the UI.  
+>The Linux user account we created (in chapter 2) to run the Nexus service as a non-root process is separate from the Nexus Repository users managed in the UI.  
 
-Note that in real-worl scenarios, we wouldn't create users manually in the UI.  
+Note that in real-world scenarios, we wouldn't create users manually in the UI.  
 Instead, we would use LDAP integration to import already existing users from our LDAP server into Nexus.  
 
 ### 2. Create a role for our Nexus user
 
-This user will only need to upload maven artifacts to Nexus hosted repo.  
+This user will only need to upload maven artifacts to a Nexus hosted repo.  
 
 - in Nexus UI > Security > Roles
 - click "Create role"
@@ -319,3 +319,56 @@ Now we want to assign this role to the user we've created:
 ### 3. Configure build tools to connect to Nexus
 
 We can now configure Maven and Gradle to connect to Nexus using the new user's credentials.  
+
+Links to the projects used in this lecture:
+- Java Gradle App: https://gitlab.com/twn-devops-bootcamp/latest/06-nexus/java-app
+- Java Maven App: https://gitlab.com/twn-devops-bootcamp/latest/06-nexus/java-maven-app
+
+#### Configuring Gradle project 
+
+We need to add a plugin to the project so we can publish a .jar file to a Maven-formatted repository:
+- In the `build.gradle` file of the Java/Gradle project, add the following lines right after the `java` block:
+```
+apply plugin: 'maven-publish'
+
+publishing {
+  publications {
+    create("maven", MavenPublication) {
+      artifact("build/libs/my-app-$version" + ".jar") {
+        extension 'jar'
+      }
+    }
+  }
+
+  repositories {
+    maven {
+      name 'nexus'
+      url "http://[your_nexus_IP]:[your_nexus_port]/repository/[repo_name]/"
+      credentials {
+        username project.nexusUsername
+        password project.nexusPassword
+      }
+    }
+  }
+}
+```  
+
+The `publications` block defines the artifacts that will be published.  
+The `$version` variable is set at the beginning of the `build.gradle` file.   
+The `repositories` block defines the Nexus repositories where the artifacts will be published.  
+
+In the `maven` block, we define: 
+- the name of the repo manager
+- the targeted Nexus repo URL (easy to copy from Nexus UI)
+- and the credentials of the user that we've created in Nexus UI
+
+>[!important]
+>For security reasons, because that `build.gradle` file is included in version control, we cannot write the username and password directly in the file.  
+>We need to create a separate file to store them: the `gradle.properties` file.  
+
+- At the root of the project, create a file named `gradle.properties`.
+- Add the following lines to the file:
+```
+nexusUsername = my_nexus_user
+nexusPassword = my_nexus_user_password
+```

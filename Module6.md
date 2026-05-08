@@ -288,8 +288,10 @@ But before we execute that command, we need to configure both build tools to con
 - In Nexus UI, go to Security > Users
 - default users are: admin and anonymous
 - Click "Create local user"
-- Fill in the user details
-- Click "Create"
+- Fill in the user details 
+  - name it as you like
+  - give it nx-anonymous role for now
+- Click "Create local user" at the bottom
 
 >[!important]
 >The Linux account we created to run the Nexus service as a non-root process (in chapter 2) is separate from the Nexus Repository users managed in the UI.  
@@ -297,3 +299,23 @@ But before we execute that command, we need to configure both build tools to con
 Note that in real-worl scenarios, we wouldn't create users manually in the UI.  
 Instead, we would use LDAP integration to import already existing users from our LDAP server into Nexus.  
 
+### 2. Create a role for our Nexus user
+
+This user will only need to upload maven artifacts to Nexus hosted repo.  
+
+- in Nexus UI > Security > Roles
+- click "Create role"
+- Type: Nexus role
+- call it "nx-java"
+- privileges selection: nx-repository-view-maven2-maven-snapshots-* (use filter to find the right one)
+- scroll to the bottom and click "Save"
+
+Now we want to assign this role to the user we've created:
+- go back to Users menu
+- select the user we've created to edit it
+- remove previous anonymous role and add nx-java role
+- click "Save"
+
+### 3. Configure build tools to connect to Nexus
+
+We can now configure Maven and Gradle to connect to Nexus using the new user's credentials.  

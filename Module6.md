@@ -319,12 +319,13 @@ Now we want to assign this role to the user we've created:
 ### 3. Configure build tools to connect to Nexus
 
 We can now configure Maven and Gradle to connect to Nexus using the new user's credentials.  
+This configuration step involves 3 files: `build.gradle`, `settings.gradle`, and `gradle.properties`.  
 
 Links to the projects used in this lecture:
 - Java Gradle App: https://gitlab.com/twn-devops-bootcamp/latest/06-nexus/java-app
 - Java Maven App: https://gitlab.com/twn-devops-bootcamp/latest/06-nexus/java-maven-app
 
-#### Configuring Java Gradle project 
+#### 3.1. Configuring Java Gradle project 
 
 We need to add a plugin to the project so we can publish a .jar file to a Maven-formatted repository:
 - In the `build.gradle` file of the Java/Gradle project, add the following lines right after the `java` block:
@@ -343,7 +344,7 @@ publishing {
   repositories {
     maven {
       name 'nexus'
-      url "http://[your_nexus_IP]:[your_nexus_port]/repository/[repo_name]/"
+      url "http://[your_nexus_IP]:[your_nexus_port]/repository/[repo_name]"
       allowInsecureProtocol = true
       credentials {
         username project.nexusUsername
@@ -364,6 +365,8 @@ In the `maven` block, we define:
 - `allowInsecureProtocol = true` is required because we're not accessing our Nexus repo using HTTPS
 - and the credentials of the user that we've created in Nexus UI
 
+---
+
 >[!important]
 >For security reasons, because that `build.gradle` file is included in version control, we cannot write the username and password directly in the file.  
 >We need to create a separate file to store them: the `gradle.properties` file.  
@@ -375,17 +378,19 @@ nexusUsername = my_nexus_user
 nexusPassword = my_nexus_user_password
 ```
 
+---
+
 Finally, we need to configure the name of the application, which is defined in the `settings.gradle` file:
 ```
 rootProject.name = 'my-java-gradle-app'
 ```
 This setting will be used to generate the name of the .jar file.  
 
-#### Building and pushing the artifact to Nexus
+#### 3.2. Building and pushing the artifact to Nexus
 
 >[!important]
 >Since we've modified the Gradle project structure, we need to sync those changes before building.  
->IDEs like IntelliJ IDEA detect changes automatically but may require manual sync.  
+>IDEs like IntelliJ IDEA detect changes automatically but may require manual sync (refresh).  
 
 Once the project is synced, we can run `gradle build` to build the artifact.  
 This command will generate a .jar file in the `build/libs` directory, as defined in the `build.gradle` file.  
@@ -398,5 +403,45 @@ This command will upload the .jar file to the Maven hosted repo defined in the `
 >They will be executed by the Jenkins job we'll create in the upcoming modules.  
 
 The `gradle publish` command is not available in Gradle by default.  
-We can use it because we previously added the `maven-publish` plugin to the `build.gradle` file.  
+We can use it now because we previously added the `maven-publish` plugin to the `build.gradle` file.  
 
+And the `publishing {}` block we've added to the `build.gradle` file is what tells the `gradle publish` command what to publish and where to publish it.  
+
+Once the artifact is pushed to Nexus, we can browse the UI to see it in the repo that we've specified.  
+
+#### 3.3. Configuring Java Maven project
+
+This time, we need to modify the `pom.xml` file instead of the `build.gradle` file.  
+The logic remains the same as with the Gradle project: 
+- tell Maven what file to push: location, name, version, and extension 
+- where to push it: the Nexus repo URL
+- provide the credentials to authenticate to Nexus as the user we've created
+
+First, let's configure a plugin in the `pom.xml` file, same way as we did in `build.gradle`.  
+This is the plugin that will enable Maven to upload the .jar file.  
+
+Here's the code for that plugin:
+```xml
+<build>
+  <plugins>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-deploy-plugin</artifactId>
+      <version>3.1.4</version>
+    </plugin>
+```
+
+After adding the plugin, save the `pom.xml` file and refresh the project so that Maven can download the plugin.  
+
+---
+
+Next, we need to configure the location of our Nexus repo.  
+We do that by adding the following to the `pom.xml` file:
+```xml
+<distributionManagement>
+  <snapshotRepository>
+    <id>nexus-snapshots</id>
+    <url>http://[your_nexus_IP]:[your_nexus_port]/repository/[repo_name]</url>
+  </snapshotRepository>
+</distributionManagement>
+```

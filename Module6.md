@@ -473,3 +473,12 @@ This is a file where Maven global credentials can be defined (accessible to all 
 >The id needs to be the same as the id we defined in the `distributionManagement` block of the `pom.xml` file.  
 
 Now, everything is set up to upload the artifact to Nexus.  
+
+#### 3.4. Building and Pushing the artifact to Nexus
+
+- cd into your Java Maven project folder (where the `pom.xml` file is located)
+- run `mvn package` to build the artifact
+- run `mvn deploy` to push the artifact to Nexus
+
+## 6. Nexus REST API
+

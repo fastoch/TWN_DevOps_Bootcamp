@@ -482,3 +482,18 @@ Now, everything is set up to upload the artifact to Nexus.
 
 ## 6. Nexus REST API
 
+We need Nexus REST endpoint in order to query Nexus repositories for information such as:
+- which components are available?
+- what are the versions of those components?
+- which repositories are available?
+- etc.
+
+Here are some reasons why we need to use the Nexus API for a **CI/CD pipeline**:
+- **automating the build process** of our software artifacts:
+  - using the Nexus API, we can trigger builds, specify build configurations, and retrieve build results
+- **managing versions** and release numbers for our artifacts
+- **storing and managing artifacts**: uploading new ones, retrieving existing ones, organizing them into repositories
+- **automating the release process**, creating release notes, and associating them with specific versions
+
+### 6.1 How to access the Nexus REST API?
+

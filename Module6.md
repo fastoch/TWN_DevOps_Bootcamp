@@ -445,3 +445,12 @@ We do that by adding the following to the `pom.xml` file:
   </snapshotRepository>
 </distributionManagement>
 ```
+
+--- 
+
+Finally, we need to add the credentials to allow Maven to authenticate to our Nexus instance.  
+This is done via the `~/.m2` folder located in your home directory.  
+
+Inside this folder, create a file named `settings.xml`.  
+This is a file where Maven global credentials can be defined (accessible to all Maven projects). 
+

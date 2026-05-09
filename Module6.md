@@ -453,4 +453,23 @@ This is done via the `~/.m2` folder located in your home directory.
 
 Inside this folder, create a file named `settings.xml`.  
 This is a file where Maven global credentials can be defined (accessible to all Maven projects). 
+- `cd ~/.m2`
+- `vim settings.xml`
+- add the following lines to the file:
+  ```xml
+  <settings>
+    <servers>
+      <server>
+        <id>nexus-snapshots</id>
+        <username>my_nexus_user</username>
+        <password>my_nexus_user_password</password>
+      </server>
+    </servers>
+  </settings>
+  ```
+- write and quit
 
+>[!important]
+>The id needs to be the same as the id we defined in the `distributionManagement` block of the `pom.xml` file.  
+
+Now, everything is set up to upload the artifact to Nexus.  

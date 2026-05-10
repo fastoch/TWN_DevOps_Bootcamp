@@ -497,3 +497,61 @@ Here are some reasons why we need to use the Nexus API for a **CI/CD pipeline**:
 
 ### 6.1 How to access the Nexus REST API?
 
+We can use a utility like `curl` or `wget` to send HTTP requests to Nexus API.  
+In that case, we need to provide a Nexus user's credentials in the request.  
+
+#### GET repositories
+
+A repository is a logical bucket that holds components and their assets.  
+
+Let's say we want to see what **repositories** are available in our Nexus instance:  
+```bash
+curl -u user:pwd -X GET 'http://[your_nexus_IP]:[your_nexus_port]/service/rest/v1/repositories'
+```  
+
+The above command can be used inside automation scripts.  
+It will return the following information (in JSON format) about the repositories: 
+- name 
+- format (maven2, nuget, etc.)
+- type (hosted, proxy, or group)
+- URL
+- other attributes
+
+Of course, the response depends on the user's permissions.  
+To get all available repositories, the user needs to have the `nexus-admin` role.  
+
+#### GET components in a repository
+
+A component is an **installable unit**.  
+
+Let's now see how to list **components** available in a specific repository:  
+```bash
+curl -u user:pwd -X GET 'http://[your_nexus_IP]:[your_nexus_port]/service/rest/v1/components?repository=[repo_name]'
+```  
+
+#### GET assets associated with a component  
+
+An asset is a **single file** stored in the **blob store**, associated with a component.  
+
+Now, we can ask for the **assets** of a specific component:
+```bash
+curl -u user:pwd -X GET 'http://[your_nexus_IP]:[your_nexus_port]/service/rest/v1/components/[component_ID]'
+```
+The component ID can be found in the response to the previous request.  
+
+>[!tip]
+>In Nexus, the hierarchy you see in the UI and REST API is basically:  
+>Repository → Components → Assets  
+>Think of it as: logical bucket → logical artifacts → actual files  
+
+### 6.2 Use cases for the Nexus REST API
+
+You can create a script that lists available repos, then selects one repo in that list to get its components.  
+And once you have these components, you can get the assets associated with a specific component.  
+
+You could also retrieve a specific version of a component in order to fetch the corresponding .jar file, and then deploy it on one of your servers.  
+
+The idea is to use Nexus API to automate different tasks, which is what **CI/CD pipelines** are all about.  
+
+## 7. Blob Store
+

@@ -614,3 +614,7 @@ Docker images are components, and the assets are the layers of the Docker image.
 
 ## 9. Cleanup Policies & Scheduled Tasks
 
+While logged in as admin to Nexus UI, go to Repository Admin > Cleanup Policies.  
+Here, we can define rules to automatically delete components that match specific criteria.  
+The goal is to free up storage for newer components.  
+

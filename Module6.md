@@ -555,3 +555,62 @@ The idea is to use Nexus API to automate different tasks, which is what **CI/CD 
 
 ## 7. Blob Store
 
+### What is a blob store?
+
+The binary assets you download via proxy repositories, or publish to hosted repositories, are stored in the blob store attached to those repositories.
+
+A blob store can live: 
+- on the server where Nexus is deployed, within the `sonatype-work` directory
+- in a cloud-based storage such as AWS S3
+
+Each blob store can be used by one or multiple repositories, or even by repository groups.  
+
+### The path attribute
+
+When we create a blob store, we define a path.  
+That path tells us where the blob store is located: `/opt/sonatype-work/nexus3/blobs/[blob_store_path]`  
+
+The path parameter should be an absolute path to the desired file system location.  
+It also has to be full accessible by the OS user account that is running Nexus.  
+
+>[!warning]
+>Blob stores cannot be modified after creation.  
+>And any blob store attached to a repository cannot be deleted.
+
+### The type attribute
+
+A blob store has a type, which can be one of the following:
+- File: file system-based storage
+- S3: cloud-based storage using AWS S3
+
+File is the default type and the recommended one for most installations.  
+The S3 type is only recommended for Nexus instances that are deployed on AWS.  
+
+### Considerations
+
+Before creating blob stores, you need to think about:
+- how many blob stores do I need?
+- which ones will I use for which repositories?
+- how much space will my repositories be using?
+- which size should I assign to each blob store?
+- what cleanup policies should I apply?
+
+>[!warning]
+>Once a repo is allocated to a blob store, it cannot be moved to another blob store.  
+
+### Assigning a blob store to a repository
+
+This is done in Nexus UI, when you create a new repository, you can select the blob store.  
+
+## 8. Component vs Asset
+
+When we push an artifact to Nexus, it creates the corresponding component (as a folder).  
+Inside a repository, components are grouped, each group has its own group ID.  
+
+When we expand a component by clicking it in Nexus UI, we see the assets (files) inside it.  
+
+Docker images are components, and the assets are the layers of the Docker image.  
+.zip files or .jar files (java archives) are components, and the assets are the files inside them.
+
+## 9. Cleanup Policies & Scheduled Tasks
+

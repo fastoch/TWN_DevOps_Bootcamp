@@ -615,6 +615,39 @@ Docker images are components, and the assets are the layers of the Docker image.
 ## 9. Cleanup Policies & Scheduled Tasks
 
 While logged in as admin to Nexus UI, go to Repository Admin > Cleanup Policies.  
-Here, we can define rules to automatically delete components that match specific criteria.  
-The goal is to free up storage for newer components.  
+Here, we can define rules to automatically delete components that match certain criteria.  
+The goal is to free up storage for future artifact uploads.  
+
+When creating a cleanup policy, we need to define:
+- its name
+- the format this policy can be applied to (maven2, helm, nuget, etc.)
+- a description
+- the release type: pre-releases/snapshots, releases, or both
+- cleanup criteria: 
+  - component age: remove components published over x days ago
+  - component usage: remove components that were not downloaded in x days
+  - asset name matcher: remove components that have at least one asset name matching the following regex pattern
+
+After selecting criteria, we can select a repository to preview the result of applying the policy to that repo.  
+
+### Attaching a policy to a repository
+
+Until you attach a policy to a repository, nothing will happen.  
+Attaching a policy to a repo can be done via Nexus UI, using admin access.  
+
+In the Repositories menu, click the targeted repo, scroll down till "Cleanup Policies".  
+Then, select the policy in the list of available ones, and move it to the list of applied ones.  
+Click the Save button to apply changes.  
+
+One cleanup policy can be applied to multiple repositories.  
+
+### Scheduled Tasks
+
+We now need to decide when our cleanup policies should run.  
+This is done via the Scheduled Tasks menu.  
+
+Tasks can be found in the System menu > Tasks.  
+
+An important thing to understand about cleanup policies is that they will not actually delete components.  
+They will mark them for deletion, which is called "**soft delete**".  
 

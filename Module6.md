@@ -616,7 +616,7 @@ Docker images are components, and the assets are the layers of the Docker image.
 
 While logged in as admin to Nexus UI, go to Repository Admin > Cleanup Policies.  
 Here, we can define rules to automatically delete components that match certain criteria.  
-The goal is to free up storage for future artifact uploads.  
+The goal is to free up storage for future artifacts.  
 
 When creating a cleanup policy, we need to define:
 - its name
@@ -648,6 +648,22 @@ This is done via the Scheduled Tasks menu.
 
 Tasks can be found in the System menu > Tasks.  
 
-An important thing to understand about cleanup policies is that they will not actually delete components.  
+An important thing to understand about cleanup policies is that they will not delete components.  
 They will mark them for deletion, which is called "**soft delete**".  
+
+If we want to actually delete components, we need to compact the blob store.  
+For that, in the Tasks menu > create task > select "Admin - Compact Blob Store"  
+After that, select the blob store to compact > set frequency, date and time > create task  
+
+#### How does this work?
+
+- We've created a cleanup policy and associated it to a repository
+- The default "Cleanup service" task will run every 24 hours
+- This will cleanup repositories based on their associated policies
+- Components that are marked for deletion will be removed from repositories to which policies were attached
+- At this point, no space is freed, which can be verified in Repository > Blob Stores
+- Space will be "reclaimed" only when the "Compact Blob Store" task will run
+
+>[!tip]
+>Tasks can be run manually, so we can test them and make sure they work as expected.  
 

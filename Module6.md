@@ -162,6 +162,9 @@ Once logged in to the droplet, let's install Java version 17, that's the specifi
     - your uploaded files and metadata
 - The `sonatype-work` folder can be used as a backup since it contains all the config and data
 
+>[!note]
+>The latest version of Sonatype Nexus Repository (3.87.0 and later) bundles its own Java 21 runtime in official installers and Docker images, so you typically don't need to install or configure a separate Java version on your system.
+
 ### Configuring the server before running Nexus
 
 >[!warning]

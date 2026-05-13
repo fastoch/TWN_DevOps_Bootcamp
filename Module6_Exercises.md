@@ -2,18 +2,17 @@
 
 ## Exercise 1 - install Nexus on a server
 
-- create a droplet on DigitalOcean that has the following specs:
+### Create a cloud server
+
+- I can create a droplet on DigitalOcean that has the following specs:
   - region: closest to you
   - Ubuntu LTS
   - Basic plan
   - CPU options > Regular
   - 8 GB RAM / 4 vCPUs
-  - 160 GB SSD Disk
 
-On AWS, an Ubuntu m7i-flex.large VM (EC2 instance) could be enough to run Nexus.  
+On AWS, an Ubuntu m7i-flex.large (EC2 instance) could be enough to run Nexus.  
 That's what I'll go with for this exercise.  
-
----
 
 >[!important]
 >Nexus will be used in Docker and Jenkins modules as well, which are modules 7 and 8.  
@@ -22,15 +21,28 @@ That's what I'll go with for this exercise.
 >We must snapshot the Droplet, then delete it.  
 >When we need it again, we can recreate a new Droplet from that snapshot.   
 
----
+### Log in to the server
 
-- once you have a cloud server, allow SSH access by adding a rule to its firewall:
+- once I've create a cloud server, I must allow SSH access by adding a rule to its firewall:
   - Inbound rule > type: SSH > protocol: TCP > port: 22 > sources: my laptop's public IP
 - I've previously created a key pair on AWS and saved it to my local machine
-- SSH into the EC2 instance: `ssh root@<EC2_instance_public_IP_address>`
+- I can SSH into the EC2 instance: `ssh root@<EC2_instance_public_IP_address>`
+
+### Install Nexus
 
 >[!note]
 >The latest version of Sonatype Nexus Repository (3.87.0 and later) bundles its own Java 21 runtime in official installers and Docker images, so you typically don't need to install or configure a separate Java version on your system.  
 
-- enter the opt folder: `cd /opt`
-- download Nexus package: `wget https://download.sonatype.com/nexus/3/nexus-3.91.1-04-linux-x86_64.tar.gz`
+- then enter the opt folder: `cd /opt`
+- and download Nexus package from official source:  
+  `sudo wget https://download.sonatype.com/nexus/3/nexus-3.91.1-04-linux-x86_64.tar.gz`
+- extract the package: `sudo tar -xvzf nexus-3.91.1-04-linux-x86_64.tar.gz`
+- we now have 2 directories: `nexus-3.91.1-04` and `sonatype-work`
+- remove the tar file: `sudo rm nexus-3.91.1-04-linux-x86_64.tar.gz`
+
+### Create a service account for running Nexus
+
+- `sudo adduser nexus`
+- run `ls -l /opt` to see that the owner of the `nexus-3.91.1-04` and `sonatype-work` folders is root
+- run `sudo chown -R nexus:nexus /opt/nexus-3.91.1-04`
+- run `sudo chown -R nexus:nexus /opt/sonatype-work`

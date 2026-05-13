@@ -128,7 +128,6 @@ To create a droplet on DigitalOcean onto which you'll be able to install and run
 - Basic plan
 - CPU options > Regular
 - 8 GB RAM / 4 vCPUs
-- 160 GB SSD Disk
 
 The current cost (May 2026) is 48$/month.  
 
@@ -176,8 +175,9 @@ The dedicated user account should only have the necessary permissions to run Nex
 To create a dedicated user account for running Nexus:
 - ssh into the droplet as root
 - run `adduser nexus`
+- follow the user creation wizard
 
-Now, if we run `ls -l /opt`, we can see that we need to change the ownership for the `nexus` and `sonatype-work` folders.  
+If we run `ls -l /opt`, we can see that we need to change ownership for the `nexus` and `sonatype-work` folders.  
 Right now, the owner is root. To change the owner to the new user:   
 - run `chown -R nexus:nexus /opt/nexus-3.91.1-04`
 - run `chown -R nexus:nexus /opt/sonatype-work`

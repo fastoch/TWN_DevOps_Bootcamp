@@ -77,7 +77,7 @@ That's what I'll go with for this exercise.
 
 ## Exercise 2 - create npm hosted repository
 
-For a Node application, we must create a new npm hosted repository with a new blob store.  
+For a Node application on which team 1 is working, we must create a new npm hosted repository:  
 - first, need to create a new blob store for the future repo: 
   - in Nexus UI > Settings > Repository > Blob Stores > create blob store
   - type: file
@@ -102,8 +102,8 @@ First, create a role for this user:
 
 Then, create the user and assign the new role to it:
 - Settings > Security > Users > create local user
-- username: team_one
-- password: team_one
+- username: user_one
+- password: user_one
 - role: team1
 - click "Create local user"
 
@@ -113,7 +113,7 @@ To test what we've configured so far, we'll build and publish a node.js tar pack
 To do that, we'll use the NodeJS app from Module 5 exercises.  
 
 We had already cloned the repo for this NodeJS app, the project folder is cloud-basics-exercises.  
-We had also already packaged the app into a tar file via `npm pack`.  
+We had also already packaged the app into a tar file via the `npm pack` command.  
 In my case, the resulting tar file is in ~/DevOps/cloud-basics-exercises/app/ and it's `bootcamp-node-project-1.0.0.tgz`.  
 
 To publish this tar file to our npm hosted repo in Nexus:
@@ -123,11 +123,23 @@ To publish this tar file to our npm hosted repo in Nexus:
 
 The generic syntax is:
 - `npm login --registry=http://{nexus-instance-ip}:8081/repository/{repo-name}/`
-- `npm publish --registry=http://{nexus-instance-ip}:8081/repository/{repo-name}/ {package-name}.tgz`
+- enter the username and password for the Nexus user we've just created
+- `npm publish --registry=http://{nexus-instance-ip}:8081/repository/{repo-name}/ {package-name}.tgz`  
+
+The repo URL can be easily be found in Nexus UI > Settings > Repository > Repositories > [repo_name]  
+
+I got a `npm error Unable to authenticate, need: BASIC realm="Sonatype Nexus Repository Manager"` when trying to publish.  
+To fix this:
+- Go to Nexus UI (as admin)
+- Navigate to Security > Realms.
+- Move 'npm bearer Token Realm' to the active realms
+- save
+
+Once the tar file got published to the npm hosted repo, you can see it in Nexus UI while logged in as the user we've created for team 1 (user_one).  
 
 ## Exercise 5 - Create maven hosted repository
 
-For a Java application on which team 2 is working, we need to  create a new maven hosted repository:
+For a Java application on which team 2 is working, we need to create a new maven hosted repository:
 - in Nexus UI > Settings > Repository > Repositories > create repository
 - select recipe > maven (hosted)
 - name: repo2

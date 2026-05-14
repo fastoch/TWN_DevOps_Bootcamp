@@ -78,15 +78,36 @@ That's what I'll go with for this exercise.
 ## Exercise 2 - create npm hosted repository
 
 For a Node application, we must create a new npm hosted repository with a new blob store.  
-- create a new blob store: 
+- first, need to create a new blob store for the future repo: 
   - in Nexus UI > Settings > Repository > Blob Stores > create blob store
   - type: file
-- create an npm hosted repo that uses that blob store:
+- now we can create a npm hosted repo that uses that blob store:
   - Settings > Repository > Repositories > create repository
   - select recipe > npm (hosted)
-  - name is npm-repo, for example
-  - select the blob store we've just created (mine is named "npm-blob-store")
+  - name: repo1
+  - select the blob store we've just created
+  - click "Create repository"
 
 ## Exercise 3 - create user for team 1
 
-You need to create a Nexus user for the project 1 team to have access to this npm repository.  
+You need to create a Nexus user for the project 1 team to have access to the npm repository.  
+
+First, create a role for this user:
+- Settings > Security > Roles > create role
+- type: Nexus role
+- name: team1
+- privileges: `nx-repository-admin-npm-repo1-*` and `nx-repository-view-npm-*-*`
+- save
+
+Then, create the user and assign the new role to it:
+- Settings > Security > Users > create local user
+- username: team_one
+- password: team_one
+- role: team1
+- click "Create local user"
+
+## Exercise 4 - build and publish npm tar
+
+To test what we've configured so far, we'll build and publish a node.js tar package to the npm hosted repo.  
+To do that, we'll use the NodeJS app from Module 5 exercises.  
+

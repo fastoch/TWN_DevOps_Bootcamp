@@ -73,7 +73,20 @@ That's what I'll go with for this exercise.
 
 - default username is admin
 - use the generated admin password located at: `/opt/sonatype-work/nexus3/admin.password`
+- once logged in, a wizard prompts you to define a new password for the admin account
 
 ## Exercise 2 - create npm hosted repository
 
 For a Node application, we must create a new npm hosted repository with a new blob store.  
+- create a new blob store: 
+  - in Nexus UI > Settings > Repository > Blob Stores > create blob store
+  - type: file
+- create an npm hosted repo that uses that blob store:
+  - Settings > Repository > Repositories > create repository
+  - select recipe > npm (hosted)
+  - name is npm-repo, for example
+  - select the blob store we've just created (mine is named "npm-blob-store")
+
+## Exercise 3 - create user for team 1
+
+You need to create a Nexus user for the project 1 team to have access to this npm repository.  

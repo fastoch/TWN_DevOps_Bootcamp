@@ -26,7 +26,11 @@ That's what I'll go with for this exercise.
 - once I've create a cloud server, I must allow SSH access by adding a rule to its firewall:
   - Inbound rule > type: SSH > protocol: TCP > port: 22 > sources: my laptop's public IP
 - I've previously created a key pair on AWS and saved it to my local machine
-- I can SSH into the EC2 instance: `ssh root@<EC2_instance_public_IP_address>`
+- I can SSH into the EC2 instance: `ssh -i /path/to/my-key.pem ubuntu@<EC2_instance_public_IP>`
+
+>[!warning]
+>Every time you stop an EC2 instance, its public IP address will change.  
+>That means you'll need to update the SSH command to use the new IP address.
 
 ### Install Nexus
 
@@ -44,5 +48,32 @@ That's what I'll go with for this exercise.
 
 - `sudo adduser nexus`
 - run `ls -l /opt` to see that the owner of the `nexus-3.91.1-04` and `sonatype-work` folders is root
-- run `sudo chown -R nexus:nexus /opt/nexus-3.91.1-04`
-- run `sudo chown -R nexus:nexus /opt/sonatype-work`
+- make service account the owner via `sudo chown -R nexus:nexus /opt/nexus-3.91.1-04 /opt/sonatype-work`
+- to make sure that Nexus runs as the user `nexus`, create and edit the Nexus config file:
+  - `sudo vim /opt/nexus-3.91.1-04/bin/nexus.rc` 
+  - add the following: `run_as_user="nexus"`
+  - write and quit
+
+### Run Nexus
+
+- switch to nexus user: `su - nexus` (password required)
+- run `/opt/nexus-3.91.1-04/bin/nexus start`
+- make sure it's running: `ps aux | grep nexus`
+- identify the id of the process which nexus is running in (PID)
+- run `ss -lntp` to see the port that Nexus is listening on (thanks to Nexus PID)
+- port should be 8081
+
+### Access Nexus from a browser
+
+- in the EC2 instance firewall settings (since I'm using AWS), add an inbound rule for port 8081
+  - menu EC2 > security groups > inbound rules
+- I can access the app from my browser at: `http://<Nexus_instance_IPv4_public_address>:8081`
+
+### Logging in to my Nexus instance
+
+- default username is admin
+- use the generated admin password located at: `/opt/sonatype-work/nexus3/admin.password`
+
+## Exercise 2 - create npm hosted repository
+
+For a Node application, we must create a new npm hosted repository with a new blob store.  

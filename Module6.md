@@ -179,12 +179,13 @@ To create a dedicated user account for running Nexus:
 
 If we run `ls -l /opt`, we can see that we need to change ownership for the `nexus` and `sonatype-work` folders.  
 Right now, the owner is root. To change the owner to the new user:   
-- run `chown -R nexus:nexus /opt/nexus-3.91.1-04`
-- run `chown -R nexus:nexus /opt/sonatype-work`
+- run `chown -R nexus:nexus /opt/nexus-3.91.1-04 /opt/sonatype-work`
 
 To make sure that Nexus runs as the user `nexus`:
-- run `vim /opt/nexus-3.91.1-04/bin/nexus.rc`
-- set the value for `run_as_user` to `"nexus"` and uncomment the line by removing the `#` at the beginning
+- since Nexus 3.80, the `nexus.rc` config file is missing, you need to create it
+- edit the config file: `vim /opt/nexus-3.91.1-04/bin/nexus.rc`
+- add this line: `run_as_user="nexus"`
+- uncomment the line by removing the `#` at the beginning
 - write and quit
 
 ### Running Nexus on the server
@@ -192,15 +193,16 @@ To make sure that Nexus runs as the user `nexus`:
 - switch from root to nexus user: `su - nexus`
 - run `/opt/nexus-3.91.1-04/bin/nexus start`
 - make sure it's running: `ps aux | grep nexus`
-- the nexus process is the one that starts with "/usr/lib/jvm" and ends with "NexusMain" 
+- the nexus process id (PID) is visible in the second column of the longest result
 - identify the process id and run `netstat -lntp`
+- if `netstat` is not installed and can't be, run `ss -lntp` instead
 - you can see the app is accessible for external requests at port 8081
 
 Which means that we can access the Nexus service from a browser at: `http://<IPv4_public_address>:8081`  
 On the condition that this port is open on our cloud server...  
 
 To allow incoming traffic on the port that Nexus is listening on, we need to:
-- go to DigitalOcean's UI
+- go to DigitalOcean's UI (or the UI from the cloud provider you're using)
 - go to the droplet we've created for running Nexus
 - configure the firewall > new inbound rule > type: custom > protocol: TCP > port: 8081
 - save the new rule

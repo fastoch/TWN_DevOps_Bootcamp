@@ -81,6 +81,7 @@ For a Node application, we must create a new npm hosted repository with a new bl
 - first, need to create a new blob store for the future repo: 
   - in Nexus UI > Settings > Repository > Blob Stores > create blob store
   - type: file
+  - name: my-store
 - now we can create a npm hosted repo that uses that blob store:
   - Settings > Repository > Repositories > create repository
   - select recipe > npm (hosted)
@@ -111,3 +112,24 @@ Then, create the user and assign the new role to it:
 To test what we've configured so far, we'll build and publish a node.js tar package to the npm hosted repo.  
 To do that, we'll use the NodeJS app from Module 5 exercises.  
 
+We had already cloned the repo for this NodeJS app, the project folder is cloud-basics-exercises.  
+We had also already packaged the app into a tar file via `npm pack`.  
+In my case, the resulting tar file is in ~/DevOps/cloud-basics-exercises/app/ and it's `bootcamp-node-project-1.0.0.tgz`.  
+
+To publish this tar file to our npm hosted repo in Nexus:
+- from my laptop: `npm login --registry=http://<Nexus_IPv4_public_address>:8081/repository/repo1`
+- change directory to the app folder: `cd ~/DevOps/cloud-basics-exercises/app/`
+- then: `npm publish --registry=http://<Nexus_IPv4_public_address>:8081/repository/repo1 bootcamp-node-project-1.0.0.tgz`
+
+The generic syntax is:
+- `npm login --registry=http://{nexus-instance-ip}:8081/repository/{repo-name}/`
+- `npm publish --registry=http://{nexus-instance-ip}:8081/repository/{repo-name}/ {package-name}.tgz`
+
+## Exercise 5 - Create maven hosted repository
+
+For a Java application on which team 2 is working, we need to  create a new maven hosted repository:
+- in Nexus UI > Settings > Repository > Repositories > create repository
+- select recipe > maven (hosted)
+- name: repo2
+- select the same blob store as the npm hosted repo
+- click "Create repository"

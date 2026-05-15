@@ -148,3 +148,13 @@ For a Java application on which team 2 is working, we need to create a new maven
 
 ## Exercise 6 - create user for team 2
 
+Now, we need to create a Nexus user for the other team to have access to this maven repository:
+- create a role named team2
+- privileges: `nx-repository-admin-maven2-maven-central-*` and `nx-repository-view-maven2-*-*`
+- save
+- create a user named user_two
+- role: team2
+- pwd: user_two
+
+## Exercise 7 - build and publish jar file
+

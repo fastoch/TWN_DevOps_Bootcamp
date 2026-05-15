@@ -30,7 +30,7 @@ Since this is a Java/Gradle project, we can build the .jar file by:
 - making sure we're in the project folder, using the `cd` command if not
 - running `gradle build`
 
-The Build will fail, because of a compile error in a test, so you can't build the jar for now.
+The build process fails because of a compile error in a test, so I can't build the jar.  
 
 # Exercise 2 - Run Tests
 

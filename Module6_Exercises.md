@@ -110,7 +110,7 @@ Then, create the user and assign the new role to it:
 ## Exercise 4 - build and publish npm tar
 
 To test what we've configured so far, we'll build and publish a node.js tar package to the npm hosted repo.  
-To do that, we'll use the NodeJS app from Module 5 exercises.  
+To do that, we'll use the NodeJS app from Module 5 (Cloud Basics).   
 
 We had already cloned the repo for this NodeJS app, the project folder is cloud-basics-exercises.  
 We had also already packaged the app into a tar file via the `npm pack` command.  
@@ -157,4 +157,87 @@ Now, we need to create a Nexus user for the other team to have access to this ma
 - pwd: user_two
 
 ## Exercise 7 - build and publish jar file
+
+We will build and publish the jar file to the new maven repository using the team 2 user.  
+For that, we'll use the java-app application from the "Build Tools" module (module 4):  
+- change directory to the desired folder: `cd ~/DevOps/` in my case
+- clone the repo: `git clone https://gitlab.com/twn-devops-bootcamp/latest/04-build-tools/java-app`
+
+### Configure build.gradle file
+
+- in the `build.gradle` file, change the app version from SNAPSHOT to `version '1.0.0'`
+- in that same file, change java version from 17 to 25 (can't install Java 17 on my laptop):
+```
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(25)
+  }
+}
+```
+- then add maven plugin in the `build.gradle` file, right after the `java` block:
+```
+apply plugin: 'maven-publish'
+```
+This plugin will allow us to publish the jar file to the maven hosted repo.  
+- Finally, add the following `publishing` block in the `build.gradle` file:
+```
+publishing {
+  publications {
+    mavenJava(MavenPublication) {
+      artifact("build/libs/java-app-$version" + ".jar"){
+        extension 'jar'
+      }
+    }
+  }
+  repositories {
+    maven {
+      name = "nexus"
+      url = "http://35.181.45.149:8081/repository/repo2/"
+      allowInsecureProtocol = true
+      credentials {
+        username project.repoUser
+        password project.repoPassword
+      }
+    }
+  }
+}
+```  
+Of course, we need toreplace {nexus-ip} with the IP address of our Nexus server and {repo-name} with the name of the maven hosted repo we've created.  
+
+### Configure gradle.properties file
+
+For security reasons, because that `build.gradle` file is included in version control, we cannot write the username and password directly in the file.  
+
+We need to create a separate file to store them: the `gradle.properties` file.  
+- create a file named `gradle.properties` at the root of the project (java-app folder)
+- add the following lines to the file:
+```
+repoUser=user_two
+repoPassword=user_two
+```
+
+### Configure settings.gradle file
+
+Finally, we need to check the name of the application, which is defined in the `settings.gradle` file:
+```
+rootProject.name = 'java-app'
+```
+This setting will be used to generate the name of the .jar file. 
+
+### Build and publish
+
+Now, we can build the jar file and publish it to the maven hosted repo.  
+First, make sure to be inside the java-app folder: `cd ~/DevOps/java-app`
+
+Since I've used Vim to edit build.gradle, gradle.properties and settings.gradle, I need to run a clean build:
+- build the artifact: `gradle clean build --refresh-dependencies`
+
+>[!note]
+>The build process can take a minute or more, depending on the size and complexity of the project.  
+
+Once the build is done, we can:
+- publish the jar file to the maven hosted repo: `gradle publish`
+- access Nexus UI to check that the jar file got published to the maven hosted repo: Browse > Repositories > repo2
+
+## Exercise 8 - Download from Nexus and start application
 

@@ -362,7 +362,7 @@ publishing {
   repositories {
     maven {
       name 'nexus'
-      url "http://[your_nexus_IP]:[your_nexus_port]/repository/[repo_name]"
+      url "http://[nexus_server_IP]:[nexus_server_port]/repository/[repo_name]"
       allowInsecureProtocol = true
       credentials {
         username project.nexusUsername
@@ -378,7 +378,7 @@ The `$version` variable is set at the beginning of the `build.gradle` file.
 The `repositories` block defines the Nexus repositories where the artifacts will be published.  
 
 In the `maven` block, we define: 
-- the name of the repo manager
+- the name of the artifact repo manager (just a local alias for Gradle to identify this repo config)
 - the targeted Nexus repo URL (easy to copy from Nexus UI)
 - `allowInsecureProtocol = true` is required because we're not accessing our Nexus repo using HTTPS
 - and the credentials of the user that we've created in Nexus UI
@@ -392,8 +392,8 @@ In the `maven` block, we define:
 - At the root of the project, create a file named `gradle.properties`.
 - Add the following lines to the file:
 ```
-nexusUsername = my_nexus_user
-nexusPassword = my_nexus_user_password
+nexusUsername=my_nexus_user
+nexusPassword=my_nexus_user_password
 ```
 
 ---
@@ -410,8 +410,14 @@ This setting will be used to generate the name of the .jar file.
 >Since we've modified the Gradle project structure, we need to sync those changes before building.  
 >IDEs like IntelliJ IDEA detect changes automatically but may require manual sync (refresh).  
 
+More about syncing changes before building:  
+https://www.perplexity.ai/search/ccdf1665-aaf2-484e-a80b-666f7221d004  
+
 Once the project is synced, we can run `gradle build` to build the artifact.  
 This command will generate a .jar file in the `build/libs` directory, as defined in the `build.gradle` file.  
+
+>[!note]
+>The build process can take a minute or more, depending on the size and complexity of the project.  
 
 To push the artifact to Nexus, we need to run `gradle publish`.  
 This command will upload the .jar file to the Maven hosted repo defined in the `maven` block of the `build.gradle` file.  

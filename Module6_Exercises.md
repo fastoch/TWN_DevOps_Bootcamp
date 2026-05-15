@@ -12,7 +12,7 @@
   - 8 GB RAM / 4 vCPUs
 
 On AWS, an Ubuntu m7i-flex.large (EC2 instance) could be enough to run Nexus.  
-That's what I'll go with for this exercise.  
+That's what I'll go with for this exercise, with a 20 GB SSD.  
 
 >[!important]
 >Nexus will be used in Docker and Jenkins modules as well, which are modules 7 and 8.  
@@ -244,46 +244,39 @@ Once the build is done, we can:
 - Create a new user in Nexus UI, and grant it both of the roles previously created
 In my case, the new user is `user_three` and has both roles `team1` and `team2`
 
-### Preparing cloud server to run NodeJS app
-
-- In AWS UI, copy my EC2 instance public IP address (my_nexus_IP)
-- `ssh -i /path/to/my-key.pem ubuntu@[my_nexus_IP]`
-- once logged in to my Nexus server, update the package list: `sudo apt update`
-- if some packages are outdated, upgrade them: `sudo apt upgrade`
-- install Node and npm: `sudo apt install nodejs npm`
-
-Make a directory for the app: `mkdir nodejs-app` and switch to it: `cd nodejs-app`  
-
 ### Using Nexus API
 
-Now, I can use Nexus Rest API to fetch the download URL for the latest NodeJS app artifact:
+From my laptop, or from any other machine that is authorized to access Nexus instance (firewall settings > inbound rules), I can use Nexus Rest API to fetch the download URL for the latest NodeJS app artifact:
 `curl -u user_three:user_three -X GET 'http://[my_nexus_IP]:8081/service/rest/v1/components?repository=repo1&sort=version'`
-- copy the downloadUrl value from the response to fetch the latest artifact itself: 
-`curl [downloadUrl_value]`
+- create a folder for the NodeJS app: `mkdir nodejs-app`
+- cd into the folder: `cd nodejs-app`
+- install nodejs and npm if not already installed
+- copy the `downloadUrl` value from the response to fetch the latest artifact itself: 
+`curl [downloadUrl_value] --output bootcamp-node-project-1.0.0.tgz`
 
 ### Running NodeJS app
 
-- unpack the artifact: `tar -xvzf bootcamp-node-project-1.0.0.tgz`
-- cd into the unpacked directory: `cd [unpacked_directory]`
+- unpack the downloaded artifact: `tar -xvzf bootcamp-node-project-1.0.0.tgz`
+- cd into the unpacked directory: `cd package`
 - install dependencies: `npm install`
 - run the app (in detached mode) on my EC2 instance: `node server.js &`
 
 When starting the Node app, I see that it's listening on port 3000.  
-I can copy-paste my EC2 instance public IP address followed by `:3000` in my web browser to see the app's home page!
+I can type `localhost:3000` in my web browser to see the app's home page!  
 
 ## Exercise 9 - Automate
 
 We decide to automate the fetching from Nexus and starting the application.  
-For that, we need to:  
-- Write a script that:
+For that, we need to write a script that:
   - fetches the latest version from npm repository
-  - untar it and run the app on the server
-- Execute the script on the server
+  - untar it and run the app on the machine where the artifact got downloaded
+- Execute the script to fetch the artifact and run the application
 
-- create a file named `fetch_and_run.sh` in the java-app folder
+- remove any pre-existing files in the target folder: `rm -rf ~/DevOps/nodejs-app/*`
+- create a file named `fetch_and_run.sh` in the target folder
 - change the file permissions: `chmod +x fetch_and_run.sh`
 
-Here's my script:
+Here's the script that I wrote in `fetch_and_run.sh`:
 ```bash
 #!/bin/bash
 
@@ -291,9 +284,9 @@ Here's my script:
 download_url=$(curl -u user_three:user_three -X GET 'http://[my_nexus_IP]:8081/service/rest/v1/components?repository=repo1&sort=version' | )
 
 # Fetch the latest version of the artifact from npm repository
-curl $download_url > java-app-1.0.0.jar'
-
-
+curl $download_url > '
 ```  
 
-To run it: `./fetch_and_run.sh`
+- run it: `./fetch_and_run.sh`
+- open a web browser and go to `localhost:3000` or `<IPv4_public_address>:3000` to see the app's home page
+- in case you're using a cloud server, make sure that port 3000 is open (firewall > inbound rules)

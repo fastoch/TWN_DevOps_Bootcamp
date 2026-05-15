@@ -74,7 +74,7 @@ scp -i /path/to/my-key.pem app/bootcamp-node-project-1.0.0.tgz ubuntu@<EC2_VM_pu
 - ssh into the EC2 VM: `ssh -i /path/to/my-key.pem ubuntu@<EC2_VM_public_IP>`
 - cd into the app folder: `cd app`
 - unpack the Node project artifact: `tar -zxvf bootcamp-node-project-1.0.0.tgz`
-- cd into unpacked directory: `cd package`
+- cd into the unpacked directory: `cd package`
 - install dependencies: `npm install`
 - start the Node app in detached mode: `node server.js &`
 

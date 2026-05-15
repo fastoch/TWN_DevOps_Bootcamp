@@ -544,7 +544,7 @@ It will return the following information (in JSON format) about the repositories
 Of course, the response depends on the user's permissions.  
 To get all available repositories, the user needs to have the `nexus-admin` role.  
 
-#### GET components in a repository
+#### GET components (artifacts) in a repository
 
 A component is an **installable unit**.  
 

@@ -247,11 +247,12 @@ In my case, the new user is `user_three` and has both roles `team1` and `team2`
 ### Using Nexus API
 
 From my laptop, or from any other machine that is authorized to access Nexus instance (firewall settings > inbound rules), I can use Nexus Rest API to fetch the download URL for the latest NodeJS app artifact:
-`curl -u user_three:user_three -X GET 'http://[my_nexus_IP]:8081/service/rest/v1/components?repository=repo1&sort=version'`
+`curl -u user_three:user_three -X GET 'http://[my-nexus-IP]:8081/service/rest/v1/components?repository=repo1&sort=version'`
 - create a folder for the NodeJS app: `mkdir nodejs-app`
 - cd into the folder: `cd nodejs-app`
 - install nodejs and npm if not already installed
-- copy the `downloadUrl` value from the response to fetch the latest artifact itself: 
+- copy the `downloadUrl` value from the response to the previous `curl` command
+- fetch the latest artifact itself: 
 `curl [downloadUrl_value] --output bootcamp-node-project-1.0.0.tgz`
 
 ### Running NodeJS app
@@ -280,13 +281,30 @@ Here's the script that I wrote in `fetch_and_run.sh`:
 ```bash
 #!/bin/bash
 
+# install the jq utility
+sudo apt install jq -y
+
 # Get the download URL for the latest version of the NodeJS app artifact
-download_url=$(curl -u user_three:user_three -X GET 'http://[my_nexus_IP]:8081/service/rest/v1/components?repository=repo1&sort=version' | )
+download_url=$(curl -u user_three:user_three -X GET 'http://35.181.45.149:8081/service/rest/v1/components?repository=repo1&sort=version' | jq -r '.items[0].assets[0].downloadUrl')
 
 # Fetch the latest version of the artifact from npm repository
-curl $download_url > '
+curl $download_url --output bootcamp-node-project-1.0.0.tgz
+
+# Unpack the downloaded artifact
+tar -xvzf bootcamp-node-project-1.0.0.tgz
+
+# cd into the unpacked directory
+cd package
+
+# Install dependencies
+npm install
+
+# Run the app (in detached mode)
+node server.js &
 ```  
 
-- run it: `./fetch_and_run.sh`
+- run my script: `./fetch_and_run.sh`
 - open a web browser and go to `localhost:3000` or `<IPv4_public_address>:3000` to see the app's home page
-- in case you're using a cloud server, make sure that port 3000 is open (firewall > inbound rules)
+
+>[!important] 
+>In in case you're using a cloud server, make sure that port 3000 is open (firewall > inbound rules)

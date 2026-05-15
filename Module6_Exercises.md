@@ -135,13 +135,16 @@ To fix this:
 - Move 'npm bearer Token Realm' to the active realms
 - save
 
-Once the tar file got published to the npm hosted repo, you can see it in Nexus UI while logged in as the user we've created for team 1 (user_one).  
+Once the tar file got published to the npm hosted repo, you can see it in Nexus UI > Browse > repo1
 
 ## Exercise 5 - Create maven hosted repository
 
 For a Java application on which team 2 is working, we need to create a new maven hosted repository:
 - in Nexus UI > Settings > Repository > Repositories > create repository
-- select recipe > maven (hosted)
+- select recipe > maven2 (hosted)
 - name: repo2
 - select the same blob store as the npm hosted repo
 - click "Create repository"
+
+## Exercise 6 - create user for team 2
+

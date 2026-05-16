@@ -253,7 +253,7 @@ From my laptop, or from any other machine that is authorized to access Nexus ins
 - install nodejs and npm if not already installed
 - copy the `downloadUrl` value from the response to the previous `curl` command
 - fetch the latest artifact itself: 
-`curl [downloadUrl_value] --output bootcamp-node-project-1.0.0.tgz`
+`curl "[downloadUrl_value]" --output bootcamp-node-project-1.0.0.tgz`
 
 ### Running NodeJS app
 
@@ -277,18 +277,18 @@ For that, we need to write a script that:
 - create a file named `fetch_and_run.sh` in the target folder
 - change the file permissions: `chmod +x fetch_and_run.sh`
 
-Here's the script that I wrote in `fetch_and_run.sh`:
+Here's the script that I wrote in `fetch_and_run.sh` and will run on my laptop:
 ```bash
 #!/bin/bash
 
-# install the jq utility
-sudo apt install jq -y
+# install the jq utility (for extracting JSON values)
+sudo dnf install -y jq
 
 # Get the download URL for the latest version of the NodeJS app artifact
-download_url=$(curl -u user_three:user_three -X GET 'http://35.181.45.149:8081/service/rest/v1/components?repository=repo1&sort=version' | jq -r '.items[0].assets[0].downloadUrl')
+download_url=$(curl -u user_three:user_three -X GET 'http://13.39.20.122:8081/service/rest/v1/components?repository=repo1&sort=version' | jq -r '.items[0].assets[0].downloadUrl')
 
 # Fetch the latest version of the artifact from npm repository
-curl $download_url --output bootcamp-node-project-1.0.0.tgz
+curl "$download_url" --output bootcamp-node-project-1.0.0.tgz
 
 # Unpack the downloaded artifact
 tar -xvzf bootcamp-node-project-1.0.0.tgz
@@ -303,8 +303,14 @@ npm install
 node server.js &
 ```  
 
+>[!note]
+>In that script, I'm using the `jq` utility to extract the `downloadUrl` value from the previous `curl` command.  
+>It's **important** to update the IP address in the `curl` command to the public IP address of the server where Nexus is running (an EC2 instance gets a new public IP address every time it's started).  
+
 - run my script: `./fetch_and_run.sh`
-- open a web browser and go to `localhost:3000` or `<IPv4_public_address>:3000` to see the app's home page
+- open a web browser and go to `localhost:3000` to see the app's home page
 
 >[!important] 
->In in case you're using a cloud server, make sure that port 3000 is open (firewall > inbound rules)
+>In in case you're using a cloud server to fetch the artifact and run the NodeJS app on it, make sure that port 3000 is open and that this second cloud server is authorized to access Nexus server:
+>Nexus server's firewall > add inbound rule > type: custom > protocol: TCP > port: 3000 > sources: all IPv4/IPv6 addresses
+>Of course, you don't have to authorize all IPv4/IPv6 addresses, just the cloud server's public IP address

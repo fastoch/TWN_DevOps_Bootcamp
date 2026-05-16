@@ -176,6 +176,7 @@ To create a dedicated user account for running Nexus:
 - ssh into the droplet as root
 - run `adduser nexus`
 - follow the user creation wizard
+- not the password for this service account somewhere safe
 
 If we run `ls -l /opt`, we can see that we need to change ownership for the `nexus` and `sonatype-work` folders.  
 Right now, the owner is root. To change the owner to the new user:   
@@ -192,6 +193,7 @@ To make sure that Nexus runs as the user `nexus`:
 
 - switch from root to nexus user: `su - nexus`
 - run `/opt/nexus-3.91.1-04/bin/nexus start`
+- enter the password for the `nexus` service account
 - make sure it's running: `ps aux | grep nexus`
 - the nexus process id (PID) is visible in the second column of the longest result
 - identify the process id and run `netstat -lntp`

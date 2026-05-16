@@ -1,5 +1,11 @@
 # Bonus module: Databases (DB)
 
+## Introduction
+
+>[!NOTE]
+>This module sits between module 3 (Version Control with Git) and module 4 (Build Tools & Package Managers).  
+>It doesn't have any exercises.  
+
 Applications use databases to persist data.  
 Let's see how databases are integrated in the software development process.  
 

@@ -50,8 +50,8 @@ Other technologies include containerd, cri-o, etc.
 
 ## 2. Container vs image
 
-Technically, a container is made up of layers of images that are stacked on top of each other.  
-Most containers use a Linux image as their base layer (such as Alpine), because it's lightweight.  
+Technically, a container image is made up of layers that are stacked on top of each other.  
+Most containers use a Linux distro as their base layer (such as Alpine), because it's lightweight.  
 
 On top of that base layer, we generally have an application layer.  
 And on top of that, we usually have additional layers for configuration data.  
@@ -67,10 +67,11 @@ When you install Docker Desktop on a non-Linux OS, it also installs a Linux VM, 
 
 ### Running a Docker image
 
-A Docker image is the result of a Docker build process.  
+A Docker image is the result of a `docker build` command.  
 A process that stacks layers on top of each other and creates a container image.  
 
 We can run a Docker image by using the `docker run` command.  
+The image is a package, an artifact that can be moved around.  
 What we call a "container" is actually a running instance of a Docker image.  
 
 When people make Docker images, they often publish them on Docker Hub, the most popular Docker repository.  
@@ -78,7 +79,7 @@ We can pull images from Docker Hub by using the `docker pull` command.
 And if we run `docker run`, it will pull the image from Docker Hub and run the container.  
 
 Since Docker Hub is a public repository, we don't need to log in to it.  
-On a private repository, we would need to provide credentials, more on that later on.  
+On a private repository, we would need to provide credentials, more on that in later sections.  
 
 Example of a `docker run` command:  
 `docker run --name my-postgres -e POSTGRES_PWD=mysecretpwd -d postgres:13.10`  
@@ -92,17 +93,29 @@ Command explanation:
 When you run that command, Docker tries to find the image locally.  
 If it doesn't find it, it will pull it from Docker Hub and run the container.  
 
-You can see the different layers that make up the container image as the `docker run` command is pulling them.  
+Since we've started our container in detached mode, we can run other commands in the same terminal session.  
+For example, `docker ps` tells us which containers are running and shows information about them.  
 
-### Docker caching
+### Docker caches layers for future use
+
+You can see the different layers that make up the container image as the `docker run` command is pulling them.  
+And if we had already pulled some of these layers for previous containers, Docker tells you "Already exists".  
 
 The advantage of splitting a container image into layers is that we don't have to pull the whole image every time we want to run it.  
 
 If we want to run a newer version of the image, such as postgres:14.1, we'll only pull the layers that are different.  
 And if we want to run the exact same image, it will be much faster because Docker has already cached the layers.  
 
-### 
+## 3. Container vs. Virtual Machine 
 
-Since we've started our container in detached mode, we can run other commands in the same terminal session.  
-- For example, `docker ps` tells us which containers are running and shows information about them
-- 
+Operating Systems have 2 layers: a kernel and the applications layer.  
+The kernel is the part that enables communication between hardware components and applications.  
+
+**Docker** virtualizes the **applications** layer, and uses the kernel of the host system.  
+A **VM** has the **applications** layer and its own **kernel**.  
+
+Docker images are **much smaller** than VM images.  
+You can run and start Docker containers **much faster** than VMs, since there's no kernel to boot.  
+
+## 4. Docker Architecture and Components
+

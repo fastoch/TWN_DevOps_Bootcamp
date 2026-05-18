@@ -80,3 +80,29 @@ And if we run `docker run`, it will pull the image from Docker Hub and run the c
 Since Docker Hub is a public repository, we don't need to log in to it.  
 On a private repository, we would need to provide credentials, more on that later on.  
 
+Example of a `docker run` command:  
+`docker run --name my-postgres -e POSTGRES_PWD=mysecretpwd -d postgres:13.10`  
+
+Command explanation:
+- `--name`: Assigns a name to the container
+- `-e`: Sets an environment variable inside the container
+- `-d`: Runs the container in detached mode so we can keep using the same terminal session
+- `postgres:13.10`: The image we want to run and its version
+
+When you run that command, Docker tries to find the image locally.  
+If it doesn't find it, it will pull it from Docker Hub and run the container.  
+
+You can see the different layers that make up the container image as the `docker run` command is pulling them.  
+
+### Docker caching
+
+The advantage of splitting a container image into layers is that we don't have to pull the whole image every time we want to run it.  
+
+If we want to run a newer version of the image, such as postgres:14.1, we'll only pull the layers that are different.  
+And if we want to run the exact same image, it will be much faster because Docker has already cached the layers.  
+
+### 
+
+Since we've started our container in detached mode, we can run other commands in the same terminal session.  
+- For example, `docker ps` tells us which containers are running and shows information about them
+- 

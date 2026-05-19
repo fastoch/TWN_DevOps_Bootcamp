@@ -119,3 +119,30 @@ You can run and start Docker containers **much faster** than VMs, since there's 
 
 ## 4. Docker Architecture and Components
 
+When you install Docker, you install something called **Docker Engine**.  
+
+Docker **Engine** comes with 3 components:
+- Docker **server**: pulls images, starts and stops containers, manages images...
+- Docker **API**: allows us to interact with the Docker server
+- Docker **CLI**: powerful client that allows us to run Docker commands against the server
+
+The **Server** component itself includes:
+- the **container runtime**: the one responsible for pulling images and managing container lifecycle
+- the **Volumes** functionality: responsible for persisting data in containers across restarts
+- the **network** part: configures network for container communication
+- the **image building** functionality: allows us to build our own Docker images from Dockerfiles
+
+**Reminder**: Docker images are the artifacts that we can create from our applications.  
+
+### Alternatives to Docker
+
+Docker is very powerful because it gives us all of the above functionalities (and more) in one single tool.  
+However, there are alternatives for some of these functionalities.  
+
+If you only need a container runtime on a server, you can simply use **containerd** or **cri-o**.  
+This will allow your server to run container images, including Docker images.    
+
+And if you only need to build container images, you can use tools like **podman** or **buildah**.  
+
+## 5. Main docker commands
+

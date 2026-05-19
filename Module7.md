@@ -96,9 +96,9 @@ If it doesn't find it, it will pull it from Docker Hub and run the container.
 ### Useful commands
 
 Since we've started our container in detached mode, we can run other commands in the same terminal session:
-- `docker ps` tells us which containers are running and shows information about them
+- `docker ps` shows running containers and some useful information about them
 - `docker ps -a` shows all containers, including the ones that are not running
-- `docker images` tells us which images we have locally
+- `docker images` shows us which images we have locally
 - `docker rmi <image_name>` deletes an image
 
 ### Docker caches layers for future use
@@ -152,4 +152,12 @@ And if you only need to build container images, you can use tools like **podman*
 ## 5. Main docker commands
 
 - `docker pull <image_name:version>`: Pulls an image from a Docker Hub repository
-- `docker run <image_name:version>`: Runs a container from an image
+- `docker run <image_name:version>`: Runs a container from an image (pulls the image if needed)
+  - `docker run -d` to run the container in detached mode 
+- `docker stop <container_name_or_id>`: Stops a running container
+- `docker start <container_name_or_id>`: Starts a stopped container
+- `docker build <dockerfile_path>`: Creates a Docker image from a Dockerfile
+
+>[!note]
+>When we don't specify a version, Docker will pull the latest version of the image.  
+
